@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
 
     viewer.setSource(QUrl("qrc:/qml/qml/Chess/screens.qml"));
     Game curGame(viewer.rootObject());
+    viewer.rootContext()->setContextProperty("curGame", &curGame);
 
     viewer.showExpanded();
 

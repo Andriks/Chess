@@ -19,9 +19,9 @@ public slots:
     void saveAction();
     void loadAction();
 
-
-protected:
+private:
     QObject *viewer_;
+        
 
 };
 

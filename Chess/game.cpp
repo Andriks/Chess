@@ -1,4 +1,5 @@
 #include "game.h"
+#include <qfiledialog.h>
 
 Game::Game(QObject *parent) :
     //QObject(parent),
@@ -28,5 +29,11 @@ void Game::saveAction()
 
 void Game::loadAction()
 {
+//    QString filename = QFileDialog::getOpenFileName(
+//                this,
+//                tr("dsdasda"),
+//                "D://"
+//                );
+
 
 }
