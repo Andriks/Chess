@@ -723,5 +723,593 @@ Rectangle {
             visible: true
         }
 
+        Rectangle {
+            id: row5
+            x: 0
+            y: 240
+            width: 480
+            height: 60
+            color: "#ffffff"
+            Rectangle {
+                id: cell51
+                x: 0
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell51
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell51"
+            }
+
+            Rectangle {
+                id: cell52
+                x: 60
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell52
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell52"
+            }
+
+            Rectangle {
+                id: cell53
+                x: 120
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell53
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell53"
+            }
+
+            Rectangle {
+                id: cell54
+                x: 180
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell54
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell54"
+            }
+
+            Rectangle {
+                id: cell55
+                x: 240
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell55
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell55"
+            }
+
+            Rectangle {
+                id: cell56
+                x: 300
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell56
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell56"
+            }
+
+            Rectangle {
+                id: cell57
+                x: 360
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell57
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell57"
+            }
+
+            Rectangle {
+                id: cell58
+                x: 420
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell58
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell58"
+            }
+            border.width: 0
+            border.color: "#ffffff"
+            visible: true
+        }
+
+        Rectangle {
+            id: row6
+            x: 0
+            y: 300
+            width: 480
+            height: 60
+            color: "#ffffff"
+            Rectangle {
+                id: cell61
+                x: 0
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell61
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell61"
+            }
+
+            Rectangle {
+                id: cell62
+                x: 60
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell62
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell62"
+            }
+
+            Rectangle {
+                id: cell63
+                x: 120
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell63
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell63"
+            }
+
+            Rectangle {
+                id: cell64
+                x: 180
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell64
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell64"
+            }
+
+            Rectangle {
+                id: cell65
+                x: 240
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell65
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell65"
+            }
+
+            Rectangle {
+                id: cell66
+                x: 300
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell66
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell66"
+            }
+
+            Rectangle {
+                id: cell67
+                x: 360
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell67
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell67"
+            }
+
+            Rectangle {
+                id: cell68
+                x: 420
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell68
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell68"
+            }
+            border.width: 0
+            border.color: "#ffffff"
+            visible: true
+        }
+
+        Rectangle {
+            id: row7
+            x: 0
+            y: 360
+            width: 480
+            height: 60
+            color: "#ffffff"
+            Rectangle {
+                id: cell71
+                x: 0
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell71
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell71"
+            }
+
+            Rectangle {
+                id: cell72
+                x: 60
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell72
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell72"
+            }
+
+            Rectangle {
+                id: cell73
+                x: 120
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell73
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell73"
+            }
+
+            Rectangle {
+                id: cell74
+                x: 180
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell74
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell74"
+            }
+
+            Rectangle {
+                id: cell75
+                x: 240
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell75
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell75"
+            }
+
+            Rectangle {
+                id: cell76
+                x: 300
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell76
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell76"
+            }
+
+            Rectangle {
+                id: cell77
+                x: 360
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell77
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell77"
+            }
+
+            Rectangle {
+                id: cell78
+                x: 420
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell78
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell78"
+            }
+            border.width: 0
+            border.color: "#ffffff"
+            visible: true
+        }
+
+        Rectangle {
+            id: row8
+            x: 0
+            y: 420
+            width: 480
+            height: 60
+            color: "#ffffff"
+            Rectangle {
+                id: cell81
+                x: 0
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell81
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell81"
+            }
+
+            Rectangle {
+                id: cell82
+                x: 60
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell82
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell82"
+            }
+
+            Rectangle {
+                id: cell83
+                x: 120
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell83
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell83"
+            }
+
+            Rectangle {
+                id: cell84
+                x: 180
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell84
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell84"
+            }
+
+            Rectangle {
+                id: cell85
+                x: 240
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell85
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell85"
+            }
+
+            Rectangle {
+                id: cell86
+                x: 300
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell86
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell86"
+            }
+
+            Rectangle {
+                id: cell87
+                x: 360
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell87
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell87"
+            }
+
+            Rectangle {
+                id: cell88
+                x: 420
+                y: 0
+                width: 60
+                height: 60
+                color: "#ffffff"
+                MouseArea {
+                    id: mouseAreaCell88
+                    anchors.fill: parent
+
+                    onClicked: curGame.cellAction(parent.objectName)
+                }
+                border.width: 1
+                objectName: "cell88"
+            }
+            border.width: 0
+            border.color: "#ffffff"
+            visible: true
+        }
+
     }
 }

@@ -10,6 +10,8 @@ class Game : public QObject
 {
     Q_OBJECT
 public:
+    // !!IMPORTANT!! Game instance should to be deleted explicit!
+    // it have no QObject owner to be deleted automatically
     explicit Game(QObject *parent = 0);
 
 signals:
