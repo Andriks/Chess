@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file>qml/Chess/screens.qml</file>
+    </qresource>
+</RCC>
