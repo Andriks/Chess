@@ -10,7 +10,8 @@ class Figure : public QObject
     Q_OBJECT
 
 private:
-    enum{EMPTY/*base class*/, KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN};
+    enum FigType{EMPTY/*base class*/, KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN};
+    enum FigColor{NONE/*base class*/, WHITE, BLACK};
 
 public:
     explicit Figure(QObject *parent = 0);
@@ -21,9 +22,12 @@ public slots:
 
 private:
     virtual std::vector<QObject*> cellsToMove();
+    virtual QString figName();
 
 private:
     QObject *owner_;    //ptr to figure owner (Desk instance)
+    FigType type_;
+    FigColor color_;
 
 };
 
@@ -37,6 +41,7 @@ public:
 
 private:
     virtual std::vector<QObject*> cellsToMove();
+    virtual QString figName();
 
 };
 

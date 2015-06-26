@@ -28,8 +28,8 @@ public slots:
 
 private:
     QObject *viewer_;       //for access to gui elements
-    QObject *desk_;         //ptr to desk instance (game have 1 instance of desk during all life period)
-
+    //QObject *desk_;         //ptr to desk instance (game have 1 instance of desk during all life period)
+    Desk *desk_;         //ptr to desk instance (game have 1 instance of desk during all life period)
 };
 
 #endif // GAME_H

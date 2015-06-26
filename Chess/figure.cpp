@@ -13,6 +13,11 @@ std::vector<QObject *> Figure::cellsToMove()
     return res;
 }
 
+QString Figure::figName()
+{
+    return "";
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 King::King(QObject *parent) :
@@ -25,4 +30,9 @@ std::vector<QObject *> King::cellsToMove()
     std::vector<QObject *> res;
 
     return res;
+}
+
+QString King::figName()
+{
+    return "K";
 }

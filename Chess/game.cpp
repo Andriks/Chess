@@ -15,7 +15,7 @@ void Game::cellAction(QString cell_name)
 
 void Game::startAction()
 {
-
+    desk_->fillDefault();
 }
 
 void Game::stopAction()
