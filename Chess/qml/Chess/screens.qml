@@ -151,7 +151,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 border.width: 1
                 objectName: "cell11"
                 MouseArea {
@@ -168,7 +168,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 border.width: 1
                 objectName: "cell12"
                 MouseArea {
@@ -185,7 +185,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 border.width: 1
                 objectName: "cell13"
                 MouseArea {
@@ -202,7 +202,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 objectName: "cell14"
                 MouseArea {
                     id: mouseAreaCell14
@@ -219,7 +219,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 objectName: "cell15"
                 MouseArea {
                     id: mouseAreaCell15
@@ -236,7 +236,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 objectName: "cell16"
                 MouseArea {
                     id: mouseAreaCell16
@@ -253,7 +253,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 objectName: "cell17"
                 MouseArea {
                     id: mouseAreaCell17
@@ -270,7 +270,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 objectName: "cell18"
                 MouseArea {
                     id: mouseAreaCell18
@@ -298,7 +298,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 objectName: "cell21"
                 MouseArea {
                     id: mouseAreaCell21
@@ -315,7 +315,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 objectName: "cell22"
                 MouseArea {
                     id: mouseAreaCell22
@@ -332,7 +332,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 objectName: "cell23"
                 MouseArea {
                     id: mouseAreaCell23
@@ -349,7 +349,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 objectName: "cell24"
                 MouseArea {
                     id: mouseAreaCell24
@@ -366,7 +366,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 objectName: "cell25"
                 MouseArea {
                     id: mouseAreaCell25
@@ -383,7 +383,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 objectName: "cell26"
                 MouseArea {
                     id: mouseAreaCell26
@@ -400,7 +400,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 objectName: "cell27"
                 MouseArea {
                     id: mouseAreaCell27
@@ -417,7 +417,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 objectName: "cell28"
                 MouseArea {
                     id: mouseAreaCell28
@@ -442,7 +442,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell31
                     anchors.fill: parent
@@ -459,7 +459,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell32
                     anchors.fill: parent
@@ -476,7 +476,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell33
                     anchors.fill: parent
@@ -493,7 +493,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell34
                     anchors.fill: parent
@@ -510,7 +510,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell35
                     anchors.fill: parent
@@ -527,7 +527,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell36
                     anchors.fill: parent
@@ -544,7 +544,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell37
                     anchors.fill: parent
@@ -561,7 +561,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell38
                     anchors.fill: parent
@@ -589,7 +589,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell41
                     anchors.fill: parent
@@ -606,7 +606,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell42
                     anchors.fill: parent
@@ -623,7 +623,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell43
                     anchors.fill: parent
@@ -640,7 +640,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell44
                     anchors.fill: parent
@@ -657,7 +657,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell45
                     anchors.fill: parent
@@ -674,7 +674,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell46
                     anchors.fill: parent
@@ -691,7 +691,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell47
                     anchors.fill: parent
@@ -708,7 +708,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell48
                     anchors.fill: parent
@@ -736,7 +736,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell51
                     anchors.fill: parent
@@ -753,7 +753,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell52
                     anchors.fill: parent
@@ -770,7 +770,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell53
                     anchors.fill: parent
@@ -787,7 +787,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell54
                     anchors.fill: parent
@@ -804,7 +804,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell55
                     anchors.fill: parent
@@ -821,7 +821,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell56
                     anchors.fill: parent
@@ -838,7 +838,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell57
                     anchors.fill: parent
@@ -855,7 +855,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell58
                     anchors.fill: parent
@@ -883,7 +883,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell61
                     anchors.fill: parent
@@ -900,7 +900,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell62
                     anchors.fill: parent
@@ -917,7 +917,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell63
                     anchors.fill: parent
@@ -934,7 +934,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell64
                     anchors.fill: parent
@@ -951,7 +951,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell65
                     anchors.fill: parent
@@ -968,7 +968,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell66
                     anchors.fill: parent
@@ -985,7 +985,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell67
                     anchors.fill: parent
@@ -1002,7 +1002,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell68
                     anchors.fill: parent
@@ -1030,7 +1030,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell71
                     anchors.fill: parent
@@ -1047,7 +1047,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell72
                     anchors.fill: parent
@@ -1064,7 +1064,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell73
                     anchors.fill: parent
@@ -1081,7 +1081,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell74
                     anchors.fill: parent
@@ -1098,7 +1098,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell75
                     anchors.fill: parent
@@ -1115,7 +1115,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell76
                     anchors.fill: parent
@@ -1132,7 +1132,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell77
                     anchors.fill: parent
@@ -1149,7 +1149,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell78
                     anchors.fill: parent
@@ -1177,7 +1177,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell81
                     anchors.fill: parent
@@ -1194,7 +1194,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell82
                     anchors.fill: parent
@@ -1211,7 +1211,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell83
                     anchors.fill: parent
@@ -1228,7 +1228,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell84
                     anchors.fill: parent
@@ -1245,7 +1245,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell85
                     anchors.fill: parent
@@ -1262,7 +1262,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell86
                     anchors.fill: parent
@@ -1279,7 +1279,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#9e630a"
                 MouseArea {
                     id: mouseAreaCell87
                     anchors.fill: parent
@@ -1296,7 +1296,7 @@ Rectangle {
                 y: 0
                 width: 60
                 height: 60
-                color: "#ffffff"
+                color: "#ffead1"
                 MouseArea {
                     id: mouseAreaCell88
                     anchors.fill: parent
