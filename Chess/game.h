@@ -4,6 +4,8 @@
 #include <QObject>
 #include <qstring.h>
 
+#include "desk.h"
+
 class Game : public QObject
 {
     Q_OBJECT
@@ -13,15 +15,18 @@ public:
 signals:
 
 public slots:
+    //desk action handler
     void cellAction(QString);
+
+    //btn action handlers
     void startAction();
     void stopAction();
     void saveAction();
     void loadAction();
 
 private:
-    QObject *viewer_;
-        
+    QObject *viewer_;       //for access to gui elements
+    QObject *desk_;         //ptr to desk instance (game have 1 instance of desk during all life period)
 
 };
 

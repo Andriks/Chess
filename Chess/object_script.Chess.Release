@@ -1,0 +1,12 @@
+INPUT(
+./release\chess_main.o
+./release\game.o
+./release\desk.o
+./release\figure.o
+./release\qtquick2applicationviewer.o
+./release\qrc_rc.o
+./release\moc_qtquick2applicationviewer.o
+./release\moc_game.o
+./release\moc_desk.o
+./release\moc_figure.o
+);

@@ -11,7 +11,9 @@ QML_IMPORT_PATH =
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += \
     chess_main.cpp \
-    game.cpp
+    game.cpp \
+    desk.cpp \
+    figure.cpp
 
 # Installation path
 # target.path =
@@ -27,4 +29,6 @@ RESOURCES += \
     rc.qrc
 
 HEADERS += \
-    game.h
+    game.h \
+    desk.h \
+    figure.h

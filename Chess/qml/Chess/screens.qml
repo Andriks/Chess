@@ -126,7 +126,7 @@ Rectangle {
     }
 
     Rectangle {
-        id: desc
+        id: desk
         x: 60
         y: 60
         width: 480
