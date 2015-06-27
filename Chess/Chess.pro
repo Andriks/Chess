@@ -13,7 +13,8 @@ SOURCES += \
     chess_main.cpp \
     game.cpp \
     desk.cpp \
-    figure.cpp
+    figure.cpp \
+    command.cpp
 
 # Installation path
 # target.path =
@@ -31,4 +32,5 @@ RESOURCES += \
 HEADERS += \
     game.h \
     desk.h \
-    figure.h
+    figure.h \
+    command.h

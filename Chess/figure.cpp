@@ -1,10 +1,10 @@
 #include "figure.h"
 
-Figure::Figure(QObject *parent, FigType inp_type, FigColor inp_color) :
+Figure::Figure(QObject *parent, FigType ftype, FigColor fcolor) :
     QObject(parent),
     owner_(parent),
-    type_(inp_type),
-    color_(inp_color)
+    type_(ftype),
+    color_(fcolor)
 {
 }
 
@@ -45,6 +45,16 @@ QString Figure::getFigColor() const
     default:
         return "";
     }
+}
+
+Figure::FigType Figure::type()
+{
+    return type_;
+}
+
+Figure::FigColor Figure::color()
+{
+    return color_;
 }
 
 

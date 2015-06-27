@@ -3,10 +3,12 @@ INPUT(
 ./debug\game.o
 ./debug\desk.o
 ./debug\figure.o
+./debug\command.o
 ./debug\qtquick2applicationviewer.o
 ./debug\qrc_rc.o
 ./debug\moc_qtquick2applicationviewer.o
 ./debug\moc_game.o
 ./debug\moc_desk.o
 ./debug\moc_figure.o
+./debug\moc_command.o
 );

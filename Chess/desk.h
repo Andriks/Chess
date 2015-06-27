@@ -6,29 +6,37 @@
 
 #include "figure.h"
 
+
 class Desk : public QObject
 {
     Q_OBJECT
 
 public:
     struct Cell {
-        size_t row_;
-        size_t col_;
-        Cell(size_t row, size_t col): row_(row), col_(col) {}
+        int row_;
+        int col_;
+        Cell(int row=-1, int col=-1): row_(row), col_(col) {}
+        bool operator ==(Cell rv) {
+            return (row_==rv.row_ && col_==rv.col_);
+        }
     };
 
     struct CellInfo {
         Cell cell_;
         Figure::FigType ftype_;
         Figure::FigColor fcolor_;
-        CellInfo(Cell cell, Figure::FigType ftype,Figure::FigColor fcolor):
+        CellInfo(Cell cell=Cell(-1,-1), Figure::FigType ftype=Figure::EMPTY, Figure::FigColor fcolor=Figure::NONE):
             cell_(cell),
             ftype_(ftype),
             fcolor_(fcolor)
         {}
+        bool operator ==(CellInfo rv) {
+            return (cell_==rv.cell_ && ftype_==rv.ftype_ && fcolor_==rv.fcolor_);
+        }
     };
 
 public:
+    //friend Command;
     explicit Desk(QObject *parent = 0);
 
     void fillDefault();
@@ -43,8 +51,8 @@ private:
     static bool defaultStateFilled_;
     static std::vector<CellInfo> defaultState_;
 
-    static size_t max_row_cnt_;
-    static size_t max_col_cnt_;
+    static int max_row_cnt_;
+    static int max_col_cnt_;
 };
 
 

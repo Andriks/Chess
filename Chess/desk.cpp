@@ -3,20 +3,20 @@
 bool Desk::defaultStateFilled_(false);
 std::vector<Desk::CellInfo> Desk::defaultState_;
 
-size_t Desk::max_row_cnt_(8);
-size_t Desk::max_col_cnt_(8);
+int Desk::max_row_cnt_(8);
+int Desk::max_col_cnt_(8);
 
 Desk::Desk(QObject *parent) :
     QObject(parent),
     owner_(parent)
 {
     //filling desk by empty ptr on base items
-    for (size_t x=0; x<max_row_cnt_; x++) {
-        std::vector<Figure*> row;
-        for (size_t y=0; y<max_row_cnt_; y++)
-            row.push_back(NULL);
+    for (int row=0; row<max_row_cnt_; row++) {
+        std::vector<Figure*> row_vec;
+        for (int col=0; col<max_row_cnt_; col++)
+            row_vec.push_back(NULL);
 
-        buffer_.push_back(row);     //it will copy row to buffer_ (now mamory leek [?])
+        buffer_.push_back(row_vec);     //it will copy row to buffer_ (now mamory leek [?])
     }
 
 
@@ -51,11 +51,11 @@ Desk::Desk(QObject *parent) :
 
 void Desk::fillDefault()
 {
-    for (size_t i=0; i<defaultState_.size(); i++) {
+    for (int i=0; i<defaultState_.size(); i++) {
         const CellInfo item = defaultState_[i];
 
-        const size_t row = item.cell_.row_;
-        const size_t col = item.cell_.col_;
+        const int row = item.cell_.row_;
+        const int col = item.cell_.col_;
 
         switch (item.ftype_) {
         case Figure::KING:
@@ -85,8 +85,8 @@ void Desk::fillDefault()
 
 void Desk::clear()
 {
-    for (size_t row=0; row<max_row_cnt_; row++) {
-        for (size_t col=0; col<max_col_cnt_; col++) {
+    for (int row=0; row<max_row_cnt_; row++) {
+        for (int col=0; col<max_col_cnt_; col++) {
             if (buffer_[row][col] != NULL) {
                 delete buffer_[row][col];
                 buffer_[row][col] = NULL;

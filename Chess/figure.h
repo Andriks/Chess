@@ -4,6 +4,7 @@
 #include <QObject>
 
 
+
 ///////////////////////////////////////////////////////////////////////////////////////
 class Figure : public QObject
 {
@@ -14,11 +15,13 @@ public:
     enum FigColor{NONE/*base class*/, WHITE, BLACK};
 
 public:
-    explicit Figure(QObject *parent, FigType, FigColor);
+    explicit Figure(QObject *parent = 0, FigType ftype=EMPTY, FigColor fcolor=Figure::NONE);
 
     QString getFigName() const;
     QString getFigColor() const;
 
+    FigType type();
+    FigColor color();
 
 private:
     virtual std::vector<QObject*> cellsToMove();
