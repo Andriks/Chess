@@ -27,7 +27,10 @@ public slots:
     void loadAction();
 
 private:
-    QObject *viewer_;       //for access to gui elements
+    void drawCurState();
+
+private:
+    QObject *root_;       //for access to gui elements
     //QObject *desk_;         //ptr to desk instance (game have 1 instance of desk during all life period)
     Desk *desk_;         //ptr to desk instance (game have 1 instance of desk during all life period)
 };

@@ -32,7 +32,7 @@ Rectangle {
                        btnLoad.visible = true,
                        btnStop.visible = false,
                        btnSave.visible = false,
-                       curGame.stopAction()
+                       Controller.stopAction()
         }
     }
 
@@ -60,7 +60,7 @@ Rectangle {
             id: mouseAreaSave
             anchors.fill: parent
 
-            onClicked: curGame.saveAction()
+            onClicked: Controller.saveAction()
         }
     }
 
@@ -92,7 +92,7 @@ Rectangle {
                        btnSave.visible = true,
                        btnStart.visible = false,
                        btnLoad.visible = false,
-                       curGame.startAction()
+                       Controller.startAction()
 
         }
     }
@@ -121,7 +121,7 @@ Rectangle {
             id: mouseAreaLoad
             anchors.fill: parent
 
-            onClicked: curGame.loadAction()
+            onClicked: Controller.loadAction()
         }
     }
 
@@ -154,11 +154,19 @@ Rectangle {
                 color: "#ffead1"
                 border.width: 1
                 objectName: "cell11"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell11
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
             }
 
@@ -171,11 +179,21 @@ Rectangle {
                 color: "#9e630a"
                 border.width: 1
                 objectName: "cell12"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell12
+                    x: 7
+                    y: 5
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
             }
 
@@ -188,11 +206,19 @@ Rectangle {
                 color: "#ffead1"
                 border.width: 1
                 objectName: "cell13"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell13
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
             }
 
@@ -204,11 +230,19 @@ Rectangle {
                 height: 60
                 color: "#9e630a"
                 objectName: "cell14"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell14
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
             }
@@ -221,11 +255,19 @@ Rectangle {
                 height: 60
                 color: "#ffead1"
                 objectName: "cell15"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell15
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
             }
@@ -238,11 +280,19 @@ Rectangle {
                 height: 60
                 color: "#9e630a"
                 objectName: "cell16"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell16
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
             }
@@ -255,11 +305,19 @@ Rectangle {
                 height: 60
                 color: "#ffead1"
                 objectName: "cell17"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell17
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
             }
@@ -272,11 +330,19 @@ Rectangle {
                 height: 60
                 color: "#9e630a"
                 objectName: "cell18"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell18
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
             }
@@ -300,11 +366,19 @@ Rectangle {
                 height: 60
                 color: "#9e630a"
                 objectName: "cell21"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell21
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
             }
@@ -317,11 +391,19 @@ Rectangle {
                 height: 60
                 color: "#ffead1"
                 objectName: "cell22"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell22
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
             }
@@ -334,11 +416,19 @@ Rectangle {
                 height: 60
                 color: "#9e630a"
                 objectName: "cell23"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell23
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
             }
@@ -351,11 +441,19 @@ Rectangle {
                 height: 60
                 color: "#ffead1"
                 objectName: "cell24"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell24
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
             }
@@ -368,11 +466,19 @@ Rectangle {
                 height: 60
                 color: "#9e630a"
                 objectName: "cell25"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell25
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
             }
@@ -385,11 +491,19 @@ Rectangle {
                 height: 60
                 color: "#ffead1"
                 objectName: "cell26"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell26
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
             }
@@ -402,11 +516,19 @@ Rectangle {
                 height: 60
                 color: "#9e630a"
                 objectName: "cell27"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell27
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
             }
@@ -419,11 +541,19 @@ Rectangle {
                 height: 60
                 color: "#ffead1"
                 objectName: "cell28"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell28
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
             }
@@ -443,11 +573,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell31
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell31"
@@ -460,11 +598,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell32
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell32"
@@ -477,11 +623,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell33
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell33"
@@ -494,11 +648,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell34
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell34"
@@ -511,11 +673,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell35
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell35"
@@ -528,11 +698,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell36
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell36"
@@ -545,11 +723,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell37
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell37"
@@ -562,11 +748,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell38
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell38"
@@ -590,11 +784,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell41
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell41"
@@ -607,11 +809,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell42
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell42"
@@ -624,11 +834,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell43
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell43"
@@ -641,11 +859,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell44
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell44"
@@ -658,11 +884,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell45
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell45"
@@ -675,11 +909,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell46
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell46"
@@ -692,11 +934,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell47
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell47"
@@ -709,11 +959,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell48
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell48"
@@ -737,11 +995,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell51
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell51"
@@ -754,11 +1020,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell52
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell52"
@@ -771,11 +1045,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell53
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell53"
@@ -788,11 +1070,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell54
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell54"
@@ -805,11 +1095,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell55
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell55"
@@ -822,11 +1120,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell56
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell56"
@@ -839,11 +1145,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell57
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell57"
@@ -856,11 +1170,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell58
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell58"
@@ -884,11 +1206,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell61
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell61"
@@ -901,11 +1231,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell62
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell62"
@@ -918,11 +1256,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell63
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell63"
@@ -935,11 +1281,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell64
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell64"
@@ -952,11 +1306,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell65
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell65"
@@ -969,11 +1331,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell66
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell66"
@@ -986,11 +1356,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell67
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell67"
@@ -1003,11 +1381,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell68
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell68"
@@ -1031,11 +1417,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell71
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell71"
@@ -1048,11 +1442,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell72
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell72"
@@ -1065,11 +1467,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell73
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell73"
@@ -1082,11 +1492,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell74
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell74"
@@ -1099,11 +1517,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell75
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell75"
@@ -1116,11 +1542,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell76
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell76"
@@ -1133,11 +1567,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell77
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell77"
@@ -1150,11 +1592,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell78
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell78"
@@ -1178,11 +1628,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell81
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell81"
@@ -1195,11 +1653,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell82
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell82"
@@ -1212,11 +1678,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell83
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell83"
@@ -1229,11 +1703,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell84
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell84"
@@ -1246,11 +1728,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell85
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell85"
@@ -1263,11 +1753,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell86
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell86"
@@ -1280,11 +1778,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#9e630a"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell87
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell87"
@@ -1297,11 +1803,19 @@ Rectangle {
                 width: 60
                 height: 60
                 color: "#ffead1"
+                Text {
+                    objectName: "t_"+parent.objectName;
+                    width: parent.width
+                    height: parent.height
+                    font.pixelSize: 30
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
                 MouseArea {
                     id: mouseAreaCell88
                     anchors.fill: parent
 
-                    onClicked: curGame.cellAction(parent.objectName)
+                    onClicked: Controller.cellAction(parent.objectName)
                 }
                 border.width: 1
                 objectName: "cell88"

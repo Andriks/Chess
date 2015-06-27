@@ -11,13 +11,11 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-
     QtQuick2ApplicationViewer viewer;
 
-
     viewer.setSource(QUrl("qrc:/qml/qml/Chess/screens.qml"));
-    Game curGame(viewer.rootObject());
-    viewer.rootContext()->setContextProperty("curGame", &curGame);
+    Game Controller(viewer.rootObject());
+    viewer.rootContext()->setContextProperty("Controller", &Controller);
 
     viewer.showExpanded();
 

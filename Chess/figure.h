@@ -9,20 +9,19 @@ class Figure : public QObject
 {
     Q_OBJECT
 
-private:
+public:
     enum FigType{EMPTY/*base class*/, KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN};
     enum FigColor{NONE/*base class*/, WHITE, BLACK};
 
 public:
-    explicit Figure(QObject *parent = 0);
+    explicit Figure(QObject *parent, FigType, FigColor);
 
-signals:
+    QString getFigName() const;
+    QString getFigColor() const;
 
-public slots:
 
 private:
     virtual std::vector<QObject*> cellsToMove();
-    virtual QString figName();
 
 private:
     QObject *owner_;    //ptr to figure owner (Desk instance)
@@ -37,11 +36,27 @@ class King : public Figure
 {
     Q_OBJECT
 public:
-    explicit King(QObject *parent = 0);
+    explicit King(QObject *parent, FigColor);
 
 private:
     virtual std::vector<QObject*> cellsToMove();
-    virtual QString figName();
+
+private:
+
+
+};
+
+///////////////////////////////////////////////////////////////////////////////////////
+class Queen : public Figure
+{
+    Q_OBJECT
+public:
+    explicit Queen(QObject *parent, FigColor);
+
+private:
+    virtual std::vector<QObject*> cellsToMove();
+
+private:
 
 };
 
