@@ -54,7 +54,16 @@ void Command::set_e_info(Cell cell)
 
 void Command::exec()
 {
+    std::swap(desk_->buffer_[b_cell_info_.cell_.row_][b_cell_info_.cell_.col_],
+              desk_->buffer_[e_cell_info_.cell_.row_][e_cell_info_.cell_.col_]);
 
+    //we have swaped figures and figure, which was on target cell, on start cell now
+    //if it exists (not NULL) we should to relese it from buffer (and memory)
+    Figure *rem_ptr = desk_->buffer_[b_cell_info_.cell_.row_][b_cell_info_.cell_.col_];
+    if (rem_ptr != NULL) {
+        delete rem_ptr;
+        rem_ptr = NULL;
+    }
 }
 
 void Command::rollback()
