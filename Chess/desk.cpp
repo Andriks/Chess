@@ -96,12 +96,25 @@ void Desk::clear()
     }
 }
 
-Figure *Desk::getFigure(Cell inp_cell)
+Figure *Desk::getFigure(const Cell &inp_cell) const
 {
-    if (inp_cell.row_ > (max_row_cnt_-1))
-        return NULL;
-    if (inp_cell.col_ > (max_col_cnt_-1))
+//    if (inp_cell.row_ > (max_row_cnt_-1))
+//        return NULL;
+//    if (inp_cell.col_ > (max_col_cnt_-1))
+//        return NULL;
+    if (!inRange(inp_cell))
         return NULL;
 
     return buffer_[inp_cell.row_][inp_cell.col_];
+}
+
+bool Desk::inRange(const Cell &cell) const
+{
+    if (cell.row_ < 0 || cell.col_ < 0)
+        return false;
+
+    if (cell.row_ > (max_row_cnt_-1) || cell.col_ > (max_col_cnt_-1))
+        return false;
+
+    return true;
 }

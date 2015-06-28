@@ -2,7 +2,12 @@
 #define COMMON_TYPES_H
 
 #include <QObject>
-#include <qstring.h>
+#include <QString>
+
+
+class Figure;
+class Desk;
+class Command;
 
 
 enum FigType{EMPTY/*base class*/,
@@ -52,8 +57,5 @@ struct CellInfo {
 
 };
 
-class Figure;
-class Desk;
-class Command;
 
 #endif // COMMON_TYPES_H

@@ -44,17 +44,21 @@ void Game::cellAction(QString cell_name)
     }
 
     if (command_ == NULL) {
-        Figure *fig = desk_->getFigure(cell);
-        if (fig == NULL)
+//        Figure *fig = desk_->getFigure(cell);
+//        if (fig == NULL)
+//            return;
+
+        if (desk_->getFigure(cell) == NULL)
             return;
+
 
         t_cell->setProperty("color", "red");
 
         command_ = new Command(this, desk_);
-        command_->set_b_info(cell, fig);
+        command_->set_b_info(cell);
     } else {
-        Figure *fig = desk_->getFigure(cell);
-        command_->set_e_info(cell, fig);
+        //Figure *fig = desk_->getFigure(cell);
+        command_->set_e_info(cell);
 
         if (command_->valid()) {
             command_->exec();

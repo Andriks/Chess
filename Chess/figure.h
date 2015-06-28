@@ -9,7 +9,9 @@ class Figure : public QObject
 {
     Q_OBJECT
 public:
-    explicit Figure(QObject *parent = 0, FigType ftype=EMPTY, FigColor fcolor=NONE);
+    friend class Command;
+
+    explicit Figure(Desk *parent = 0, FigType ftype=EMPTY, FigColor fcolor=NONE);
 
     QString getFigName() const;
     QString getFigColor() const;
@@ -18,12 +20,11 @@ public:
     FigType type();
     FigColor color();
 
-private:
-    //virtual std::vector<Desk::Cell> cellsToMove();
-    virtual std::vector<QObject *> cellsToMove();
+protected:
+    virtual std::vector<Cell> cellsToMove(const Cell &) const;
 
-private:
-    QObject *owner_;    //ptr to figure owner (Desk instance)
+protected:
+    Desk *owner_;    //ptr to figure owner (Desk instance)
     FigType type_;
     FigColor color_;
 
@@ -35,11 +36,10 @@ class King : public Figure
 {
     Q_OBJECT
 public:
-    explicit King(QObject *parent, FigColor);
+    explicit King(Desk *parent, FigColor);
 
 private:
-    //virtual std::vector<Desk::Cell> cellsToMove();
-    virtual std::vector<QObject *> cellsToMove();
+    virtual std::vector<Cell> cellsToMove(const Cell &) const;
 
 private:
 
@@ -51,11 +51,10 @@ class Queen : public Figure
 {
     Q_OBJECT
 public:
-    explicit Queen(QObject *parent, FigColor);
+    explicit Queen(Desk *parent, FigColor);
 
 private:
-   //virtual std::vector<Desk::Cell> cellsToMove();
-    virtual std::vector<QObject *> cellsToMove();
+   virtual std::vector<Cell> cellsToMove(const Cell &) const;
 
 private:
 

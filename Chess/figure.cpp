@@ -1,6 +1,7 @@
 #include "figure.h"
+#include "desk.h"
 
-Figure::Figure(QObject *parent, FigType ftype, FigColor fcolor) :
+Figure::Figure(Desk *parent, FigType ftype, FigColor fcolor) :
     QObject(parent),
     owner_(parent),
     type_(ftype),
@@ -8,10 +9,9 @@ Figure::Figure(QObject *parent, FigType ftype, FigColor fcolor) :
 {
 }
 
-std::vector<QObject *> Figure::cellsToMove()
+std::vector<Cell> Figure::cellsToMove(const Cell &cur_cell) const
 {
-    //std::vector<Desk::Cell> res;
-    std::vector<QObject *> res;
+    std::vector<Cell> res;
 
     return res;
 }
@@ -60,30 +60,98 @@ FigColor Figure::color()
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
-King::King(QObject *parent, FigColor inp_color) :
+King::King(Desk *parent, FigColor inp_color) :
     Figure(parent, KING, inp_color)
 {
 }
 
-std::vector<QObject *> King::cellsToMove()
+std::vector<Cell> King::cellsToMove(const Cell &cur_cell) const
 {
-    //std::vector<Desk::Cell> res;
-    std::vector<QObject *> res;
+    int row = cur_cell.row_;
+    int col = cur_cell.col_;
+
+    std::vector<Cell> to_check;
+    to_check.push_back( Cell(row-1, col-1) );
+    to_check.push_back( Cell(row-1, col  ) );
+    to_check.push_back( Cell(row-1, col+1) );
+
+    to_check.push_back( Cell(row, col-1) );
+    to_check.push_back( Cell(row, col+1) );
+
+    to_check.push_back( Cell(row+1, col-1) );
+    to_check.push_back( Cell(row+1, col  ) );
+    to_check.push_back( Cell(row+1, col+1) );
+
+    std::vector<Cell> res;
+
+    for (int i=0; i!=to_check.size(); i++)
+    {
+        Cell it = to_check[i];
+        if (owner_->inRange(it))
+            if (owner_->getFigure(it) == NULL)
+                res.push_back(it);
+            else
+                if (owner_->getFigure(cur_cell)->color() != owner_->getFigure(it)->color())
+                    //meens that figure on target cell is enemy, we can go there
+                    res.push_back(it);
+    }
+//have problems with *it here ... err
+//    for (std::vector<Cell>::iterator it=to_check.begin(); it != to_check.end(); it++)
+//    {
+//        if (owner_->inRange(*it))
+//            if (owner_->getFigure(*it) == NULL)
+//                res.push_back(*it);
+//            else
+//                if (owner_->getFigure(cur_cell)->color() != owner_->getFigure(*it)->color())
+//                    //meens that figure on target cell is enemy, we can go there
+//                    res.push_back(*it);
+//    }
 
     return res;
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
-Queen::Queen(QObject *parent, FigColor inp_color) :
+Queen::Queen(Desk *parent, FigColor inp_color) :
     Figure(parent, QUEEN, inp_color)
 {
 }
 
-std::vector<QObject *> Queen::cellsToMove()
+std::vector<Cell> Queen::cellsToMove(const Cell &cur_cell) const
 {
-    //std::vector<Desk::Cell> res;
-    std::vector<QObject *> res;
+
+    /*******************************/
+    /******TMP FROM KING************/
+    /*******************************/
+
+    int row = cur_cell.row_;
+    int col = cur_cell.col_;
+
+    std::vector<Cell> to_check;
+    to_check.push_back( Cell(row-1, col-1) );
+    to_check.push_back( Cell(row-1, col  ) );
+    to_check.push_back( Cell(row-1, col+1) );
+
+    to_check.push_back( Cell(row, col-1) );
+    to_check.push_back( Cell(row, col+1) );
+
+    to_check.push_back( Cell(row+1, col-1) );
+    to_check.push_back( Cell(row+1, col  ) );
+    to_check.push_back( Cell(row+1, col+1) );
+
+    std::vector<Cell> res;
+
+    for (int i=0; i!=to_check.size(); i++)
+    {
+        Cell it = to_check[i];
+        if (owner_->inRange(it))
+            if (owner_->getFigure(it) == NULL)
+                res.push_back(it);
+            else
+                if (owner_->getFigure(cur_cell)->color() != owner_->getFigure(it)->color())
+                    //meens that figure on target cell is enemy, we can go there
+                    res.push_back(it);
+    }
 
     return res;
 }

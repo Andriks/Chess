@@ -12,8 +12,8 @@ public:
 
     bool valid();
 
-    void set_b_info(Cell, Figure*);
-    void set_e_info(Cell, Figure*);
+    void set_b_info(Cell);
+    void set_e_info(Cell);
 
     void exec();
     void rollback();

@@ -11,14 +11,15 @@ class Desk : public QObject
 {
     Q_OBJECT
 public:
-    //friend Command;
+    friend class Command;
 
     explicit Desk(QObject *parent = 0);
 
     void fillDefault();
     void clear();
 
-    Figure *getFigure(Cell);
+    Figure *getFigure(const Cell &) const;
+    bool inRange(const Cell &) const;
 
 private:
     QObject *owner_;    //ptr to desk owner (Game instance)
