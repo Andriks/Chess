@@ -106,7 +106,7 @@ Rectangle {
         color: "#f5cba3"
         objectName: "btnLoad"
         Text {
-            id: capStart1
+            id: capLoad
             x: 0
             y: 0
             width: 130
@@ -1825,5 +1825,31 @@ Rectangle {
             visible: true
         }
 
+    }
+
+    Rectangle {
+        id: btnDraw
+        x: 462
+        y: 8
+        width: 130
+        height: 40
+        color: "#f5cba3"
+        Text {
+            id: capDraw
+            width: 130
+            height: 40
+            text: qsTr("Draw")
+            verticalAlignment: Text.AlignVCenter
+            font.pixelSize: 20
+            horizontalAlignment: Text.AlignHCenter
+        }
+
+        MouseArea {
+            id: mouseAreaDraw
+            anchors.fill: parent
+
+            onClicked: Controller.tmpDraw()
+        }
+        objectName: "btnLoad"
     }
 }

@@ -2,6 +2,7 @@
 #define FIGURE_H
 
 #include <QObject>
+//#include "desk.h"
 
 
 
@@ -20,11 +21,13 @@ public:
     QString getFigName() const;
     QString getFigColor() const;
 
+    //tmp func for Command
     FigType type();
     FigColor color();
 
 private:
-    virtual std::vector<QObject*> cellsToMove();
+    //virtual std::vector<Desk::Cell> cellsToMove();
+    virtual std::vector<QObject *> cellsToMove();
 
 private:
     QObject *owner_;    //ptr to figure owner (Desk instance)
@@ -42,7 +45,8 @@ public:
     explicit King(QObject *parent, FigColor);
 
 private:
-    virtual std::vector<QObject*> cellsToMove();
+    //virtual std::vector<Desk::Cell> cellsToMove();
+    virtual std::vector<QObject *> cellsToMove();
 
 private:
 
@@ -57,7 +61,8 @@ public:
     explicit Queen(QObject *parent, FigColor);
 
 private:
-    virtual std::vector<QObject*> cellsToMove();
+   //virtual std::vector<Desk::Cell> cellsToMove();
+    virtual std::vector<QObject *> cellsToMove();
 
 private:
 

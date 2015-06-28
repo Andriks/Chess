@@ -28,9 +28,11 @@ public slots:
     void stopAction();
     void saveAction();
     void loadAction();
+    void tmpDraw();
 
 private:
     void drawCurState();
+    void drawCommand();
     void interruptCommand();
 
 private:

@@ -10,6 +10,7 @@ Figure::Figure(QObject *parent, FigType ftype, FigColor fcolor) :
 
 std::vector<QObject *> Figure::cellsToMove()
 {
+    //std::vector<Desk::Cell> res;
     std::vector<QObject *> res;
 
     return res;
@@ -66,6 +67,7 @@ King::King(QObject *parent, FigColor inp_color) :
 
 std::vector<QObject *> King::cellsToMove()
 {
+    //std::vector<Desk::Cell> res;
     std::vector<QObject *> res;
 
     return res;
@@ -80,6 +82,7 @@ Queen::Queen(QObject *parent, FigColor inp_color) :
 
 std::vector<QObject *> Queen::cellsToMove()
 {
+    //std::vector<Desk::Cell> res;
     std::vector<QObject *> res;
 
     return res;

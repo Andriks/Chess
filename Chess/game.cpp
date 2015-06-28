@@ -1,4 +1,5 @@
 #include "game.h"
+
 #include <qfiledialog.h>
 #include <QVariant>
 
@@ -47,7 +48,7 @@ void Game::cellAction(QString cell_name)
 
         t_cell->setProperty("color", "red");
 
-        command_ = new Command(this);
+        command_ = new Command(this, desk_);
         command_->set_b_info(cell, fig);
     } else {
         Figure *fig = desk_->getFigure(cell);
@@ -55,7 +56,11 @@ void Game::cellAction(QString cell_name)
 
         if (command_->valid()) {
             command_->exec();
+            drawCommand();
+            // add to command list (for saving)
 
+            delete command_;
+            command_ = NULL;
 
         } else {
 
@@ -92,7 +97,13 @@ void Game::loadAction()
 //                this,
 //                tr("dsdasda"),
 //                "D://"
-//                );
+    //                );
+}
+
+void Game::tmpDraw()
+{
+    interruptCommand();
+    drawCurState();
 }
 
 void Game::drawCurState()
@@ -114,6 +125,24 @@ void Game::drawCurState()
             t_cell->setProperty("color", item->getFigColor());
         }
     }
+}
+
+void Game::drawCommand()
+{
+    //removing item from privious cell
+    Desk::CellInfo b_info = command_->get_b_info();
+    QString b_row = QString::number(b_info.cell_.row_+1);
+    QString b_col = QString::number(b_info.cell_.col_+1);
+    QObject *b_t_cell = root_->findChild<QObject*>(QString("t_cell")+b_row+b_col);
+    b_t_cell->setProperty("text", "");
+
+    //drawing this item on new cell
+    Desk::CellInfo e_info = command_->get_e_info();
+    QString e_row = QString::number(e_info.cell_.row_+1);
+    QString e_col = QString::number(e_info.cell_.col_+1);
+    QObject *e_t_cell = root_->findChild<QObject*>(QString("t_cell")+e_row+e_col);
+    e_t_cell->setProperty("text", command_->getCurFig()->getFigName());
+    e_t_cell->setProperty("color", command_->getCurFig()->getFigColor());
 }
 
 void Game::interruptCommand()

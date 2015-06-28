@@ -1,7 +1,8 @@
 #include "command.h"
 
-Command::Command(QObject *parent) :
+Command::Command(QObject *parent, Desk *desk) :
     QObject(parent),
+    desk_(desk),
     cur_fig_(NULL),
     rem_fig_(NULL)
 {
@@ -9,6 +10,12 @@ Command::Command(QObject *parent) :
 
 bool Command::valid()
 {
+    //needs err handle here
+    if (cur_fig_ == NULL)
+    {}
+
+    //cur_fig_->cellsToMove();
+
     if (rem_fig_ != NULL)
         if (cur_fig_->color() == rem_fig_->color())
             return false;
@@ -50,6 +57,11 @@ Figure *Command::getCurFig()
 Desk::CellInfo Command::get_b_info()
 {
     return b_cell_info_;
+}
+
+Desk::CellInfo Command::get_e_info()
+{
+    return e_cell_info_;
 }
 
 bool Command::access_check()
