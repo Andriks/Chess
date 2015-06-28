@@ -1,7 +1,8 @@
 #include "desk.h"
 
+
 bool Desk::defaultStateFilled_(false);
-std::vector<Desk::CellInfo> Desk::defaultState_;
+std::vector<CellInfo> Desk::defaultState_;
 
 int Desk::max_row_cnt_(8);
 int Desk::max_col_cnt_(8);
@@ -21,28 +22,28 @@ Desk::Desk(QObject *parent) :
 
 
     if (!defaultStateFilled_) {
-        defaultState_.push_back(CellInfo( Cell(0,0), Figure::ROOK,   Figure::BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,1), Figure::KNIGHT, Figure::BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,2), Figure::BISHOP, Figure::BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,3), Figure::QUEEN,  Figure::BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,4), Figure::KING,   Figure::BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,5), Figure::BISHOP, Figure::BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,6), Figure::KNIGHT, Figure::BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,7), Figure::ROOK,   Figure::BLACK ));
+        defaultState_.push_back(CellInfo( Cell(0,0), ROOK,   BLACK ));
+        defaultState_.push_back(CellInfo( Cell(0,1), KNIGHT, BLACK ));
+        defaultState_.push_back(CellInfo( Cell(0,2), BISHOP, BLACK ));
+        defaultState_.push_back(CellInfo( Cell(0,3), QUEEN,  BLACK ));
+        defaultState_.push_back(CellInfo( Cell(0,4), KING,   BLACK ));
+        defaultState_.push_back(CellInfo( Cell(0,5), BISHOP, BLACK ));
+        defaultState_.push_back(CellInfo( Cell(0,6), KNIGHT, BLACK ));
+        defaultState_.push_back(CellInfo( Cell(0,7), ROOK,   BLACK ));
         for (int i=0; i<8; i++) {
-            defaultState_.push_back(CellInfo( Cell(1,i), Figure::PAWN, Figure::BLACK ));
+            defaultState_.push_back(CellInfo( Cell(1,i), PAWN, BLACK ));
         }
 
-        defaultState_.push_back(CellInfo( Cell(7,0), Figure::ROOK,   Figure::WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,1), Figure::KNIGHT, Figure::WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,2), Figure::BISHOP, Figure::WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,3), Figure::QUEEN,  Figure::WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,4), Figure::KING,   Figure::WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,5), Figure::BISHOP, Figure::WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,6), Figure::KNIGHT, Figure::WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,7), Figure::ROOK,   Figure::WHITE ));
+        defaultState_.push_back(CellInfo( Cell(7,0), ROOK,   WHITE ));
+        defaultState_.push_back(CellInfo( Cell(7,1), KNIGHT, WHITE ));
+        defaultState_.push_back(CellInfo( Cell(7,2), BISHOP, WHITE ));
+        defaultState_.push_back(CellInfo( Cell(7,3), QUEEN,  WHITE ));
+        defaultState_.push_back(CellInfo( Cell(7,4), KING,   WHITE ));
+        defaultState_.push_back(CellInfo( Cell(7,5), BISHOP, WHITE ));
+        defaultState_.push_back(CellInfo( Cell(7,6), KNIGHT, WHITE ));
+        defaultState_.push_back(CellInfo( Cell(7,7), ROOK,   WHITE ));
         for (int i=0; i<8; i++) {
-            defaultState_.push_back(CellInfo( Cell(6,i), Figure::PAWN, Figure::WHITE ));
+            defaultState_.push_back(CellInfo( Cell(6,i), PAWN, WHITE ));
         }
 
         defaultStateFilled_ = true;
@@ -58,7 +59,7 @@ void Desk::fillDefault()
         const int col = item.cell_.col_;
 
         switch (item.ftype_) {
-        case Figure::KING:
+        case KING:
             buffer_[row][col] = new King(this, item.fcolor_);
             break;
         default:
@@ -95,7 +96,7 @@ void Desk::clear()
     }
 }
 
-Figure *Desk::getFigure(Desk::Cell inp_cell)
+Figure *Desk::getFigure(Cell inp_cell)
 {
     if (inp_cell.row_ > (max_row_cnt_-1))
         return NULL;

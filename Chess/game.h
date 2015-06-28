@@ -1,11 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <QObject>
-#include <qstring.h>
+#include "common_types.h"
 
-#include "desk.h"
-#include "command.h"
 
 class Game : public QObject
 {
@@ -15,7 +12,7 @@ public:
     // it have no QObject owner to be deleted automatically
     explicit Game(QObject *parent = 0);
 
-    static Desk::Cell parseQMLCellName(QString);
+    static Cell parseQMLCellName(QString);
 
 signals:
 

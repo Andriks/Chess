@@ -33,4 +33,5 @@ HEADERS += \
     game.h \
     desk.h \
     figure.h \
-    command.h
+    command.h \
+    common_types.h

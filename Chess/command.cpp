@@ -1,4 +1,6 @@
 #include "command.h"
+#include "desk.h"
+#include "figure.h"
 
 Command::Command(QObject *parent, Desk *desk) :
     QObject(parent),
@@ -23,19 +25,19 @@ bool Command::valid()
     return true;
 }
 
-void Command::set_b_info(Desk::Cell cell, Figure *fig)
+void Command::set_b_info(Cell cell, Figure *fig)
 {
-    b_cell_info_ = Desk::CellInfo(cell, fig->type(), fig->color());
+    b_cell_info_ = CellInfo(cell, fig->type(), fig->color());
     cur_fig_ = fig;
 }
 
-void Command::set_e_info(Desk::Cell cell, Figure *fig)
+void Command::set_e_info(Cell cell, Figure *fig)
 {
     if (fig != NULL) {
-        e_cell_info_ = Desk::CellInfo(cell, fig->type(), fig->color());
+        e_cell_info_ = CellInfo(cell, fig->type(), fig->color());
         rem_fig_ = fig;
     } else {
-        e_cell_info_ = Desk::CellInfo(cell);
+        e_cell_info_ = CellInfo(cell);
     }
 }
 
@@ -54,12 +56,12 @@ Figure *Command::getCurFig()
     return cur_fig_;
 }
 
-Desk::CellInfo Command::get_b_info()
+CellInfo Command::get_b_info()
 {
     return b_cell_info_;
 }
 
-Desk::CellInfo Command::get_e_info()
+CellInfo Command::get_e_info()
 {
     return e_cell_info_;
 }

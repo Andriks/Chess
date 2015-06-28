@@ -1,4 +1,6 @@
 #include "game.h"
+#include "desk.h"
+#include "command.h"
 
 #include <qfiledialog.h>
 #include <QVariant>
@@ -11,25 +13,25 @@ Game::Game(QObject *parent) :
     desk_ = new Desk(this);
 }
 
-Desk::Cell Game::parseQMLCellName(QString name)
+Cell Game::parseQMLCellName(QString name)
 {
     //needs err handle here
     if (!name.contains(QRegExp("cell[1-8][1-8]")))
-        return Desk::Cell(-1,-1);
+        return Cell(-1,-1);
 
 
     QString tmp = name.remove("cell");
     int row = QString(tmp[0]).toInt()-1;
     int col = QString(tmp[1]).toInt()-1;
 
-    return Desk::Cell(row,col);
+    return Cell(row,col);
 }
 
 void Game::cellAction(QString cell_name)
 {
-    Desk::Cell cell = parseQMLCellName(cell_name);
+    Cell cell = parseQMLCellName(cell_name);
     //bad input
-    if (cell == Desk::Cell(-1,-1)) {
+    if (cell == Cell(-1,-1)) {
         interruptCommand();
         return;
     }
@@ -115,7 +117,7 @@ void Game::drawCurState()
             if (t_cell == NULL)
                 continue;
 
-            Figure *item = desk_->getFigure(Desk::Cell(row,col));
+            Figure *item = desk_->getFigure(Cell(row,col));
             if (item == NULL) {
                 t_cell->setProperty("text", "");
                 continue;
@@ -130,14 +132,14 @@ void Game::drawCurState()
 void Game::drawCommand()
 {
     //removing item from privious cell
-    Desk::CellInfo b_info = command_->get_b_info();
+    CellInfo b_info = command_->get_b_info();
     QString b_row = QString::number(b_info.cell_.row_+1);
     QString b_col = QString::number(b_info.cell_.col_+1);
     QObject *b_t_cell = root_->findChild<QObject*>(QString("t_cell")+b_row+b_col);
     b_t_cell->setProperty("text", "");
 
     //drawing this item on new cell
-    Desk::CellInfo e_info = command_->get_e_info();
+    CellInfo e_info = command_->get_e_info();
     QString e_row = QString::number(e_info.cell_.row_+1);
     QString e_col = QString::number(e_info.cell_.col_+1);
     QObject *e_t_cell = root_->findChild<QObject*>(QString("t_cell")+e_row+e_col);
@@ -148,7 +150,7 @@ void Game::drawCommand()
 void Game::interruptCommand()
 {
     if (command_ != NULL) {
-        Desk::CellInfo info = command_->get_b_info();
+        CellInfo info = command_->get_b_info();
         QString row = QString::number(info.cell_.row_+1);
         QString col = QString::number(info.cell_.col_+1);
         QObject *prev_t_cell = root_->findChild<QObject*>(QString("t_cell")+row+col);

@@ -19,17 +19,17 @@ std::vector<QObject *> Figure::cellsToMove()
 QString Figure::getFigName() const
 {
     switch (type_) {
-    case Figure::KING:
+    case KING:
         return "K";
-    case Figure::QUEEN:
+    case QUEEN:
         return "Q";
-    case Figure::ROOK:
+    case ROOK:
         return "R";
-    case Figure::BISHOP:
+    case BISHOP:
         return "B";
-    case Figure::KNIGHT:
+    case KNIGHT:
         return "Kn";
-    case Figure::PAWN:
+    case PAWN:
         return "p";
     default:
         return "";
@@ -48,12 +48,12 @@ QString Figure::getFigColor() const
     }
 }
 
-Figure::FigType Figure::type()
+FigType Figure::type()
 {
     return type_;
 }
 
-Figure::FigColor Figure::color()
+FigColor Figure::color()
 {
     return color_;
 }

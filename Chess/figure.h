@@ -1,22 +1,15 @@
 #ifndef FIGURE_H
 #define FIGURE_H
 
-#include <QObject>
-//#include "desk.h"
-
+#include "common_types.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
 class Figure : public QObject
 {
     Q_OBJECT
-
 public:
-    enum FigType{EMPTY/*base class*/, KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN};
-    enum FigColor{NONE/*base class*/, WHITE, BLACK};
-
-public:
-    explicit Figure(QObject *parent = 0, FigType ftype=EMPTY, FigColor fcolor=Figure::NONE);
+    explicit Figure(QObject *parent = 0, FigType ftype=EMPTY, FigColor fcolor=NONE);
 
     QString getFigName() const;
     QString getFigColor() const;
