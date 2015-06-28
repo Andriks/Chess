@@ -23,9 +23,6 @@ public:
     CellInfo get_e_info();
 
 private:
-    bool access_check();
-
-private:
     Figure *cur_fig_;
     Figure *rem_fig_;
 

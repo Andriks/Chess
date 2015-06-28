@@ -85,8 +85,3 @@ CellInfo Command::get_e_info()
 {
     return e_cell_info_;
 }
-
-bool Command::access_check()
-{
-    return false;
-}

@@ -68,7 +68,7 @@ void Desk::fillDefault()
         }
     }
 
-
+    // problems with using iterator
 //    for (std::vector<CellInfo>::const_iterator it=defaultState_.begin(); it != defaultState_.end(); it++) {
 //        const size_t x = it->cell_.x_;
 //        const size_t y = it->cell_.y_;
@@ -98,10 +98,6 @@ void Desk::clear()
 
 Figure *Desk::getFigure(const Cell &inp_cell) const
 {
-//    if (inp_cell.row_ > (max_row_cnt_-1))
-//        return NULL;
-//    if (inp_cell.col_ > (max_col_cnt_-1))
-//        return NULL;
     if (!inRange(inp_cell))
         return NULL;
 

@@ -2,7 +2,7 @@
 #include "desk.h"
 #include "command.h"
 
-#include <qfiledialog.h>
+#include <QFileDialog>
 #include <QVariant>
 
 Game::Game(QObject *parent) :
@@ -44,10 +44,6 @@ void Game::cellAction(QString cell_name)
     }
 
     if (command_ == NULL) {
-//        Figure *fig = desk_->getFigure(cell);
-//        if (fig == NULL)
-//            return;
-
         if (desk_->getFigure(cell) == NULL)
             return;
 
@@ -57,7 +53,6 @@ void Game::cellAction(QString cell_name)
         command_ = new Command(this, desk_);
         command_->set_b_info(cell);
     } else {
-        //Figure *fig = desk_->getFigure(cell);
         command_->set_e_info(cell);
 
         if (command_->valid()) {
@@ -78,6 +73,7 @@ void Game::cellAction(QString cell_name)
 void Game::startAction()
 {
     interruptCommand();
+
     desk_->clear();
     desk_->fillDefault();
 
