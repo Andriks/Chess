@@ -23,8 +23,12 @@ public slots:
     //btn action handlers
     void startAction();
     void stopAction();
-    void saveAction();
-    void loadAction();
+
+    //FileDialog in qml have no feature for creating file and saving in it
+    //we can save only in existing *.txt file
+    void saveAction(QString);
+    void loadAction(QString);
+
     void tmpDraw();
 
 private:

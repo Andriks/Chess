@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Dialogs 1.1
 
 Rectangle {
     width: 600
@@ -60,7 +61,20 @@ Rectangle {
             id: mouseAreaSave
             anchors.fill: parent
 
-            onClicked: Controller.saveAction()
+            onClicked: saveFileDialog.open()
+        }
+        FileDialog {
+            id: saveFileDialog
+            title: "Please choose a file"
+            visible: false
+            selectExisting: true
+            selectFolder: false
+            modality: Qt.WindowModal
+
+            nameFilters: [ "txt files (*.txt)" ]
+            selectedNameFilter: "All files (*)"
+
+            onAccepted: Controller.saveAction(saveFileDialog.fileUrls)
         }
     }
 
@@ -116,12 +130,24 @@ Rectangle {
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
         }
-
         MouseArea {
             id: mouseAreaLoad
             anchors.fill: parent
 
-            onClicked: Controller.loadAction()
+            onClicked: loadFileDialog.open()
+        }
+        FileDialog {
+            id: loadFileDialog
+            title: "Please choose a file"
+            visible: false
+            selectExisting: true
+            selectFolder: false
+            modality: Qt.WindowModal
+
+            nameFilters: [ "txt files (*.txt)" ]
+            selectedNameFilter: "All files (*)"
+
+            onAccepted: Controller.loadAction(loadFileDialog.fileUrls)
         }
     }
 

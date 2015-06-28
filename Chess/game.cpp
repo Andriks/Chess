@@ -2,7 +2,7 @@
 #include "desk.h"
 #include "command.h"
 
-#include <QFileDialog>
+#include <QFile>
 #include <QVariant>
 
 Game::Game(QObject *parent) :
@@ -87,19 +87,34 @@ void Game::stopAction()
     drawCurState();
 }
 
-void Game::saveAction()
+void Game::saveAction(QString file_url)
 {
     interruptCommand();
 }
 
-void Game::loadAction()
+void Game::loadAction(QString file_url)
 {
     interruptCommand();
-//    QString filename = QFileDialog::getOpenFileName(
-//                this,
-//                tr("dsdasda"),
-//                "D://"
-    //                );
+
+    file_url.remove("file:///");
+
+    QFile file(file_url);
+    //needs err handle here
+    if (!file.open(QFile::ReadOnly))
+        return;
+
+    Desk *desk = new Desk(this);
+    desk->fillDefault();
+    std::vector<Command> v_comm;
+
+    while (!file.atEnd()) {
+        QString line =  file.readLine();
+        //command = new Command(this, desk);
+
+    }
+
+
+    file.close();
 }
 
 void Game::tmpDraw()
