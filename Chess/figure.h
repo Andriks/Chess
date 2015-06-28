@@ -13,12 +13,13 @@ public:
 
     explicit Figure(Desk *parent = 0, FigType ftype=EMPTY, FigColor fcolor=NONE);
 
-    QString getFigName() const;
     QString getFigColor() const;
 
-    //tmp func for Command
+    //returns enums for Command
     FigType type();
     FigColor color();
+
+    virtual QString getFigName() const;
 
 protected:
     virtual std::vector<Cell> cellsToMove(const Cell &) const;
@@ -38,6 +39,8 @@ class King : public Figure
 public:
     explicit King(Desk *parent, FigColor);
 
+    virtual QString getFigName() const;
+
 private:
     virtual std::vector<Cell> cellsToMove(const Cell &) const;
 
@@ -52,6 +55,8 @@ class Queen : public Figure
     Q_OBJECT
 public:
     explicit Queen(Desk *parent, FigColor);
+
+    virtual QString getFigName() const;
 
 private:
    virtual std::vector<Cell> cellsToMove(const Cell &) const;

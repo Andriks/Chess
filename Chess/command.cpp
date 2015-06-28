@@ -4,8 +4,8 @@
 
 #include <algorithm>
 
-Command::Command(QObject *parent, Desk *desk) :
-    QObject(parent),
+Command::Command(Desk *desk) :
+    QObject(desk),
     desk_(desk),
     cur_fig_(NULL),
     rem_fig_(NULL)

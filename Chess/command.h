@@ -8,7 +8,7 @@ class Command : public QObject
 {
     Q_OBJECT
 public:
-    explicit Command(QObject *parent = 0, Desk *desk = NULL);
+    explicit Command(Desk *desk = 0);
 
     bool valid();
 
