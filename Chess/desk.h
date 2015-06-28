@@ -3,6 +3,7 @@
 
 #include "common_types.h"
 #include "figure.h"
+#include "command.h"
 
 #include <vector>
 
@@ -22,14 +23,14 @@ public:
     bool inRange(const Cell &) const;
 
 private:
-    QObject *owner_;    //ptr to desk owner (Game instance)
     std::vector< std::vector<Figure*> > buffer_;
 
     static bool defaultStateFilled_;
     static std::vector<CellInfo> defaultState_;
 
-    static int max_row_cnt_;
-    static int max_col_cnt_;
+    static const int max_row_cnt_;
+    static const int max_col_cnt_;
+
 };
 
 

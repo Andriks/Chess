@@ -34,7 +34,7 @@ struct Cell {
     {
     }
 
-    bool operator ==(Cell rv) {
+    bool operator ==(const Cell &rv) {
         return (row_==rv.row_ && col_==rv.col_);
     }
 
@@ -44,14 +44,14 @@ struct CellInfo {
     Cell cell_;
     FigType ftype_;
     FigColor fcolor_;
-    CellInfo(Cell cell=Cell(-1,-1), FigType ftype=EMPTY, FigColor fcolor=NONE):
+    CellInfo(Cell cell=Cell(), FigType ftype=EMPTY, FigColor fcolor=NONE):
         cell_(cell),
         ftype_(ftype),
         fcolor_(fcolor)
     {
     }
 
-    bool operator ==(CellInfo rv) {
+    bool operator ==(const CellInfo &rv) {
         return (cell_==rv.cell_ && ftype_==rv.ftype_ && fcolor_==rv.fcolor_);
     }
 

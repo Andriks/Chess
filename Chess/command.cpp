@@ -22,9 +22,6 @@ bool Command::valid()
 
     std::vector<Cell> acc_cells = cur_fig_->cellsToMove(b_cell_info_.cell_);
 
-//    if (std::find(acc_cells.begin(), acc_cells.end(), b_cell_info_.cell_))
-//        return true;
-    // tmp
     for (std::vector<Cell>::iterator it = acc_cells.begin(); it != acc_cells.end(); it++)
         if (*it == e_cell_info_.cell_)
             return true;

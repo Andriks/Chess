@@ -4,12 +4,11 @@
 bool Desk::defaultStateFilled_(false);
 std::vector<CellInfo> Desk::defaultState_;
 
-int Desk::max_row_cnt_(8);
-int Desk::max_col_cnt_(8);
+const int Desk::max_row_cnt_(8);
+const int Desk::max_col_cnt_(8);
 
 Desk::Desk(QObject *parent) :
-    QObject(parent),
-    owner_(parent)
+    QObject(parent)
 {
     //filling desk by empty ptr on base items
     for (int row=0; row<max_row_cnt_; row++) {
@@ -67,21 +66,6 @@ void Desk::fillDefault()
             break;
         }
     }
-
-    // problems with using iterator
-//    for (std::vector<CellInfo>::const_iterator it=defaultState_.begin(); it != defaultState_.end(); it++) {
-//        const size_t x = it->cell_.x_;
-//        const size_t y = it->cell_.y_;
-//        switch (it->ftype_) {
-//        case Figure::KING:
-//            buffer_[x][y] = new King(this, it->fcolor_);
-//            break;
-//        default:
-//            buffer_[x][y] = new Queen(this, it->fcolor_);
-//            break;
-//        }
-//    }
-
 }
 
 void Desk::clear()

@@ -1,9 +1,9 @@
 #include "figure.h"
 #include "desk.h"
 
-Figure::Figure(Desk *parent, FigType ftype, FigColor fcolor) :
-    QObject(parent),
-    owner_(parent),
+Figure::Figure(Desk *owner, FigType ftype, FigColor fcolor) :
+    QObject(owner),
+    owner_(owner),
     type_(ftype),
     color_(fcolor)
 {
@@ -95,17 +95,6 @@ std::vector<Cell> King::cellsToMove(const Cell &cur_cell) const
                     //meens that figure on target cell is enemy, we can go there
                     res.push_back(it);
     }
-//have problems with *it here ... err
-//    for (std::vector<Cell>::iterator it=to_check.begin(); it != to_check.end(); it++)
-//    {
-//        if (owner_->inRange(*it))
-//            if (owner_->getFigure(*it) == NULL)
-//                res.push_back(*it);
-//            else
-//                if (owner_->getFigure(cur_cell)->color() != owner_->getFigure(*it)->color())
-//                    //meens that figure on target cell is enemy, we can go there
-//                    res.push_back(*it);
-//    }
 
     return res;
 }

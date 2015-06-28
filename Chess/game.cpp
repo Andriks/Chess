@@ -36,7 +36,7 @@ void Game::cellAction(QString cell_name)
         return;
     }
 
-    QObject *t_cell = root_->findChild<QObject*>(QString("t_")+cell_name);
+    QObject *t_cell = root_->findChild<QObject*>("t_"+cell_name);
     //needs err handle here
     if (t_cell == NULL) {
         interruptCommand();
@@ -58,7 +58,10 @@ void Game::cellAction(QString cell_name)
         if (command_->valid()) {
             command_->exec();
             drawCommand();
+
             // add to command list (for saving)
+            //executed_commands_.push_back(*command_);
+            //Command cc = *command_;
 
             delete command_;
             command_ = NULL;

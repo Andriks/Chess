@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "common_types.h"
+#include "command.h"
 
 
 class Game : public QObject
@@ -40,7 +41,7 @@ private:
     QObject *root_;     //for access to gui elements
     Desk *desk_;        //ptr to desk instance (game have 1 instance of desk during all life period)
     Command *command_;  //current command
-    //std::vector<Command> executed_commands_;
+    std::vector<Command> executed_commands_;
 };
 
 #endif // GAME_H
