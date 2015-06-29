@@ -59,7 +59,7 @@ void Command::set_e_info(Cell cell)
     if (fig != NULL)
         e_cell_info_ = CellInfo(cell, fig->getFigName(), fig->color());
     else
-        e_cell_info_ = CellInfo(cell, "", NONE);
+        e_cell_info_ = CellInfo(cell, " ", NONE);
 }
 
 void Command::set_b_info(CellInfo inp)
