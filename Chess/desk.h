@@ -17,7 +17,7 @@ public:
     explicit Desk(QObject *parent = 0);
 
     void fillDefault();
-    void clear();
+    //void clear();
 
     Figure *getFigure(const Cell &) const;
     bool inRange(const Cell &) const;

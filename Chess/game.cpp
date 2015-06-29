@@ -8,6 +8,7 @@
 Game::Game(QObject *parent) :
     root_(parent),
     desk_(NULL),
+    color_to_move_(WHITE),
     command_(NULL)
 {
     desk_ = new Desk(this);
@@ -47,6 +48,8 @@ void Game::cellAction(QString cell_name)
         if (desk_->getFigure(cell) == NULL)
             return;
 
+        if (desk_->getFigure(cell)->color() != color_to_move_)
+            return;
 
         t_cell->setProperty("color", "red");
 
@@ -58,6 +61,7 @@ void Game::cellAction(QString cell_name)
 
         if (command_->valid()) {
             command_->exec();
+            color_to_move_ = color_to_move_== WHITE ? BLACK : WHITE;
             drawCommand();
 
             // add to command list (for saving)
@@ -78,7 +82,10 @@ void Game::startAction()
 {
     interruptCommand();
 
-    desk_->clear();
+    //desk_->clear();
+    delete desk_;
+    desk_ = new Desk(this);
+
     desk_->fillDefault();
 
     drawCurState();
@@ -87,7 +94,9 @@ void Game::startAction()
 void Game::stopAction()
 {
     interruptCommand();
-    desk_->clear();
+    //desk_->clear();
+    delete desk_;
+    desk_ = new Desk(this);
 
     drawCurState();
 }

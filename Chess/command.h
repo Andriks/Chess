@@ -10,6 +10,10 @@ class Command : public QObject
 public:
     explicit Command(Desk *desk = 0);
 
+//    Command(const Command&);
+//    Command& operator=(const Command&);
+    //~Command(void);
+
     bool valid();
 
     void set_b_info(Cell);
