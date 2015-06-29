@@ -2,7 +2,6 @@
 #include "desk.h"
 #include "figure.h"
 
-#include <algorithm>
 
 Command::Command(Desk *desk) :
     QObject(desk),
@@ -59,7 +58,7 @@ void Command::exec()
     Figure *rem_ptr = desk_->buffer_[b_cell_info_.cell_.row_][b_cell_info_.cell_.col_];
     if (rem_ptr != NULL) {
         delete rem_ptr;
-        rem_ptr = NULL;
+        desk_->buffer_[b_cell_info_.cell_.row_][b_cell_info_.cell_.col_] = NULL;
     }
 }
 

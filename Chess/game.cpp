@@ -53,7 +53,6 @@ void Game::cellAction(QString cell_name)
 
         t_cell->setProperty("color", "red");
 
-        //command_ = new Command(this, desk_);
         command_ = new Command(desk_);
         command_->set_b_info(cell);
     } else {

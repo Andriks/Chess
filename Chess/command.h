@@ -30,8 +30,8 @@ private:
     Figure *cur_fig_;
     Figure *rem_fig_;
 
-    CellInfo b_cell_info_;
-    CellInfo e_cell_info_;
+    CellInfo b_cell_info_;  // info about cell from which we are moving
+    CellInfo e_cell_info_;  // info about cell which we are moving for
     Desk *desk_;
 };
 
