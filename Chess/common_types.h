@@ -40,6 +40,8 @@ struct Cell {
 
 };
 
+
+
 struct CellInfo {
     Cell cell_;
     FigType ftype_;

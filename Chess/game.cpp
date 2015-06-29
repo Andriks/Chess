@@ -3,12 +3,14 @@
 #include "command.h"
 
 #include <QFile>
+#include <QTextStream>
 #include <QVariant>
 
 Game::Game(QObject *parent) :
     root_(parent),
     desk_(NULL),
     color_to_move_(WHITE),
+    desk_is_active_(false),
     command_(NULL)
 {
     desk_ = new Desk(this);
@@ -30,6 +32,9 @@ Cell Game::parseQMLCellName(QString name)
 
 void Game::cellAction(QString cell_name)
 {
+    if (!desk_is_active_)
+        return;
+
     Cell cell = parseQMLCellName(cell_name);
     //bad input
     if (cell == Cell(-1,-1)) {
@@ -79,8 +84,7 @@ void Game::cellAction(QString cell_name)
 
 void Game::startAction()
 {
-    interruptCommand();
-
+    desk_is_active_ = true;
     color_to_move_ = WHITE;
 
     delete desk_;
@@ -93,6 +97,7 @@ void Game::startAction()
 void Game::stopAction()
 {
     interruptCommand();
+    desk_is_active_ = false;
 
     delete desk_;
     desk_ = new Desk(this);
@@ -103,12 +108,27 @@ void Game::stopAction()
 void Game::saveAction(QString file_url)
 {
     interruptCommand();
+
+    file_url.remove("file:///");
+    QFile file(file_url);
+    //needs err handle here
+    if (!file.open(QFile::WriteOnly|QFile::Truncate))
+        return;
+
+    QTextStream outstream(&file);
+
+    for (std::vector<Command>::iterator it=executed_commands_.begin();
+                                      it!=executed_commands_.end();
+                                      it++)
+    {
+        outstream << it->getAsString() << "\n";
+    }
+
+    file.close();
 }
 
 void Game::loadAction(QString file_url)
 {
-    interruptCommand();
-
     file_url.remove("file:///");
 
     QFile file(file_url);
@@ -116,17 +136,31 @@ void Game::loadAction(QString file_url)
     if (!file.open(QFile::ReadOnly))
         return;
 
-    Desk *desk = new Desk(this);
-    desk->fillDefault();
-    std::vector<Command> v_comm;
+    Desk *new_desk = new Desk(this);
+    new_desk->fillDefault();
+    std::vector<Command> comm_list;
 
     while (!file.atEnd()) {
         QString line =  file.readLine();
+        Command comm;
+        comm.setFromStr(line);
+        comm.set_desk(new_desk);
+        comm.exec();
 
+        comm_list.push_back(comm);
     }
 
-
     file.close();
+
+    //if everething was nice
+    delete desk_;
+    desk_ = new_desk;
+    executed_commands_.clear();
+    executed_commands_ = comm_list;
+    command_ = NULL;
+
+
+    drawCurState();
 }
 
 void Game::tmpDraw()
@@ -137,17 +171,31 @@ void Game::tmpDraw()
 
 void Game::rollback_from_list()
 {
-    interruptCommand();
+    if (command_ == &executed_commands_.front())
+        return;
 
-    if (executed_commands_.size() > 0) {
-        Command comm = executed_commands_.back();
-        executed_commands_.pop_back();
+    if (command_ == NULL)
+        command_ = &executed_commands_.back();
+    else
+        command_--;
 
-        comm.set_desk(desk_);
-        comm.rollback();
 
-        drawCommand(comm);
-    }
+    command_->rollback();
+    drawCommand(*command_);
+}
+
+void Game::make_move_from_list()
+{
+    if (command_ == NULL)
+        return;
+
+    command_->exec();
+    drawCommand(*command_);
+
+    if (command_ == &executed_commands_.back())
+        command_ = NULL;
+    else
+        command_++;
 }
 
 void Game::drawCurState()

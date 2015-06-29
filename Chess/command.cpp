@@ -2,6 +2,9 @@
 #include "desk.h"
 #include "figure.h"
 
+#include <QStringList>
+#include <QMap>
+
 
 Command::Command(Desk *desk) :
     QObject(desk),
@@ -11,14 +14,15 @@ Command::Command(Desk *desk) :
 
 Command::Command(const Command &rv):
     desk_(NULL)
-
 {
+    desk_ = rv.desk_;
     b_cell_info_ = rv.b_cell_info_;
     e_cell_info_ = rv.e_cell_info_;
 }
 
 Command &Command::operator=(const Command &rv)
 {
+    desk_ = rv.desk_;
     b_cell_info_ = rv.b_cell_info_;
     e_cell_info_ = rv.e_cell_info_;
 }
@@ -124,16 +128,6 @@ void Command::rollback()
         //desk_->buffer_[e_row][e_col] = new Pawn(desk_, e_cell_info_.fcolor_);
         break;
     }
-
-//    if (e_cell_info_.ftype_ != NONE) {
-//    }
-
-//    Figure *rem_ptr = desk_->buffer_[b_cell_info_.cell_.row_][b_cell_info_.cell_.col_];
-//    if (rem_ptr != NULL) {
-//        delete rem_ptr;
-//        desk_->buffer_[b_cell_info_.cell_.row_][b_cell_info_.cell_.col_] = NULL;
-//    }
-
 }
 
 CellInfo Command::get_b_info() const
@@ -144,4 +138,71 @@ CellInfo Command::get_b_info() const
 CellInfo Command::get_e_info() const
 {
     return e_cell_info_;
+}
+
+QString Command::getAsString() const
+{
+    QMap<FigType, QString> typemap;
+    typemap.insert(KING,"K");
+    typemap.insert(QUEEN,"Q");
+    typemap.insert(ROOK,"R");
+    typemap.insert(BISHOP,"B");
+    typemap.insert(KNIGHT,"Kn");
+    typemap.insert(PAWN,"p");
+    typemap.insert(EMPTY," ");
+
+    QMap<FigColor, QString> colormap;
+    colormap.insert(WHITE, "white");
+    colormap.insert(BLACK, "black");
+    colormap.insert(NONE, " ");
+
+    Cell b_cell = b_cell_info_.cell_;
+    Cell e_cell = e_cell_info_.cell_;
+
+    QString b_info;
+    QString e_info;
+
+    b_info = QString::number(b_cell.row_) + "," + QString::number(b_cell.col_)
+     + "|" + typemap.value(b_cell_info_.ftype_)
+     + "|" + colormap.value(b_cell_info_.fcolor_);
+
+    e_info = QString::number(e_cell.row_) + "," + QString::number(e_cell.col_)
+     + "|" + typemap.value(e_cell_info_.ftype_)
+     + "|" + colormap.value(e_cell_info_.fcolor_);
+
+    return b_info + "||" + e_info;
+}
+
+void Command::setFromStr(const QString &inp_str)
+{
+    QMap<FigType, QString> typemap;
+    typemap.insert(KING,"K");
+    typemap.insert(QUEEN,"Q");
+    typemap.insert(ROOK,"R");
+    typemap.insert(BISHOP,"B");
+    typemap.insert(KNIGHT,"Kn");
+    typemap.insert(PAWN,"p");
+    typemap.insert(EMPTY," ");
+
+    QMap<FigColor, QString> colormap;
+    colormap.insert(WHITE, "white");
+    colormap.insert(BLACK, "black");
+    colormap.insert(NONE, " ");
+
+    QString tmp(inp_str);
+    tmp.remove("\n");
+
+    QStringList line = tmp.split("||");
+
+    QStringList b_info_list = line[0].split("|");
+    QStringList b_cell_list = b_info_list[0].split(",");
+    b_cell_info_.cell_ = Cell(b_cell_list[0].toInt(), b_cell_list[1].toInt());
+    b_cell_info_.ftype_ = typemap.key(b_info_list[1]);
+    b_cell_info_.fcolor_ = colormap.key(b_info_list[2]);
+
+    QStringList e_info_list = line[1].split("|");
+    QStringList e_cell_list = e_info_list[0].split(",");
+    e_cell_info_.cell_ = Cell(e_cell_list[0].toInt(), e_cell_list[1].toInt());
+    e_cell_info_.ftype_ = typemap.key(e_info_list[1]);
+    e_cell_info_.fcolor_ = colormap.key(e_info_list[2]);
 }

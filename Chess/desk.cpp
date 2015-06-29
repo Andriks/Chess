@@ -76,25 +76,9 @@ void Desk::fillDefault()
         case PAWN:
             //buffer_[row][col] = new Pawn(this, item.fcolor_);
             break;
-
-        //default:
-            //buffer_[row][col] = new Queen(this, item.fcolor_);
-            //break;
         }
     }
 }
-
-//void Desk::clear()
-//{
-//    for (int row=0; row<max_row_cnt_; row++) {
-//        for (int col=0; col<max_col_cnt_; col++) {
-//            if (buffer_[row][col] != NULL) {
-//                delete buffer_[row][col];
-//                buffer_[row][col] = NULL;
-//            }
-//        }
-//    }
-//}
 
 Figure *Desk::getFigure(const Cell &inp_cell) const
 {

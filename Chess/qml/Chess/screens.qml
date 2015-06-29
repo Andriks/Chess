@@ -106,6 +106,8 @@ Rectangle {
                        btnSave.visible = true,
                        btnStart.visible = false,
                        btnLoad.visible = false,
+                       btnNext.visible = false,
+                       btnPrev.visible = false,
                        Controller.startAction()
 
         }
@@ -147,7 +149,63 @@ Rectangle {
             nameFilters: [ "txt files (*.txt)" ]
             selectedNameFilter: "All files (*)"
 
-            onAccepted: Controller.loadAction(loadFileDialog.fileUrls)
+            onAccepted: Controller.loadAction(loadFileDialog.fileUrls),
+                        btnNext.visible = true,
+                        btnPrev.visible = true
+        }
+    }
+
+    Rectangle {
+        id: btnNext
+        x: 546
+        y: 511
+        width: 40
+        height: 29
+        color: "#f5cba3"
+        visible: false
+        objectName: "btnNext"
+        Text {
+            id: capNext
+            width: 40
+            height: 29
+            text: qsTr("next")
+            verticalAlignment: Text.AlignVCenter
+            font.pixelSize: 20
+            horizontalAlignment: Text.AlignHCenter
+        }
+
+        MouseArea {
+            id: mouseAreaNext
+            anchors.fill: parent
+
+            onClicked: Controller.make_move_from_list();
+        }
+    }
+
+    Rectangle {
+        id: btnPrev
+        x: 14
+        y: 511
+        width: 40
+        height: 29
+        color: "#f5cba3"
+        visible: false
+        objectName: "btnPrev"
+        Text {
+            id: capPrev
+            width: 40
+            height: 29
+            text: qsTr("prev")
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 20
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        MouseArea {
+            id: mousePrev
+            anchors.fill: parent
+
+            onClicked: Controller.rollback_from_list();
         }
     }
 
@@ -1879,29 +1937,5 @@ Rectangle {
         objectName: "btnLoad"
     }
 
-    Rectangle {
-        id: btnRollback
-        x: 456
-        y: 8
-        width: 61
-        height: 40
-        color: "#f5cba3"
-        objectName: "btnLoad"
-        Text {
-            id: capRollback
-            width: 61
-            height: 40
-            text: qsTr("back")
-            horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 20
-            verticalAlignment: Text.AlignVCenter
-        }
 
-        MouseArea {
-            id: mouseAreaRollback
-            anchors.fill: parent
-
-            onClicked: Controller.rollback_from_list()
-        }
-    }
 }

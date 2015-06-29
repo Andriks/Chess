@@ -25,7 +25,7 @@ protected:
     virtual std::vector<Cell> cellsToMove(const Cell &) const;
 
 protected:
-    Desk *owner_;    //ptr to figure owner (Desk instance)
+    Desk *desk_;    //ptr to figure owner (Desk instance)
     FigType type_;
     FigColor color_;
 

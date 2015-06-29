@@ -3,7 +3,7 @@
 
 Figure::Figure(Desk *owner, FigType ftype, FigColor fcolor) :
     QObject(owner),
-    owner_(owner),
+    desk_(owner),
     type_(ftype),
     color_(fcolor)
 {
@@ -77,11 +77,11 @@ std::vector<Cell> King::cellsToMove(const Cell &cur_cell) const
     for (int i=0; i!=to_check.size(); i++)
     {
         Cell it = to_check[i];
-        if (owner_->inRange(it))
-            if (owner_->getFigure(it) == NULL)
+        if (desk_->inRange(it))
+            if (desk_->getFigure(it) == NULL)
                 res.push_back(it);
             else
-                if (owner_->getFigure(cur_cell)->color() != owner_->getFigure(it)->color())
+                if (desk_->getFigure(cur_cell)->color() != desk_->getFigure(it)->color())
                     //meens that figure on target cell is enemy, we can go there
                     res.push_back(it);
     }
@@ -114,11 +114,11 @@ std::vector<Cell> Queen::cellsToMove(const Cell &cur_cell) const
     int i = row;
     while (true) {
         Cell cell(++i, col);
-        if (!owner_->inRange(cell))
+        if (!desk_->inRange(cell))
             break;
 
-        if (owner_->getFigure(cell) != NULL)
-            if (owner_->getFigure(cur_cell)->color() != owner_->getFigure(cell)->color()) {
+        if (desk_->getFigure(cell) != NULL)
+            if (desk_->getFigure(cur_cell)->color() != desk_->getFigure(cell)->color()) {
                 res.push_back(cell);
                 break;
             } else
@@ -130,11 +130,11 @@ std::vector<Cell> Queen::cellsToMove(const Cell &cur_cell) const
     i = row;
     while (true) {
         Cell cell(--i, col);
-        if (!owner_->inRange(cell))
+        if (!desk_->inRange(cell))
             break;
 
-        if (owner_->getFigure(cell) != NULL)
-            if (owner_->getFigure(cur_cell)->color() != owner_->getFigure(cell)->color()) {
+        if (desk_->getFigure(cell) != NULL)
+            if (desk_->getFigure(cur_cell)->color() != desk_->getFigure(cell)->color()) {
                 res.push_back(cell);
                 break;
             } else
@@ -146,11 +146,11 @@ std::vector<Cell> Queen::cellsToMove(const Cell &cur_cell) const
     i = col;
     while (true) {
         Cell cell(row, ++i);
-        if (!owner_->inRange(cell))
+        if (!desk_->inRange(cell))
             break;
 
-        if (owner_->getFigure(cell) != NULL)
-            if (owner_->getFigure(cur_cell)->color() != owner_->getFigure(cell)->color()) {
+        if (desk_->getFigure(cell) != NULL)
+            if (desk_->getFigure(cur_cell)->color() != desk_->getFigure(cell)->color()) {
                 res.push_back(cell);
                 break;
             } else
@@ -162,11 +162,11 @@ std::vector<Cell> Queen::cellsToMove(const Cell &cur_cell) const
     i = col;
     while (true) {
         Cell cell(row, --i);
-        if (!owner_->inRange(cell))
+        if (!desk_->inRange(cell))
             break;
 
-        if (owner_->getFigure(cell) != NULL)
-            if (owner_->getFigure(cur_cell)->color() != owner_->getFigure(cell)->color()) {
+        if (desk_->getFigure(cell) != NULL)
+            if (desk_->getFigure(cur_cell)->color() != desk_->getFigure(cell)->color()) {
                 res.push_back(cell);
                 break;
             } else

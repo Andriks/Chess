@@ -18,12 +18,10 @@ public:
 
     void set_b_info(Cell);
     void set_e_info(Cell);
-
     void set_b_info(CellInfo);
     void set_e_info(CellInfo);
 
     void set_desk(Desk *);
-
 
     void exec();
     void rollback();
@@ -31,10 +29,14 @@ public:
     CellInfo get_b_info() const;
     CellInfo get_e_info() const;
 
+    QString getAsString() const;
+    void setFromStr(const QString &);
+
 private:
     CellInfo b_cell_info_;  // info about cell from which we are moving (begin)
     CellInfo e_cell_info_;  // info about cell which we are moving for (end)
     Desk *desk_;
 };
+
 
 #endif // COMMAND_H
