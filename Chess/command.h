@@ -12,7 +12,6 @@ public:
 
     Command(const Command&);
     Command& operator=(const Command&);
-    //~Command(void);
 
     bool valid();
 

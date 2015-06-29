@@ -9,16 +9,6 @@ class Figure;
 class Desk;
 class Command;
 
-
-//enum FigType{EMPTY/*base class*/,
-//             KING,
-//             QUEEN,
-//             ROOK,
-//             BISHOP,
-//             KNIGHT,
-//             PAWN};
-
-
 enum FigColor{NONE/*base class*/,
               WHITE,
               BLACK};

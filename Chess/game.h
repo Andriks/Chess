@@ -32,7 +32,6 @@ public slots:
     void saveAction(QString);
     void loadAction(QString);
 
-    void tmpDraw();
     void rollback_from_list();
     void make_move_from_list();
 

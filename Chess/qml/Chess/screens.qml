@@ -1911,31 +1911,5 @@ Rectangle {
 
     }
 
-    Rectangle {
-        id: btnDraw
-        x: 531
-        y: 8
-        width: 61
-        height: 40
-        color: "#f5cba3"
-        Text {
-            id: capDraw
-            width: 61
-            height: 40
-            text: qsTr("Draw")
-            verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 20
-            horizontalAlignment: Text.AlignHCenter
-        }
-
-        MouseArea {
-            id: mouseAreaDraw
-            anchors.fill: parent
-
-            onClicked: Controller.tmpDraw()
-        }
-        objectName: "btnLoad"
-    }
-
 
 }

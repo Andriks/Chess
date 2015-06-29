@@ -177,12 +177,6 @@ void Game::loadAction(QString file_url)
     drawCurState();
 }
 
-void Game::tmpDraw()
-{
-    interruptCommand();
-    drawCurState();
-}
-
 void Game::rollback_from_list()
 {
     if (command_ == &executed_commands_.front())
