@@ -86,6 +86,7 @@ void Game::startAction()
 {
     desk_is_active_ = true;
     color_to_move_ = WHITE;
+    command_ = NULL;
 
     delete desk_;
     desk_ = new Desk(this);
