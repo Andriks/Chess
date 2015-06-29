@@ -13,6 +13,22 @@ FigColor Figure::getColor() const
     return color_;
 }
 
+bool Figure::freeCellsCheck4loop(const Cell &cur_cell, const Cell &cell, std::vector<Cell> &res) const
+{
+    if (!desk_->inRange(cell))
+        return false;
+
+    if (desk_->getFigure(cell) != NULL)
+        if (desk_->getFigure(cur_cell)->getColor() != desk_->getFigure(cell)->getColor()) {
+            res.push_back(cell);
+            return false;
+        } else
+            return false;
+
+    res.push_back(cell);
+    return true;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 King::King(Desk *parent, FigColor inp_color) :
@@ -71,6 +87,7 @@ QString Queen::getFigName() const
     return "Q";
 }
 
+
 std::vector<Cell> Queen::cellsToMove(const Cell &cur_cell) const
 {
     std::vector<Cell> res;
@@ -78,76 +95,41 @@ std::vector<Cell> Queen::cellsToMove(const Cell &cur_cell) const
     int row = cur_cell.row_;
     int col = cur_cell.col_;
 
+    int i, j;
+
     /****************/
     /****ROOK********/
     /****************/
-    int i = row;
-    while (true) {
-        Cell cell(++i, col);
-        if (!desk_->inRange(cell))
-            break;
-
-        if (desk_->getFigure(cell) != NULL)
-            if (desk_->getFigure(cur_cell)->getColor() != desk_->getFigure(cell)->getColor()) {
-                res.push_back(cell);
-                break;
-            } else
-                break;
-
-        res.push_back(cell);
-    }
+    i = row;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(++i, col), res));
 
     i = row;
-    while (true) {
-        Cell cell(--i, col);
-        if (!desk_->inRange(cell))
-            break;
-
-        if (desk_->getFigure(cell) != NULL)
-            if (desk_->getFigure(cur_cell)->getColor() != desk_->getFigure(cell)->getColor()) {
-                res.push_back(cell);
-                break;
-            } else
-                break;
-
-        res.push_back(cell);
-    }
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(--i, col), res));
 
     i = col;
-    while (true) {
-        Cell cell(row, ++i);
-        if (!desk_->inRange(cell))
-            break;
-
-        if (desk_->getFigure(cell) != NULL)
-            if (desk_->getFigure(cur_cell)->getColor() != desk_->getFigure(cell)->getColor()) {
-                res.push_back(cell);
-                break;
-            } else
-                break;
-
-        res.push_back(cell);
-    }
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(row, ++i), res));
 
     i = col;
-    while (true) {
-        Cell cell(row, --i);
-        if (!desk_->inRange(cell))
-            break;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(row, --i), res));
 
-        if (desk_->getFigure(cell) != NULL)
-            if (desk_->getFigure(cur_cell)->getColor() != desk_->getFigure(cell)->getColor()) {
-                res.push_back(cell);
-                break;
-            } else
-                break;
-
-        res.push_back(cell);
-    }
 
     /****************/
     /****BISHOP******/
     /****************/
+
+    i = row; j = col;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(++i, ++j), res));
+
+    i = row; j = col;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(++i, --j), res));
+
+    i = row; j = col;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(--i, --j), res));
+
+    i = row; j = col;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(--i, ++j), res));
+
+
 
     return res;
 }
@@ -166,34 +148,25 @@ QString Bishop::getFigName() const
 
 std::vector<Cell> Bishop::cellsToMove(const Cell &cur_cell) const
 {
+    std::vector<Cell> res;
+
     int row = cur_cell.row_;
     int col = cur_cell.col_;
 
-    std::vector<Cell> to_check;
-    to_check.push_back( Cell(row-1, col-1) );
-    to_check.push_back( Cell(row-1, col  ) );
-    to_check.push_back( Cell(row-1, col+1) );
+    int i, j;
 
-    to_check.push_back( Cell(row, col-1) );
-    to_check.push_back( Cell(row, col+1) );
+    i = row; j = col;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(++i, ++j), res));
 
-    to_check.push_back( Cell(row+1, col-1) );
-    to_check.push_back( Cell(row+1, col  ) );
-    to_check.push_back( Cell(row+1, col+1) );
+    i = row; j = col;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(++i, --j), res));
 
-    std::vector<Cell> res;
+    i = row; j = col;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(--i, --j), res));
 
-    for (int i=0; i!=to_check.size(); i++)
-    {
-        Cell it = to_check[i];
-        if (desk_->inRange(it))
-            if (desk_->getFigure(it) == NULL)
-                res.push_back(it);
-            else
-                if (desk_->getFigure(cur_cell)->getColor() != desk_->getFigure(it)->getColor())
-                    //meens that figure on target cell is enemy, we can go there
-                    res.push_back(it);
-    }
+    i = row; j = col;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(--i, ++j), res));
+
 
     return res;
 }
@@ -212,34 +185,23 @@ QString Rook::getFigName() const
 
 std::vector<Cell> Rook::cellsToMove(const Cell &cur_cell) const
 {
+    std::vector<Cell> res;
+
     int row = cur_cell.row_;
     int col = cur_cell.col_;
 
-    std::vector<Cell> to_check;
-    to_check.push_back( Cell(row-1, col-1) );
-    to_check.push_back( Cell(row-1, col  ) );
-    to_check.push_back( Cell(row-1, col+1) );
+    int i = row;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(++i, col), res));
 
-    to_check.push_back( Cell(row, col-1) );
-    to_check.push_back( Cell(row, col+1) );
+    i = row;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(--i, col), res));
 
-    to_check.push_back( Cell(row+1, col-1) );
-    to_check.push_back( Cell(row+1, col  ) );
-    to_check.push_back( Cell(row+1, col+1) );
+    i = col;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(row, ++i), res));
 
-    std::vector<Cell> res;
+    i = col;
+    do {    } while(freeCellsCheck4loop(cur_cell, Cell(row, --i), res));
 
-    for (int i=0; i!=to_check.size(); i++)
-    {
-        Cell it = to_check[i];
-        if (desk_->inRange(it))
-            if (desk_->getFigure(it) == NULL)
-                res.push_back(it);
-            else
-                if (desk_->getFigure(cur_cell)->getColor() != desk_->getFigure(it)->getColor())
-                    //meens that figure on target cell is enemy, we can go there
-                    res.push_back(it);
-    }
 
     return res;
 }
@@ -262,16 +224,17 @@ std::vector<Cell> Knight::cellsToMove(const Cell &cur_cell) const
     int col = cur_cell.col_;
 
     std::vector<Cell> to_check;
-    to_check.push_back( Cell(row-1, col-1) );
-    to_check.push_back( Cell(row-1, col  ) );
-    to_check.push_back( Cell(row-1, col+1) );
+    to_check.push_back( Cell(row+2, col+1) );
+    to_check.push_back( Cell(row+1, col+2) );
 
-    to_check.push_back( Cell(row, col-1) );
-    to_check.push_back( Cell(row, col+1) );
+    to_check.push_back( Cell(row-2, col+1) );
+    to_check.push_back( Cell(row-1, col+2) );
 
-    to_check.push_back( Cell(row+1, col-1) );
-    to_check.push_back( Cell(row+1, col  ) );
-    to_check.push_back( Cell(row+1, col+1) );
+    to_check.push_back( Cell(row+2, col-1) );
+    to_check.push_back( Cell(row+1, col-2) );
+
+    to_check.push_back( Cell(row-2, col-1) );
+    to_check.push_back( Cell(row-1, col-2) );
 
     std::vector<Cell> res;
 
@@ -307,32 +270,70 @@ std::vector<Cell> Pawn::cellsToMove(const Cell &cur_cell) const
     int row = cur_cell.row_;
     int col = cur_cell.col_;
 
-    std::vector<Cell> to_check;
-    to_check.push_back( Cell(row-1, col-1) );
-    to_check.push_back( Cell(row-1, col  ) );
-    to_check.push_back( Cell(row-1, col+1) );
-
-    to_check.push_back( Cell(row, col-1) );
-    to_check.push_back( Cell(row, col+1) );
-
-    to_check.push_back( Cell(row+1, col-1) );
-    to_check.push_back( Cell(row+1, col  ) );
-    to_check.push_back( Cell(row+1, col+1) );
+    std::vector<Cell> to_check4move;
+    std::vector<Cell> to_check4attack;
 
     std::vector<Cell> res;
 
-    for (int i=0; i!=to_check.size(); i++)
-    {
-        Cell it = to_check[i];
-        if (desk_->inRange(it))
-            if (desk_->getFigure(it) == NULL)
-                res.push_back(it);
-            else
-                if (desk_->getFigure(cur_cell)->getColor() != desk_->getFigure(it)->getColor())
-                    //meens that figure on target cell is enemy, we can go there
-                    res.push_back(it);
+    if (color_ == WHITE) {
+        //it is IMPORTENT to add this first, we cant check next Cell if it is not valid
+        to_check4move.push_back(Cell(row-1, col));
+
+        if (row == desk_->max_row_cnt_-2)
+            // it is first move if it steel there
+            to_check4move.push_back(Cell(row-2, col));
+
+        to_check4attack.push_back(Cell(row-1, col-1));
+        to_check4attack.push_back(Cell(row-1, col+1));
+
+    } else {
+        //it is IMPORTENT to add this first, we cant check next Cell if it is not valid
+        to_check4move.push_back(Cell(row+1, col));
+
+        if (row == 1)
+            // it is first move if it steel there
+            to_check4move.push_back(Cell(row+2, col));
+
+        to_check4attack.push_back(Cell(row+1, col-1));
+        to_check4attack.push_back(Cell(row+1, col+1));
     }
+
+    for (int i=0; i!=to_check4attack.size(); i++) {
+        //to_check4attack(cur_cell, to_check4attack[i], res);
+        Cell cell = to_check4attack[i];
+        if (desk_->inRange(cell))
+            if (desk_->getFigure(cell) != NULL)
+                if (desk_->getFigure(cur_cell)->getColor() != desk_->getFigure(cell)->getColor())
+                    //meens that figure on target cell is enemy, we can go there
+                    res.push_back(cell);
+    }
+
+
+
+    for (int i=0; i!=to_check4move.size(); i++) {
+        Cell cell = to_check4move[i];
+        if (desk_->inRange(cell))
+            if (desk_->getFigure(cell) == NULL) {
+                res.push_back(cell);
+                continue;
+            }
+
+        break;
+    }
+
 
     return res;
 }
+
+bool Pawn::check4move(const Cell &cell, std::vector<Cell> &res) const
+{
+    if (desk_->inRange(cell))
+        if (desk_->getFigure(cell) == NULL) {
+            res.push_back(cell);
+            return true;
+        }
+
+    return false;
+}
+
 

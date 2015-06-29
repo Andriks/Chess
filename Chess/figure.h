@@ -19,6 +19,8 @@ public:
     virtual QString getFigName() const = 0;
 
 protected:
+    bool freeCellsCheck4loop(const Cell &cur_cell, const Cell &cell, std::vector<Cell> &res) const;
+
     virtual std::vector<Cell> cellsToMove(const Cell &) const = 0;
 
 protected:
@@ -119,7 +121,9 @@ public:
     virtual QString getFigName() const;
 
 private:
-   virtual std::vector<Cell> cellsToMove(const Cell &) const;
+    virtual std::vector<Cell> cellsToMove(const Cell &) const;
+
+    bool check4move(const Cell &, std::vector<Cell> &) const;
 
 private:
 
