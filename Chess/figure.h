@@ -11,12 +11,12 @@ class Figure : public QObject
 public:
     friend class Command;
 
-    explicit Figure(Desk *parent = 0, FigType ftype=EMPTY, FigColor fcolor=NONE);
+    explicit Figure(Desk *parent = 0, FigColor fcolor=NONE);
 
+    //returns name of color for gui
     QString getFigColor() const;
 
-    //returns enums for Command
-    FigType type() const;
+    //returns enum for Command
     FigColor color() const;
 
     virtual QString getFigName() const;
@@ -26,7 +26,6 @@ protected:
 
 protected:
     Desk *desk_;    //ptr to figure owner (Desk instance)
-    FigType type_;
     FigColor color_;
 
 };

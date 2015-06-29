@@ -16,17 +16,13 @@ public:
 
     explicit Desk(QObject *parent = 0);
 
-    void fillDefault();
-
     Figure *getFigure(const Cell &) const;
     bool inRange(const Cell &) const;
 
 private:
     std::vector< std::vector<Figure*> > buffer_;
 
-    static bool defaultStateFilled_;
-    static std::vector<CellInfo> defaultState_;
-
+public:
     static const int max_row_cnt_;
     static const int max_col_cnt_;
 

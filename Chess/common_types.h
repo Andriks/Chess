@@ -10,13 +10,13 @@ class Desk;
 class Command;
 
 
-enum FigType{EMPTY/*base class*/,
-             KING,
-             QUEEN,
-             ROOK,
-             BISHOP,
-             KNIGHT,
-             PAWN};
+//enum FigType{EMPTY/*base class*/,
+//             KING,
+//             QUEEN,
+//             ROOK,
+//             BISHOP,
+//             KNIGHT,
+//             PAWN};
 
 
 enum FigColor{NONE/*base class*/,
@@ -44,9 +44,9 @@ struct Cell {
 
 struct CellInfo {
     Cell cell_;
-    FigType ftype_;
+    QString ftype_;
     FigColor fcolor_;
-    CellInfo(Cell cell=Cell(), FigType ftype=EMPTY, FigColor fcolor=NONE):
+    CellInfo(Cell cell=Cell(), QString ftype="", FigColor fcolor=NONE):
         cell_(cell),
         ftype_(ftype),
         fcolor_(fcolor)

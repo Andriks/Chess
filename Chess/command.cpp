@@ -50,16 +50,16 @@ bool Command::valid()
 void Command::set_b_info(Cell cell)
 {
     Figure *fig = desk_->getFigure(cell);
-    b_cell_info_ = CellInfo(cell, fig->type(), fig->color());
+    b_cell_info_ = CellInfo(cell, fig->getFigName(), fig->color());
 }
 
 void Command::set_e_info(Cell cell)
 {
     Figure *fig = desk_->getFigure(cell);
     if (fig != NULL)
-        e_cell_info_ = CellInfo(cell, fig->type(), fig->color());
+        e_cell_info_ = CellInfo(cell, fig->getFigName(), fig->color());
     else
-        e_cell_info_ = CellInfo(cell, EMPTY, NONE);
+        e_cell_info_ = CellInfo(cell, "", NONE);
 }
 
 void Command::set_b_info(CellInfo inp)
@@ -108,26 +108,20 @@ void Command::rollback()
     std::swap(desk_->buffer_[b_row][b_col],
               desk_->buffer_[e_row][e_col]);
 
-    switch (e_cell_info_.ftype_) {
-    case KING:
+    QString type = e_cell_info_.ftype_;
+
+    if (type == "K")
         desk_->buffer_[e_row][e_col] = new King(desk_, e_cell_info_.fcolor_);
-        break;
-    case QUEEN:
+    else if (type == "Q")
         desk_->buffer_[e_row][e_col] = new Queen(desk_, e_cell_info_.fcolor_);
-        break;
-    case ROOK:
+//    else if (type == "R")
         //desk_->buffer_[e_row][e_col] = new Rook(desk_, e_cell_info_.fcolor_);
-        break;
-    case BISHOP:
+//    else if (type == "B")
         //desk_->buffer_[e_row][e_col] = new Bishop(desk_, e_cell_info_.fcolor_);
-        break;
-    case KNIGHT:
+//    else if (type == "Kn")
         //desk_->buffer_[e_row][e_col] = new Knight(desk_, e_cell_info_.fcolor_);
-        break;
-    case PAWN:
+//    else if (type == "P")
         //desk_->buffer_[e_row][e_col] = new Pawn(desk_, e_cell_info_.fcolor_);
-        break;
-    }
 }
 
 CellInfo Command::get_b_info() const
@@ -142,20 +136,6 @@ CellInfo Command::get_e_info() const
 
 QString Command::getAsString() const
 {
-    QMap<FigType, QString> typemap;
-    typemap.insert(KING,"K");
-    typemap.insert(QUEEN,"Q");
-    typemap.insert(ROOK,"R");
-    typemap.insert(BISHOP,"B");
-    typemap.insert(KNIGHT,"Kn");
-    typemap.insert(PAWN,"p");
-    typemap.insert(EMPTY," ");
-
-    QMap<FigColor, QString> colormap;
-    colormap.insert(WHITE, "white");
-    colormap.insert(BLACK, "black");
-    colormap.insert(NONE, " ");
-
     Cell b_cell = b_cell_info_.cell_;
     Cell e_cell = e_cell_info_.cell_;
 
@@ -163,32 +143,18 @@ QString Command::getAsString() const
     QString e_info;
 
     b_info = QString::number(b_cell.row_) + "," + QString::number(b_cell.col_)
-     + "|" + typemap.value(b_cell_info_.ftype_)
-     + "|" + colormap.value(b_cell_info_.fcolor_);
+     + "|" + b_cell_info_.ftype_
+     + "|" + ((b_cell_info_.fcolor_ == WHITE) ? "w" : "b");
 
     e_info = QString::number(e_cell.row_) + "," + QString::number(e_cell.col_)
-     + "|" + typemap.value(e_cell_info_.ftype_)
-     + "|" + colormap.value(e_cell_info_.fcolor_);
+     + "|" + e_cell_info_.ftype_
+     + "|" + ((e_cell_info_.fcolor_ == WHITE) ? "w" : "b");
 
     return b_info + "||" + e_info;
 }
 
-void Command::setFromStr(const QString &inp_str)
+void Command::setFromString(const QString &inp_str)
 {
-    QMap<FigType, QString> typemap;
-    typemap.insert(KING,"K");
-    typemap.insert(QUEEN,"Q");
-    typemap.insert(ROOK,"R");
-    typemap.insert(BISHOP,"B");
-    typemap.insert(KNIGHT,"Kn");
-    typemap.insert(PAWN,"p");
-    typemap.insert(EMPTY," ");
-
-    QMap<FigColor, QString> colormap;
-    colormap.insert(WHITE, "white");
-    colormap.insert(BLACK, "black");
-    colormap.insert(NONE, " ");
-
     QString tmp(inp_str);
     tmp.remove("\n");
 
@@ -197,12 +163,26 @@ void Command::setFromStr(const QString &inp_str)
     QStringList b_info_list = line[0].split("|");
     QStringList b_cell_list = b_info_list[0].split(",");
     b_cell_info_.cell_ = Cell(b_cell_list[0].toInt(), b_cell_list[1].toInt());
-    b_cell_info_.ftype_ = typemap.key(b_info_list[1]);
-    b_cell_info_.fcolor_ = colormap.key(b_info_list[2]);
+    b_cell_info_.ftype_ = b_info_list[1];
+
+    QString b_color = b_info_list[2];
+    if (b_color == "w")
+        b_cell_info_.fcolor_ = WHITE;
+    else if(b_color == "b")
+        b_cell_info_.fcolor_ = BLACK;
+    else
+        b_cell_info_.fcolor_ = NONE;
 
     QStringList e_info_list = line[1].split("|");
     QStringList e_cell_list = e_info_list[0].split(",");
     e_cell_info_.cell_ = Cell(e_cell_list[0].toInt(), e_cell_list[1].toInt());
-    e_cell_info_.ftype_ = typemap.key(e_info_list[1]);
-    e_cell_info_.fcolor_ = colormap.key(e_info_list[2]);
+    e_cell_info_.ftype_ = e_info_list[1];
+
+    QString e_color = e_info_list[2];
+    if (e_color == "w")
+        e_cell_info_.fcolor_ = WHITE;
+    else if(e_color == "b")
+        e_cell_info_.fcolor_ = BLACK;
+    else
+        e_cell_info_.fcolor_ = NONE;
 }

@@ -1,10 +1,9 @@
 #include "figure.h"
 #include "desk.h"
 
-Figure::Figure(Desk *owner, FigType ftype, FigColor fcolor) :
+Figure::Figure(Desk *owner, FigColor fcolor) :
     QObject(owner),
     desk_(owner),
-    type_(ftype),
     color_(fcolor)
 {
 }
@@ -18,7 +17,7 @@ std::vector<Cell> Figure::cellsToMove(const Cell &cur_cell) const
 
 QString Figure::getFigName() const
 {
-    return "";
+    return " ";
 }
 
 QString Figure::getFigColor() const
@@ -33,10 +32,6 @@ QString Figure::getFigColor() const
     }
 }
 
-FigType Figure::type() const
-{
-    return type_;
-}
 
 FigColor Figure::color() const
 {
@@ -46,7 +41,7 @@ FigColor Figure::color() const
 
 ///////////////////////////////////////////////////////////////////////////////////////
 King::King(Desk *parent, FigColor inp_color) :
-    Figure(parent, KING, inp_color)
+    Figure(parent, inp_color)
 {
 }
 
@@ -92,7 +87,7 @@ std::vector<Cell> King::cellsToMove(const Cell &cur_cell) const
 
 ///////////////////////////////////////////////////////////////////////////////////////
 Queen::Queen(Desk *parent, FigColor inp_color) :
-    Figure(parent, QUEEN, inp_color)
+    Figure(parent, inp_color)
 {
 }
 

@@ -1,9 +1,6 @@
 #include "desk.h"
 
 
-bool Desk::defaultStateFilled_(false);
-std::vector<CellInfo> Desk::defaultState_;
-
 const int Desk::max_row_cnt_(8);
 const int Desk::max_col_cnt_(8);
 
@@ -20,64 +17,35 @@ Desk::Desk(QObject *parent) :
     }
 
 
-    if (!defaultStateFilled_) {
-        defaultState_.push_back(CellInfo( Cell(0,0), ROOK,   BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,1), KNIGHT, BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,2), BISHOP, BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,3), QUEEN,  BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,4), KING,   BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,5), BISHOP, BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,6), KNIGHT, BLACK ));
-        defaultState_.push_back(CellInfo( Cell(0,7), ROOK,   BLACK ));
-        for (int i=0; i<8; i++) {
-            defaultState_.push_back(CellInfo( Cell(1,i), PAWN, BLACK ));
-        }
+    FigColor fcolor = BLACK;
 
-        defaultState_.push_back(CellInfo( Cell(7,0), ROOK,   WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,1), KNIGHT, WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,2), BISHOP, WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,3), QUEEN,  WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,4), KING,   WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,5), BISHOP, WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,6), KNIGHT, WHITE ));
-        defaultState_.push_back(CellInfo( Cell(7,7), ROOK,   WHITE ));
-        for (int i=0; i<8; i++) {
-            defaultState_.push_back(CellInfo( Cell(6,i), PAWN, WHITE ));
-        }
+//    buffer_[0][0] = new Rook(   this, fcolor);
+//    buffer_[0][1] = new Knight( this, fcolor);
+//    buffer_[0][2] = new Bishop( this, fcolor);
+    buffer_[0][3] = new Queen(  this, fcolor);
+    buffer_[0][4] = new King(   this, fcolor);
+//    buffer_[0][5] = new Bishop( this, fcolor);
+//    buffer_[0][6] = new Knight( this, fcolor);
+//    buffer_[0][7] = new Rook(   this, fcolor);
+//    for (int i=0; i<8; i++) {
+//        buffer_[1][i] = new Pawn(this, fcolor);
+//    }
 
-        defaultStateFilled_ = true;
-    }
-}
+    fcolor = WHITE;
 
-void Desk::fillDefault()
-{
-    for (int i=0; i<defaultState_.size(); i++) {
-        const CellInfo item = defaultState_[i];
+//    buffer_[7][0] = new Rook(   this, fcolor);
+//    buffer_[7][1] = new Knight( this, fcolor);
+//    buffer_[7][2] = new Bishop( this, fcolor);
+    buffer_[7][3] = new Queen(  this, fcolor);
+    buffer_[7][4] = new King(   this, fcolor);
+//    buffer_[7][5] = new Bishop( this, fcolor);
+//    buffer_[7][6] = new Knight( this, fcolor);
+//    buffer_[7][7] = new Rook(   this, fcolor);
+//    for (int i=0; i<8; i++) {
+//        buffer_[6][i] = new Pawn(this, fcolor);
+//    }
 
-        const int row = item.cell_.row_;
-        const int col = item.cell_.col_;
 
-        switch (item.ftype_) {
-        case KING:
-            buffer_[row][col] = new King(this, item.fcolor_);
-            break;
-        case QUEEN:
-            buffer_[row][col] = new Queen(this, item.fcolor_);
-            break;
-        case ROOK:
-            //buffer_[row][col] = new Rook(this, item.fcolor_);
-            break;
-        case BISHOP:
-            //buffer_[row][col] = new Bishop(this, item.fcolor_);
-            break;
-        case KNIGHT:
-            //buffer_[row][col] = new Knight(this, item.fcolor_);
-            break;
-        case PAWN:
-            //buffer_[row][col] = new Pawn(this, item.fcolor_);
-            break;
-        }
-    }
 }
 
 Figure *Desk::getFigure(const Cell &inp_cell) const

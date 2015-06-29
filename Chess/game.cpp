@@ -90,7 +90,6 @@ void Game::startAction()
     delete desk_;
     desk_ = new Desk(this);
 
-    desk_->fillDefault();
     drawCurState();
 }
 
@@ -102,7 +101,12 @@ void Game::stopAction()
     delete desk_;
     desk_ = new Desk(this);
 
-    drawCurState();
+    for (size_t row=0; row<Desk::max_row_cnt_; row++) {
+        for (size_t col=0; col<Desk::max_col_cnt_; col++) {
+            QObject *t_cell = root_->findChild<QObject*>("t_cell"+QString::number(row+1)+QString::number(col+1));
+            t_cell->setProperty("text", "");
+        }
+    }
 }
 
 void Game::saveAction(QString file_url)
@@ -137,13 +141,12 @@ void Game::loadAction(QString file_url)
         return;
 
     Desk *new_desk = new Desk(this);
-    new_desk->fillDefault();
     std::vector<Command> comm_list;
 
     while (!file.atEnd()) {
         QString line =  file.readLine();
         Command comm;
-        comm.setFromStr(line);
+        comm.setFromString(line);
         comm.set_desk(new_desk);
         comm.exec();
 
@@ -200,8 +203,8 @@ void Game::make_move_from_list()
 
 void Game::drawCurState()
 {
-    for (size_t row=0; row<8; row++) {
-        for (size_t col=0; col<8; col++) {
+    for (size_t row=0; row<Desk::max_row_cnt_; row++) {
+        for (size_t col=0; col<Desk::max_col_cnt_; col++) {
             drawCell(Cell(row, col));
         }
     }
