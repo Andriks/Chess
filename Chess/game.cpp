@@ -60,12 +60,12 @@ void Game::cellAction(QString cell_name)
 
         if (command_->valid()) {
             command_->exec();
-            color_to_move_ = color_to_move_== WHITE ? BLACK : WHITE;
-            drawCommand();
-
-            // add to command list (for saving)
             //executed_commands_.push_back(*command_);
-            //Command cc = *command_;
+
+            // switching active player for next move
+             color_to_move_ = (color_to_move_== WHITE) ? BLACK : WHITE;
+
+            drawCommand();
 
             delete command_;
             command_ = NULL;
@@ -81,19 +81,17 @@ void Game::startAction()
 {
     interruptCommand();
 
-    //desk_->clear();
     delete desk_;
     desk_ = new Desk(this);
 
     desk_->fillDefault();
-
     drawCurState();
 }
 
 void Game::stopAction()
 {
     interruptCommand();
-    //desk_->clear();
+
     delete desk_;
     desk_ = new Desk(this);
 
@@ -122,7 +120,6 @@ void Game::loadAction(QString file_url)
 
     while (!file.atEnd()) {
         QString line =  file.readLine();
-        //command = new Command(this, desk);
 
     }
 
@@ -136,43 +133,48 @@ void Game::tmpDraw()
     drawCurState();
 }
 
+void Game::rollback_from_list()
+{
+    interruptCommand();
+    if (executed_commands_.size() > 0) {
+        Command com = executed_commands_.back();
+        executed_commands_.pop_back();
+
+        com.set_desk(desk_);
+        com.rollback();
+    }
+}
+
 void Game::drawCurState()
 {
     for (size_t row=0; row<8; row++) {
         for (size_t col=0; col<8; col++) {
-            QObject *t_cell = root_->findChild<QObject*>(QString("t_cell")+QString::number(row+1)+QString::number(col+1));
-            //needs err handle here
-            if (t_cell == NULL)
-                continue;
-
-            Figure *item = desk_->getFigure(Cell(row,col));
-            if (item == NULL) {
-                t_cell->setProperty("text", "");
-                continue;
-            }
-
-            t_cell->setProperty("text", item->getFigName());
-            t_cell->setProperty("color", item->getFigColor());
+            drawCell(Cell(row, col));
         }
     }
 }
 
 void Game::drawCommand()
 {
-    //removing item from privious cell
-    CellInfo b_info = command_->get_b_info();
-    QString b_row = QString::number(b_info.cell_.row_+1);
-    QString b_col = QString::number(b_info.cell_.col_+1);
-    QObject *b_t_cell = root_->findChild<QObject*>(QString("t_cell")+b_row+b_col);
-    b_t_cell->setProperty("text", "");
+    drawCell(command_->get_b_info().cell_);
+    drawCell(command_->get_e_info().cell_);
+}
 
-    //drawing this item on new cell
-    CellInfo e_info = command_->get_e_info();
-    QString e_row = QString::number(e_info.cell_.row_+1);
-    QString e_col = QString::number(e_info.cell_.col_+1);
-    QObject *e_t_cell = root_->findChild<QObject*>(QString("t_cell")+e_row+e_col);
-    e_t_cell->setProperty("text", command_->getCurFig()->getFigName());
-    e_t_cell->setProperty("color", command_->getCurFig()->getFigColor());
+void Game::drawCell(const Cell &cell)
+{
+    QObject *t_cell = root_->findChild<QObject*>("t_cell"+QString::number(cell.row_+1)+QString::number(cell.col_+1));
+    //needs err handle here
+    if (t_cell == NULL)
+        return;
+
+    Figure *item = desk_->getFigure(cell);
+    if (item == NULL) {
+        t_cell->setProperty("text", "");
+        return;
+    }
+
+    t_cell->setProperty("text", item->getFigName());
+    t_cell->setProperty("color", item->getFigColor());
 }
 
 void Game::interruptCommand()
@@ -182,7 +184,7 @@ void Game::interruptCommand()
         QString row = QString::number(info.cell_.row_+1);
         QString col = QString::number(info.cell_.col_+1);
         QObject *prev_t_cell = root_->findChild<QObject*>(QString("t_cell")+row+col);
-        prev_t_cell->setProperty("color", command_->getCurFig()->getFigColor());
+        prev_t_cell->setProperty("color", desk_->getFigure(info.cell_)->getFigColor());
 
         delete command_;
         command_ = NULL;

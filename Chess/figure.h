@@ -16,8 +16,8 @@ public:
     QString getFigColor() const;
 
     //returns enums for Command
-    FigType type();
-    FigColor color();
+    FigType type() const;
+    FigColor color() const;
 
     virtual QString getFigName() const;
 

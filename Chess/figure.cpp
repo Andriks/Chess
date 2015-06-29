@@ -33,12 +33,12 @@ QString Figure::getFigColor() const
     }
 }
 
-FigType Figure::type()
+FigType Figure::type() const
 {
     return type_;
 }
 
-FigColor Figure::color()
+FigColor Figure::color() const
 {
     return color_;
 }

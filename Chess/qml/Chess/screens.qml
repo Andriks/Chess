@@ -1855,14 +1855,14 @@ Rectangle {
 
     Rectangle {
         id: btnDraw
-        x: 462
+        x: 531
         y: 8
-        width: 130
+        width: 61
         height: 40
         color: "#f5cba3"
         Text {
             id: capDraw
-            width: 130
+            width: 61
             height: 40
             text: qsTr("Draw")
             verticalAlignment: Text.AlignVCenter
@@ -1877,5 +1877,31 @@ Rectangle {
             onClicked: Controller.tmpDraw()
         }
         objectName: "btnLoad"
+    }
+
+    Rectangle {
+        id: btnRollback
+        x: 456
+        y: 8
+        width: 61
+        height: 40
+        color: "#f5cba3"
+        objectName: "btnLoad"
+        Text {
+            id: capRollback
+            width: 61
+            height: 40
+            text: qsTr("back")
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 20
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        MouseArea {
+            id: mouseAreaRollback
+            anchors.fill: parent
+
+            onClicked: Controller.rollback_from_list()
+        }
     }
 }

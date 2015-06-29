@@ -10,8 +10,8 @@ class Command : public QObject
 public:
     explicit Command(Desk *desk = 0);
 
-//    Command(const Command&);
-//    Command& operator=(const Command&);
+    Command(const Command&);
+    Command& operator=(const Command&);
     //~Command(void);
 
     bool valid();
@@ -19,19 +19,21 @@ public:
     void set_b_info(Cell);
     void set_e_info(Cell);
 
+    void set_b_info(CellInfo);
+    void set_e_info(CellInfo);
+
+    void set_desk(Desk *);
+
+
     void exec();
     void rollback();
 
-    Figure *getCurFig();
     CellInfo get_b_info();
     CellInfo get_e_info();
 
 private:
-    Figure *cur_fig_;
-    Figure *rem_fig_;
-
-    CellInfo b_cell_info_;  // info about cell from which we are moving
-    CellInfo e_cell_info_;  // info about cell which we are moving for
+    CellInfo b_cell_info_;  // info about cell from which we are moving (begin)
+    CellInfo e_cell_info_;  // info about cell which we are moving for (end)
     Desk *desk_;
 };
 

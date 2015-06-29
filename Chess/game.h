@@ -31,10 +31,12 @@ public slots:
     void loadAction(QString);
 
     void tmpDraw();
+    void rollback_from_list();
 
 private:
     void drawCurState();
     void drawCommand();
+    void drawCell(const Cell &);
     void interruptCommand();
 
 private:
