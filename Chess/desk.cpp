@@ -18,32 +18,30 @@ Desk::Desk(QObject *parent) :
 
 
     FigColor fcolor = BLACK;
-
-//    buffer_[0][0] = new Rook(   this, fcolor);
-//    buffer_[0][1] = new Knight( this, fcolor);
-//    buffer_[0][2] = new Bishop( this, fcolor);
+    buffer_[0][0] = new Rook(   this, fcolor);
+    buffer_[0][1] = new Knight( this, fcolor);
+    buffer_[0][2] = new Bishop( this, fcolor);
     buffer_[0][3] = new Queen(  this, fcolor);
     buffer_[0][4] = new King(   this, fcolor);
-//    buffer_[0][5] = new Bishop( this, fcolor);
-//    buffer_[0][6] = new Knight( this, fcolor);
-//    buffer_[0][7] = new Rook(   this, fcolor);
-//    for (int i=0; i<8; i++) {
-//        buffer_[1][i] = new Pawn(this, fcolor);
-//    }
+    buffer_[0][5] = new Bishop( this, fcolor);
+    buffer_[0][6] = new Knight( this, fcolor);
+    buffer_[0][7] = new Rook(   this, fcolor);
+    for (int i=0; i<8; i++) {
+        buffer_[1][i] = new Pawn(this, fcolor);
+    }
 
     fcolor = WHITE;
-
-//    buffer_[7][0] = new Rook(   this, fcolor);
-//    buffer_[7][1] = new Knight( this, fcolor);
-//    buffer_[7][2] = new Bishop( this, fcolor);
+    buffer_[7][0] = new Rook(   this, fcolor);
+    buffer_[7][1] = new Knight( this, fcolor);
+    buffer_[7][2] = new Bishop( this, fcolor);
     buffer_[7][3] = new Queen(  this, fcolor);
     buffer_[7][4] = new King(   this, fcolor);
-//    buffer_[7][5] = new Bishop( this, fcolor);
-//    buffer_[7][6] = new Knight( this, fcolor);
-//    buffer_[7][7] = new Rook(   this, fcolor);
-//    for (int i=0; i<8; i++) {
-//        buffer_[6][i] = new Pawn(this, fcolor);
-//    }
+    buffer_[7][5] = new Bishop( this, fcolor);
+    buffer_[7][6] = new Knight( this, fcolor);
+    buffer_[7][7] = new Rook(   this, fcolor);
+    for (int i=0; i<8; i++) {
+        buffer_[6][i] = new Pawn(this, fcolor);
+    }
 
 
 }

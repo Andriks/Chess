@@ -30,6 +30,16 @@ Cell Game::parseQMLCellName(QString name)
     return Cell(row,col);
 }
 
+QString Game::colorForGUI(FigColor color)
+{
+    if (color == WHITE)
+        return "blue";
+    else if (color == BLACK)
+        return "black";
+    else
+        return "";
+}
+
 void Game::cellAction(QString cell_name)
 {
     if (!desk_is_active_)
@@ -53,7 +63,7 @@ void Game::cellAction(QString cell_name)
         if (desk_->getFigure(cell) == NULL)
             return;
 
-        if (desk_->getFigure(cell)->color() != color_to_move_)
+        if (desk_->getFigure(cell)->getColor() != color_to_move_)
             return;
 
         t_cell->setProperty("color", "red");
@@ -231,7 +241,7 @@ void Game::drawCell(const Cell &cell)
     }
 
     t_cell->setProperty("text", item->getFigName());
-    t_cell->setProperty("color", item->getFigColor());
+    t_cell->setProperty("color", colorForGUI(item->getColor()));
 }
 
 void Game::interruptCommand()
@@ -241,7 +251,7 @@ void Game::interruptCommand()
         QString row = QString::number(info.cell_.row_+1);
         QString col = QString::number(info.cell_.col_+1);
         QObject *prev_t_cell = root_->findChild<QObject*>(QString("t_cell")+row+col);
-        prev_t_cell->setProperty("color", desk_->getFigure(info.cell_)->getFigColor());
+        prev_t_cell->setProperty("color", colorForGUI(desk_->getFigure(info.cell_)->getColor()));
 
         delete command_;
         command_ = NULL;

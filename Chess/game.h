@@ -4,7 +4,6 @@
 #include "common_types.h"
 #include "command.h"
 
-#include <list>
 
 
 class Game : public QObject
@@ -16,6 +15,7 @@ public:
     explicit Game(QObject *parent = 0);
 
     static Cell parseQMLCellName(QString);
+    static QString colorForGUI(FigColor);
 
 signals:
 

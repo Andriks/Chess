@@ -50,14 +50,14 @@ bool Command::valid()
 void Command::set_b_info(Cell cell)
 {
     Figure *fig = desk_->getFigure(cell);
-    b_cell_info_ = CellInfo(cell, fig->getFigName(), fig->color());
+    b_cell_info_ = CellInfo(cell, fig->getFigName(), fig->getColor());
 }
 
 void Command::set_e_info(Cell cell)
 {
     Figure *fig = desk_->getFigure(cell);
     if (fig != NULL)
-        e_cell_info_ = CellInfo(cell, fig->getFigName(), fig->color());
+        e_cell_info_ = CellInfo(cell, fig->getFigName(), fig->getColor());
     else
         e_cell_info_ = CellInfo(cell, " ", NONE);
 }
@@ -114,14 +114,14 @@ void Command::rollback()
         desk_->buffer_[e_row][e_col] = new King(desk_, e_cell_info_.fcolor_);
     else if (type == "Q")
         desk_->buffer_[e_row][e_col] = new Queen(desk_, e_cell_info_.fcolor_);
-//    else if (type == "R")
-        //desk_->buffer_[e_row][e_col] = new Rook(desk_, e_cell_info_.fcolor_);
-//    else if (type == "B")
-        //desk_->buffer_[e_row][e_col] = new Bishop(desk_, e_cell_info_.fcolor_);
-//    else if (type == "Kn")
-        //desk_->buffer_[e_row][e_col] = new Knight(desk_, e_cell_info_.fcolor_);
-//    else if (type == "P")
-        //desk_->buffer_[e_row][e_col] = new Pawn(desk_, e_cell_info_.fcolor_);
+    else if (type == "R")
+        desk_->buffer_[e_row][e_col] = new Rook(desk_, e_cell_info_.fcolor_);
+    else if (type == "B")
+        desk_->buffer_[e_row][e_col] = new Bishop(desk_, e_cell_info_.fcolor_);
+    else if (type == "Kn")
+        desk_->buffer_[e_row][e_col] = new Knight(desk_, e_cell_info_.fcolor_);
+    else if (type == "P")
+        desk_->buffer_[e_row][e_col] = new Pawn(desk_, e_cell_info_.fcolor_);
 }
 
 CellInfo Command::get_b_info() const

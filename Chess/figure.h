@@ -11,21 +11,18 @@ class Figure : public QObject
 public:
     friend class Command;
 
-    explicit Figure(Desk *parent = 0, FigColor fcolor=NONE);
+    explicit Figure(Desk *desk_ = 0, FigColor fcolor=NONE);
 
-    //returns name of color for gui
-    QString getFigColor() const;
 
-    //returns enum for Command
-    FigColor color() const;
+    FigColor getColor() const;
 
-    virtual QString getFigName() const;
+    virtual QString getFigName() const = 0;
 
 protected:
-    virtual std::vector<Cell> cellsToMove(const Cell &) const;
+    virtual std::vector<Cell> cellsToMove(const Cell &) const = 0;
 
 protected:
-    Desk *desk_;    //ptr to figure owner (Desk instance)
+    Desk *desk_;
     FigColor color_;
 
 };
@@ -54,6 +51,70 @@ class Queen : public Figure
     Q_OBJECT
 public:
     explicit Queen(Desk *parent, FigColor);
+
+    virtual QString getFigName() const;
+
+private:
+   virtual std::vector<Cell> cellsToMove(const Cell &) const;
+
+private:
+
+};
+
+///////////////////////////////////////////////////////////////////////////////////////
+class Bishop : public Figure
+{
+    Q_OBJECT
+public:
+    explicit Bishop(Desk *parent, FigColor);
+
+    virtual QString getFigName() const;
+
+private:
+   virtual std::vector<Cell> cellsToMove(const Cell &) const;
+
+private:
+
+};
+
+///////////////////////////////////////////////////////////////////////////////////////
+class Rook : public Figure
+{
+    Q_OBJECT
+public:
+    explicit Rook(Desk *parent, FigColor);
+
+    virtual QString getFigName() const;
+
+private:
+   virtual std::vector<Cell> cellsToMove(const Cell &) const;
+
+private:
+
+};
+
+///////////////////////////////////////////////////////////////////////////////////////
+class Knight : public Figure
+{
+    Q_OBJECT
+public:
+    explicit Knight(Desk *parent, FigColor);
+
+    virtual QString getFigName() const;
+
+private:
+   virtual std::vector<Cell> cellsToMove(const Cell &) const;
+
+private:
+
+};
+
+///////////////////////////////////////////////////////////////////////////////////////
+class Pawn : public Figure
+{
+    Q_OBJECT
+public:
+    explicit Pawn(Desk *parent, FigColor);
 
     virtual QString getFigName() const;
 
