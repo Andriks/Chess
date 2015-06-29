@@ -28,8 +28,8 @@ public:
     void exec();
     void rollback();
 
-    CellInfo get_b_info();
-    CellInfo get_e_info();
+    CellInfo get_b_info() const;
+    CellInfo get_e_info() const;
 
 private:
     CellInfo b_cell_info_;  // info about cell from which we are moving (begin)

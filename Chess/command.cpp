@@ -75,22 +75,58 @@ void Command::set_desk(Desk *new_desk)
 
 void Command::exec()
 {
-    std::swap(desk_->buffer_[b_cell_info_.cell_.row_][b_cell_info_.cell_.col_],
-              desk_->buffer_[e_cell_info_.cell_.row_][e_cell_info_.cell_.col_]);
+    int b_row = b_cell_info_.cell_.row_;
+    int b_col = b_cell_info_.cell_.col_;
+
+    int e_row = e_cell_info_.cell_.row_;
+    int e_col = e_cell_info_.cell_.col_;
+
+    std::swap(desk_->buffer_[b_row][b_col],
+              desk_->buffer_[e_row][e_col]);
 
     //we have swaped figures and figure, which was on target cell, on start cell now
     //if it exists (not NULL) we should to relese it from buffer (and memory)
-    Figure *rem_ptr = desk_->buffer_[b_cell_info_.cell_.row_][b_cell_info_.cell_.col_];
+    Figure *rem_ptr = desk_->buffer_[b_row][b_col];
     if (rem_ptr != NULL) {
         delete rem_ptr;
-        desk_->buffer_[b_cell_info_.cell_.row_][b_cell_info_.cell_.col_] = NULL;
+        desk_->buffer_[b_row][b_col] = NULL;
     }
 }
 
 void Command::rollback()
 {
-//    std::swap(desk_->buffer_[b_cell_info_.cell_.row_][b_cell_info_.cell_.col_],
-//              desk_->buffer_[e_cell_info_.cell_.row_][e_cell_info_.cell_.col_]);
+    int b_row = b_cell_info_.cell_.row_;
+    int b_col = b_cell_info_.cell_.col_;
+
+    int e_row = e_cell_info_.cell_.row_;
+    int e_col = e_cell_info_.cell_.col_;
+
+    std::swap(desk_->buffer_[b_row][b_col],
+              desk_->buffer_[e_row][e_col]);
+
+    switch (e_cell_info_.ftype_) {
+    case KING:
+        desk_->buffer_[e_row][e_col] = new King(desk_, e_cell_info_.fcolor_);
+        break;
+    case QUEEN:
+        desk_->buffer_[e_row][e_col] = new Queen(desk_, e_cell_info_.fcolor_);
+        break;
+    case ROOK:
+        //desk_->buffer_[e_row][e_col] = new Rook(desk_, e_cell_info_.fcolor_);
+        break;
+    case BISHOP:
+        //desk_->buffer_[e_row][e_col] = new Bishop(desk_, e_cell_info_.fcolor_);
+        break;
+    case KNIGHT:
+        //desk_->buffer_[e_row][e_col] = new Knight(desk_, e_cell_info_.fcolor_);
+        break;
+    case PAWN:
+        //desk_->buffer_[e_row][e_col] = new Pawn(desk_, e_cell_info_.fcolor_);
+        break;
+    }
+
+//    if (e_cell_info_.ftype_ != NONE) {
+//    }
 
 //    Figure *rem_ptr = desk_->buffer_[b_cell_info_.cell_.row_][b_cell_info_.cell_.col_];
 //    if (rem_ptr != NULL) {
@@ -100,12 +136,12 @@ void Command::rollback()
 
 }
 
-CellInfo Command::get_b_info()
+CellInfo Command::get_b_info() const
 {
     return b_cell_info_;
 }
 
-CellInfo Command::get_e_info()
+CellInfo Command::get_e_info() const
 {
     return e_cell_info_;
 }

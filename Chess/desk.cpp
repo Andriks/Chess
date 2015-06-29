@@ -61,9 +61,25 @@ void Desk::fillDefault()
         case KING:
             buffer_[row][col] = new King(this, item.fcolor_);
             break;
-        default:
+        case QUEEN:
             buffer_[row][col] = new Queen(this, item.fcolor_);
             break;
+        case ROOK:
+            //buffer_[row][col] = new Rook(this, item.fcolor_);
+            break;
+        case BISHOP:
+            //buffer_[row][col] = new Bishop(this, item.fcolor_);
+            break;
+        case KNIGHT:
+            //buffer_[row][col] = new Knight(this, item.fcolor_);
+            break;
+        case PAWN:
+            //buffer_[row][col] = new Pawn(this, item.fcolor_);
+            break;
+
+        //default:
+            //buffer_[row][col] = new Queen(this, item.fcolor_);
+            //break;
         }
     }
 }

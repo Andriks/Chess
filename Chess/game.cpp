@@ -60,12 +60,12 @@ void Game::cellAction(QString cell_name)
 
         if (command_->valid()) {
             command_->exec();
-            //executed_commands_.push_back(*command_);
+            executed_commands_.push_back(*command_);
 
             // switching active player for next move
              color_to_move_ = (color_to_move_== WHITE) ? BLACK : WHITE;
 
-            drawCommand();
+            drawCommand(*command_);
 
             delete command_;
             command_ = NULL;
@@ -80,6 +80,8 @@ void Game::cellAction(QString cell_name)
 void Game::startAction()
 {
     interruptCommand();
+
+    color_to_move_ = WHITE;
 
     delete desk_;
     desk_ = new Desk(this);
@@ -136,12 +138,15 @@ void Game::tmpDraw()
 void Game::rollback_from_list()
 {
     interruptCommand();
+
     if (executed_commands_.size() > 0) {
-        Command com = executed_commands_.back();
+        Command comm = executed_commands_.back();
         executed_commands_.pop_back();
 
-        com.set_desk(desk_);
-        com.rollback();
+        comm.set_desk(desk_);
+        comm.rollback();
+
+        drawCommand(comm);
     }
 }
 
@@ -154,10 +159,10 @@ void Game::drawCurState()
     }
 }
 
-void Game::drawCommand()
+void Game::drawCommand(const Command &comm)
 {
-    drawCell(command_->get_b_info().cell_);
-    drawCell(command_->get_e_info().cell_);
+    drawCell(comm.get_b_info().cell_);
+    drawCell(comm.get_e_info().cell_);
 }
 
 void Game::drawCell(const Cell &cell)
