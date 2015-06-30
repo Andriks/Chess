@@ -157,7 +157,14 @@ void Game::loadAction(QString file_url)
     while (!file.atEnd()) {
         QString line =  file.readLine();
         Command comm;
-        comm.setFromString(line);
+        if (!comm.setFromString(line)) {
+            // bad input file, releasing of resources and breaking operation
+            file.close();
+            delete new_desk;
+
+            return;
+        }
+
         comm.set_desk(new_desk);
         comm.exec();
 

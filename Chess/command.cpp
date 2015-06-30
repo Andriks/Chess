@@ -136,6 +136,8 @@ CellInfo Command::get_e_info() const
 
 QString Command::getAsString() const
 {
+    QString delim = ";";
+
     Cell b_cell = b_cell_info_.cell_;
     Cell e_cell = e_cell_info_.cell_;
 
@@ -143,24 +145,29 @@ QString Command::getAsString() const
     QString e_info;
 
     b_info = QString::number(b_cell.row_) + "," + QString::number(b_cell.col_)
-     + "|" + b_cell_info_.ftype_
-     + "|" + ((b_cell_info_.fcolor_ == WHITE) ? "w" : "b");
+     + delim + b_cell_info_.ftype_
+     + delim + ((b_cell_info_.fcolor_ == WHITE) ? "w" : "b");
 
     e_info = QString::number(e_cell.row_) + "," + QString::number(e_cell.col_)
-     + "|" + e_cell_info_.ftype_
-     + "|" + ((e_cell_info_.fcolor_ == WHITE) ? "w" : "b");
+     + delim + e_cell_info_.ftype_
+     + delim + ((e_cell_info_.fcolor_ == WHITE) ? "w" : "b");
 
-    return b_info + "||" + e_info;
+    return b_info + delim+delim + e_info;
 }
 
-void Command::setFromString(const QString &inp_str)
+bool Command::setFromString(const QString &inp_str)
 {
+    QString delim = ";";
+
     QString tmp(inp_str);
+    if ( !tmp.contains(QRegExp("[0-7],[0-7]"+delim+"( |F|K|Q|R|B|P|Kn)"+delim+"[wb]"+delim+delim+"[0-7],[0-7]"+delim+"( |F|K|Q|R|B|P|Kn)"+delim+"[wb]\n")) )
+        return false;
+
     tmp.remove("\n");
 
-    QStringList line = tmp.split("||");
+    QStringList line = tmp.split(delim+delim);
 
-    QStringList b_info_list = line[0].split("|");
+    QStringList b_info_list = line[0].split(delim);
     QStringList b_cell_list = b_info_list[0].split(",");
     b_cell_info_.cell_ = Cell(b_cell_list[0].toInt(), b_cell_list[1].toInt());
     b_cell_info_.ftype_ = b_info_list[1];
@@ -173,7 +180,7 @@ void Command::setFromString(const QString &inp_str)
     else
         b_cell_info_.fcolor_ = NONE;
 
-    QStringList e_info_list = line[1].split("|");
+    QStringList e_info_list = line[1].split(delim);
     QStringList e_cell_list = e_info_list[0].split(",");
     e_cell_info_.cell_ = Cell(e_cell_list[0].toInt(), e_cell_list[1].toInt());
     e_cell_info_.ftype_ = e_info_list[1];
@@ -185,4 +192,6 @@ void Command::setFromString(const QString &inp_str)
         e_cell_info_.fcolor_ = BLACK;
     else
         e_cell_info_.fcolor_ = NONE;
+
+    return true;
 }

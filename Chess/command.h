@@ -29,7 +29,7 @@ public:
     CellInfo get_e_info() const;
 
     QString getAsString() const;
-    void setFromString(const QString &);
+    bool setFromString(const QString &);
 
 private:
     CellInfo b_cell_info_;  // info about cell from which we are moving (begin)
