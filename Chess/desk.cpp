@@ -54,6 +54,11 @@ Figure *Desk::getFigure(const Cell &inp_cell) const
     return buffer_[inp_cell.row_][inp_cell.col_];
 }
 
+Figure **Desk::getPtrFromBuffer(const Cell &inp_cell)
+{
+    return &(buffer_[inp_cell.row_][inp_cell.col_]);
+}
+
 bool Desk::inRange(const Cell &cell) const
 {
     if (cell.row_ < 0 || cell.col_ < 0)

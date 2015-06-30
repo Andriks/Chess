@@ -3,7 +3,6 @@
 #include "figure.h"
 
 #include <QStringList>
-#include <QMap>
 
 
 Command::Command(Desk *desk) :
@@ -85,15 +84,16 @@ void Command::exec()
     int e_row = e_cell_info_.cell_.row_;
     int e_col = e_cell_info_.cell_.col_;
 
-    std::swap(desk_->buffer_[b_row][b_col],
-              desk_->buffer_[e_row][e_col]);
+    std::swap(*desk_->getPtrFromBuffer(Cell(b_row, b_col)),
+              *desk_->getPtrFromBuffer(Cell(e_row, e_col)));
+
 
     //we have swaped figures and figure, which was on target cell, on start cell now
     //if it exists (not NULL) we should to relese it from buffer (and memory)
-    Figure *rem_ptr = desk_->buffer_[b_row][b_col];
+    Figure *rem_ptr = desk_->getFigure(Cell(b_row, b_col));
     if (rem_ptr != NULL) {
         delete rem_ptr;
-        desk_->buffer_[b_row][b_col] = NULL;
+        *desk_->getPtrFromBuffer(Cell(b_row, b_col)) = NULL;
     }
 }
 
@@ -105,23 +105,24 @@ void Command::rollback()
     int e_row = e_cell_info_.cell_.row_;
     int e_col = e_cell_info_.cell_.col_;
 
-    std::swap(desk_->buffer_[b_row][b_col],
-              desk_->buffer_[e_row][e_col]);
+    std::swap(*desk_->getPtrFromBuffer(Cell(b_row, b_col)),
+              *desk_->getPtrFromBuffer(Cell(e_row, e_col)));
 
     QString type = e_cell_info_.ftype_;
 
     if (type == "K")
-        desk_->buffer_[e_row][e_col] = new King(desk_, e_cell_info_.fcolor_);
+        *desk_->getPtrFromBuffer(Cell(e_row, e_col)) = new King(desk_, e_cell_info_.fcolor_);
     else if (type == "Q")
-        desk_->buffer_[e_row][e_col] = new Queen(desk_, e_cell_info_.fcolor_);
+        *desk_->getPtrFromBuffer(Cell(e_row, e_col)) = new Queen(desk_, e_cell_info_.fcolor_);
     else if (type == "R")
-        desk_->buffer_[e_row][e_col] = new Rook(desk_, e_cell_info_.fcolor_);
+        *desk_->getPtrFromBuffer(Cell(e_row, e_col)) = new Rook(desk_, e_cell_info_.fcolor_);
     else if (type == "B")
-        desk_->buffer_[e_row][e_col] = new Bishop(desk_, e_cell_info_.fcolor_);
+        *desk_->getPtrFromBuffer(Cell(e_row, e_col)) = new Bishop(desk_, e_cell_info_.fcolor_);
     else if (type == "Kn")
-        desk_->buffer_[e_row][e_col] = new Knight(desk_, e_cell_info_.fcolor_);
+        *desk_->getPtrFromBuffer(Cell(e_row, e_col)) = new Knight(desk_, e_cell_info_.fcolor_);
     else if (type == "P")
-        desk_->buffer_[e_row][e_col] = new Pawn(desk_, e_cell_info_.fcolor_);
+        *desk_->getPtrFromBuffer(Cell(e_row, e_col)) = new Pawn(desk_, e_cell_info_.fcolor_);
+
 }
 
 CellInfo Command::get_b_info() const
