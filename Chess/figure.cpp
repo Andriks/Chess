@@ -13,6 +13,11 @@ FigColor Figure::getColor() const
     return color_;
 }
 
+Desk *Figure::getDesk() const
+{
+    return desk_;
+}
+
 bool Figure::freeCellsCheck4loop(const Cell &cur_cell, const Cell &cell, std::vector<Cell> &res) const
 {
     if (!desk_->inRange(cell))
@@ -63,11 +68,11 @@ std::vector<Cell> King::cellsToMove(const Cell &cur_cell) const
     for (int i=0; i!=to_check.size(); i++)
     {
         Cell it = to_check[i];
-        if (desk_->inRange(it))
-            if (desk_->getFigure(it) == NULL)
+        if (getDesk()->inRange(it))
+            if (getDesk()->getFigure(it) == NULL)
                 res.push_back(it);
             else
-                if (desk_->getFigure(cur_cell)->getColor() != desk_->getFigure(it)->getColor())
+                if (getDesk()->getFigure(cur_cell)->getColor() != getDesk()->getFigure(it)->getColor())
                     //meens that figure on target cell is enemy, we can go there
                     res.push_back(it);
     }
@@ -241,11 +246,11 @@ std::vector<Cell> Knight::cellsToMove(const Cell &cur_cell) const
     for (int i=0; i!=to_check.size(); i++)
     {
         Cell it = to_check[i];
-        if (desk_->inRange(it))
-            if (desk_->getFigure(it) == NULL)
+        if (getDesk()->inRange(it))
+            if (getDesk()->getFigure(it) == NULL)
                 res.push_back(it);
             else
-                if (desk_->getFigure(cur_cell)->getColor() != desk_->getFigure(it)->getColor())
+                if (getDesk()->getFigure(cur_cell)->getColor() != getDesk()->getFigure(it)->getColor())
                     //meens that figure on target cell is enemy, we can go there
                     res.push_back(it);
     }
@@ -275,11 +280,11 @@ std::vector<Cell> Pawn::cellsToMove(const Cell &cur_cell) const
 
     std::vector<Cell> res;
 
-    if (color_ == WHITE) {
+    if (getColor() == WHITE) {
         //it is IMPORTENT to add this first, we cant check next Cell if it is not valid
         to_check4move.push_back(Cell(row-1, col));
 
-        if (row == desk_->max_row_cnt_-2)
+        if (row == getDesk()->max_row_cnt_-2)
             // it is first move if it steel there
             to_check4move.push_back(Cell(row-2, col));
 
@@ -301,9 +306,9 @@ std::vector<Cell> Pawn::cellsToMove(const Cell &cur_cell) const
     for (int i=0; i!=to_check4attack.size(); i++) {
         //to_check4attack(cur_cell, to_check4attack[i], res);
         Cell cell = to_check4attack[i];
-        if (desk_->inRange(cell))
-            if (desk_->getFigure(cell) != NULL)
-                if (desk_->getFigure(cur_cell)->getColor() != desk_->getFigure(cell)->getColor())
+        if (getDesk()->inRange(cell))
+            if (getDesk()->getFigure(cell) != NULL)
+                if (getDesk()->getFigure(cur_cell)->getColor() != getDesk()->getFigure(cell)->getColor())
                     //meens that figure on target cell is enemy, we can go there
                     res.push_back(cell);
     }
@@ -312,8 +317,8 @@ std::vector<Cell> Pawn::cellsToMove(const Cell &cur_cell) const
 
     for (int i=0; i!=to_check4move.size(); i++) {
         Cell cell = to_check4move[i];
-        if (desk_->inRange(cell))
-            if (desk_->getFigure(cell) == NULL) {
+        if (getDesk()->inRange(cell))
+            if (getDesk()->getFigure(cell) == NULL) {
                 res.push_back(cell);
                 continue;
             }
@@ -327,8 +332,8 @@ std::vector<Cell> Pawn::cellsToMove(const Cell &cur_cell) const
 
 bool Pawn::check4move(const Cell &cell, std::vector<Cell> &res) const
 {
-    if (desk_->inRange(cell))
-        if (desk_->getFigure(cell) == NULL) {
+    if (getDesk()->inRange(cell))
+        if (getDesk()->getFigure(cell) == NULL) {
             res.push_back(cell);
             return true;
         }
