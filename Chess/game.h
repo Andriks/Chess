@@ -30,7 +30,7 @@ public slots:
     //FileDialog in qml have no feature for creating file and saving in it
     //we can save only in existing *.txt file
     void saveAction(QString);
-    void loadAction(QString);
+    bool loadAction(QString);
 
     void rollback_from_list();
     void make_move_from_list();

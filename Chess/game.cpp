@@ -142,14 +142,14 @@ void Game::saveAction(QString file_url)
     file.close();
 }
 
-void Game::loadAction(QString file_url)
+bool Game::loadAction(QString file_url)
 {
     file_url.remove("file:///");
 
     QFile file(file_url);
     //needs err handle here
     if (!file.open(QFile::ReadOnly))
-        return;
+        return false;
 
     Desk *new_desk = new Desk(this);
     std::vector<Command> comm_list;
@@ -162,7 +162,7 @@ void Game::loadAction(QString file_url)
             file.close();
             delete new_desk;
 
-            return;
+            return false;
         }
 
         comm.set_desk(new_desk);
@@ -182,6 +182,8 @@ void Game::loadAction(QString file_url)
 
 
     drawCurState();
+
+    return true;
 }
 
 void Game::rollback_from_list()

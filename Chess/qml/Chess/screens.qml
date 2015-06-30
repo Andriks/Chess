@@ -149,9 +149,13 @@ Rectangle {
             nameFilters: [ "txt files (*.txt)" ]
             selectedNameFilter: "All files (*)"
 
-            onAccepted: Controller.loadAction(loadFileDialog.fileUrls),
-                        btnNext.visible = true,
-                        btnPrev.visible = true
+            onAccepted:
+            {
+                if ( Controller.loadAction(loadFileDialog.fileUrls) ) {
+                    btnNext.visible = true;
+                    btnPrev.visible = true;
+                }
+            }
         }
     }
 
