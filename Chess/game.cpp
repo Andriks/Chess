@@ -1,6 +1,5 @@
 #include "game.h"
 #include "desk.h"
-#include "command.h"
 
 #include <QFile>
 #include <QTextStream>
@@ -9,18 +8,15 @@
 Game::Game(QObject *parent) :
     root_(parent),
     desk_(NULL),
-    color_to_move_(WHITE),
-    desk_is_active_(false),
-    command_(NULL)
+    desk_is_active_(false)
 {
     desk_ = new Desk(this);
 }
 
 Cell Game::parseQMLCellName(QString name)
 {
-    //needs err handle here
     if (!name.contains(QRegExp("cell[1-8][1-8]")))
-        return Cell(-1,-1);
+        throw std::exception();
 
 
     QString tmp = name.remove("cell");
@@ -45,58 +41,38 @@ void Game::cellAction(QString cell_name)
     if (!desk_is_active_)
         return;
 
-    Cell cell = parseQMLCellName(cell_name);
-    //bad input
-    if (cell == Cell(-1,-1)) {
-        interruptCommand();
+    Cell cell;
+    try {
+        cell = parseQMLCellName(cell_name);
+    } catch (std::exception) {
+        interruptAction();
         return;
     }
 
     QObject *t_cell = root_->findChild<QObject*>("t_"+cell_name);
-    //needs err handle here
+
     if (t_cell == NULL) {
-        interruptCommand();
+        interruptAction();
         return;
     }
 
-    if (command_ == NULL) {
-        if (desk_->getFigure(cell) == NULL)
-            return;
-
-        if (desk_->getFigure(cell)->getColor() != color_to_move_)
+    if (!desk_->haveActiveFigure()) {
+        if (!desk_->grabFigure(cell))
             return;
 
         t_cell->setProperty("color", "red");
 
-        command_ = new Command(desk_);
-        command_->set_b_info(cell);
     } else {
-        command_->set_e_info(cell);
-
-        if (command_->valid()) {
-            command_->exec();
-            executed_commands_.push_back(*command_);
-
-            // switching active player for next move
-             color_to_move_ = (color_to_move_== WHITE) ? BLACK : WHITE;
-
-            drawCommand(*command_);
-
-            delete command_;
-            command_ = NULL;
-
-        } else {
-
-            interruptCommand();
-        }
+        if (desk_->putDownFigure(cell))
+            drawCurState();
+        else
+            interruptAction();
     }
 }
 
 void Game::startAction()
 {
     desk_is_active_ = true;
-    color_to_move_ = WHITE;
-    command_ = NULL;
 
     delete desk_;
     desk_ = new Desk(this);
@@ -106,14 +82,14 @@ void Game::startAction()
 
 void Game::stopAction()
 {
-    interruptCommand();
+    interruptAction();
     desk_is_active_ = false;
 
     delete desk_;
     desk_ = new Desk(this);
 
-    for (size_t row=0; row<Desk::max_row_cnt_; row++) {
-        for (size_t col=0; col<Desk::max_col_cnt_; col++) {
+    for (size_t row=0; row<Desk::getMaxCnt(); row++) {
+        for (size_t col=0; col<Desk::getMaxCnt(); col++) {
             QObject *t_cell = root_->findChild<QObject*>("t_cell"+QString::number(row+1)+QString::number(col+1));
             t_cell->setProperty("text", "");
         }
@@ -122,36 +98,18 @@ void Game::stopAction()
 
 void Game::saveAction(QString file_url)
 {
-    interruptCommand();
-
-    file_url.remove("file:///");
-    QFile file(file_url);
-    //needs err handle here
-    if (!file.open(QFile::WriteOnly|QFile::Truncate))
-        return;
-
-    QTextStream outstream(&file);
-
-    for (std::vector<Command>::iterator it=executed_commands_.begin();
-                                      it!=executed_commands_.end();
-                                      it++)
-    {
-        outstream << it->getAsString() << "\n";
-    }
-
-    file.close();
+    interruptAction();
+    desk_->saveStateIntoFile(file_url);
 }
 
 bool Game::loadAction(QString file_url)
 {
     file_url.remove("file:///");
-
     QFile file(file_url);
-    //needs err handle here
+
     if (!file.open(QFile::ReadOnly))
         return false;
 
-    Desk *new_desk = new Desk(this);
     std::vector<Command> comm_list;
 
     while (!file.atEnd()) {
@@ -160,15 +118,19 @@ bool Game::loadAction(QString file_url)
         if (!comm.setFromString(line)) {
             // bad input file, releasing of resources and breaking operation
             file.close();
-            delete new_desk;
 
             return false;
         }
 
-        comm.set_desk(new_desk);
-        comm.exec();
-
         comm_list.push_back(comm);
+    }
+
+    Desk *new_desk = new Desk(this);
+    try {
+        new_desk->restoreState(comm_list);
+    } catch(std::exception) {
+        file.close();
+        return false;
     }
 
     file.close();
@@ -176,10 +138,6 @@ bool Game::loadAction(QString file_url)
     //if everething was nice
     delete desk_;
     desk_ = new_desk;
-    executed_commands_.clear();
-    executed_commands_ = comm_list;
-    command_ = NULL;
-
 
     drawCurState();
 
@@ -188,52 +146,29 @@ bool Game::loadAction(QString file_url)
 
 void Game::rollback_from_list()
 {
-    if (command_ == &executed_commands_.front())
-        return;
-
-    if (command_ == NULL)
-        command_ = &executed_commands_.back();
-    else
-        command_--;
-
-
-    command_->rollback();
-    drawCommand(*command_);
+    desk_->rollback_from_list();
+    drawCurState();
 }
 
 void Game::make_move_from_list()
 {
-    if (command_ == NULL)
-        return;
-
-    command_->exec();
-    drawCommand(*command_);
-
-    if (command_ == &executed_commands_.back())
-        command_ = NULL;
-    else
-        command_++;
+    desk_->make_move_from_list();
+    drawCurState();
 }
 
 void Game::drawCurState()
 {
-    for (size_t row=0; row<Desk::max_row_cnt_; row++) {
-        for (size_t col=0; col<Desk::max_col_cnt_; col++) {
+    for (size_t row=0; row<Desk::getMaxCnt(); row++) {
+        for (size_t col=0; col<Desk::getMaxCnt(); col++) {
             drawCell(Cell(row, col));
         }
     }
 }
 
-void Game::drawCommand(const Command &comm)
-{
-    drawCell(comm.get_b_info().cell_);
-    drawCell(comm.get_e_info().cell_);
-}
-
 void Game::drawCell(const Cell &cell)
 {
     QObject *t_cell = root_->findChild<QObject*>("t_cell"+QString::number(cell.row_+1)+QString::number(cell.col_+1));
-    //needs err handle here
+
     if (t_cell == NULL)
         return;
 
@@ -247,16 +182,8 @@ void Game::drawCell(const Cell &cell)
     t_cell->setProperty("color", colorForGUI(item->getColor()));
 }
 
-void Game::interruptCommand()
+void Game::interruptAction()
 {
-    if (command_ != NULL) {
-        CellInfo info = command_->get_b_info();
-        QString row = QString::number(info.cell_.row_+1);
-        QString col = QString::number(info.cell_.col_+1);
-        QObject *prev_t_cell = root_->findChild<QObject*>(QString("t_cell")+row+col);
-        prev_t_cell->setProperty("color", colorForGUI(desk_->getFigure(info.cell_)->getColor()));
-
-        delete command_;
-        command_ = NULL;
-    }
+    desk_->interruptCommand();
+    drawCurState();
 }

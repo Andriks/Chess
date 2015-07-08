@@ -2,7 +2,6 @@
 #define GAME_H
 
 #include "common_types.h"
-#include "command.h"
 
 
 
@@ -37,17 +36,13 @@ public slots:
 
 private:
     void drawCurState();
-    void drawCommand(const Command &);
     void drawCell(const Cell &);
-    void interruptCommand();
+    void interruptAction();
 
 private:
     QObject *root_;             //for access to gui elements
     Desk *desk_;                //ptr to desk instance (game have 1 instance of desk during all life period)
-    FigColor color_to_move_;    //color of figures to move
     bool desk_is_active_;       //desk must be active only on screen 2
-    Command *command_;          //current command
-    std::vector<Command> executed_commands_;
 };
 
 #endif // GAME_H

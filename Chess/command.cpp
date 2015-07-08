@@ -31,11 +31,8 @@ bool Command::valid()
     Cell cur_cell = b_cell_info_.cell_;
     Figure *fig = desk_->getFigure(cur_cell);
 
-    //needs err handle here
     if (fig == NULL)
-    {
         return false;
-    }
 
     std::vector<Cell> acc_cells = fig->cellsToMove(cur_cell);
 
