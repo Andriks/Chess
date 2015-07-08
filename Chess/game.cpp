@@ -26,7 +26,7 @@ Cell Game::parseQMLCellName(QString name)
     return Cell(row,col);
 }
 
-QString Game::colorForGUI(FigColor color)
+QString Game::colorForGUI(const FigColor &color)
 {
     if (color == WHITE)
         return "blue";
@@ -45,14 +45,11 @@ void Game::cellAction(QString cell_name)
     try {
         cell = parseQMLCellName(cell_name);
     } catch (std::exception) {
-        interruptAction();
         return;
     }
 
     QObject *t_cell = root_->findChild<QObject*>("t_"+cell_name);
-
     if (t_cell == NULL) {
-        interruptAction();
         return;
     }
 
@@ -88,6 +85,7 @@ void Game::stopAction()
     delete desk_;
     desk_ = new Desk(this);
 
+    //clearing all figures on gui to have pure desk
     for (size_t row=0; row<Desk::getMaxCnt(); row++) {
         for (size_t col=0; col<Desk::getMaxCnt(); col++) {
             QObject *t_cell = root_->findChild<QObject*>("t_cell"+QString::number(row+1)+QString::number(col+1));
@@ -99,7 +97,25 @@ void Game::stopAction()
 void Game::saveAction(QString file_url)
 {
     interruptAction();
-    desk_->saveStateIntoFile(file_url);
+
+    const std::vector<Command> &executed_commands_ = desk_->getState();
+
+    file_url.remove("file:///");
+    QFile file(file_url);
+
+    if (!file.open(QFile::WriteOnly|QFile::Truncate))
+        return;
+
+    QTextStream outstream(&file);
+
+    for (std::vector<Command>::const_iterator it=executed_commands_.begin();
+                                      it!=executed_commands_.end();
+                                      it++)
+    {
+        outstream << it->getAsString() << "\n";
+    }
+
+    file.close();
 }
 
 bool Game::loadAction(QString file_url)

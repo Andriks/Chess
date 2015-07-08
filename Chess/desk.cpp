@@ -1,8 +1,5 @@
 #include "desk.h"
 
-#include <QFile>
-#include <QTextStream>
-
 
 const int Desk::max_cnt_(8);
 
@@ -139,24 +136,9 @@ bool Desk::interruptCommand()
     }
 }
 
-void Desk::saveStateIntoFile(QString &file_url)
+const std::vector<Command> &Desk::getState()
 {
-    file_url.remove("file:///");
-    QFile file(file_url);
-
-    if (!file.open(QFile::WriteOnly|QFile::Truncate))
-        return;
-
-    QTextStream outstream(&file);
-
-    for (std::vector<Command>::iterator it=executed_commands_.begin();
-                                      it!=executed_commands_.end();
-                                      it++)
-    {
-        outstream << it->getAsString() << "\n";
-    }
-
-    file.close();
+    return executed_commands_;
 }
 
 void Desk::restoreState(const std::vector<Command> &commands)
@@ -193,11 +175,6 @@ Figure *Desk::getFigure(const Cell &inp_cell) const
 Figure **Desk::getPtrFromBuffer(const Cell &inp_cell)
 {
     return &(buffer_[inp_cell.row_][inp_cell.col_]);
-}
-
-Command *Desk::getCommand()
-{
-    return command_;
 }
 
 bool Desk::inRange(const Cell &cell) const

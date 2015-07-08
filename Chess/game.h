@@ -14,7 +14,7 @@ public:
     explicit Game(QObject *parent = 0);
 
     static Cell parseQMLCellName(QString);
-    static QString colorForGUI(FigColor);
+    static QString colorForGUI(const FigColor &);
 
 signals:
 

@@ -23,12 +23,11 @@ public:
 
     bool interruptCommand();
 
-    void saveStateIntoFile(QString &);
+    const std::vector<Command> &getState();
     void restoreState(const std::vector<Command> &);
 
     Figure *getFigure(const Cell &) const;
     Figure **getPtrFromBuffer(const Cell &);
-    Command *getCommand();
     bool inRange(const Cell &) const;
     bool haveActiveFigure() const;
     static int getMaxCnt();
