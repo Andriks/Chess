@@ -5,6 +5,11 @@ Rectangle {
     width: 600
     height: 600
 
+    MessageDialog {
+        id: err_message
+        title: "error"
+    }
+
     Rectangle {
         id: btnStop
         x: 60
@@ -154,6 +159,9 @@ Rectangle {
                 if ( Controller.loadAction(loadFileDialog.fileUrls) ) {
                     btnNext.visible = true;
                     btnPrev.visible = true;
+                } else {
+                    err_message.text = "bad input file";
+                    err_message.visible = true;
                 }
             }
         }
