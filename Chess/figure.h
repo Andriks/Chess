@@ -12,16 +12,16 @@ public:
     explicit Figure(Desk *desk_ = 0, FigColor fcolor=NONE);
 
     FigColor getColor() const;
-    Desk *getDesk() const;
+    QPointer<Desk> getDesk() const;
 
     virtual QString getFigName() const = 0;
-    virtual std::vector<Cell> cellsToMove(const Cell &) const = 0;
+    virtual QVector<Cell> cellsToMove(const Cell &) const = 0;
 
 protected:
-    bool freeCellsCheck4loop(const Cell &cur_cell, const Cell &cell, std::vector<Cell> &res) const;
+    bool freeCellsCheck4loop(const Cell &cur_cell, const Cell &cell, QVector<Cell> &res) const;
 
 private:
-    Desk *desk_;
+    QPointer<Desk> desk_;
     FigColor color_;
 
 };
@@ -35,7 +35,7 @@ public:
     explicit King(Desk *parent, FigColor);
 
     virtual QString getFigName() const;
-    virtual std::vector<Cell> cellsToMove(const Cell &) const;
+    virtual QVector<Cell> cellsToMove(const Cell &) const;
 
 };
 
@@ -47,7 +47,7 @@ public:
     explicit Queen(Desk *parent, FigColor);
 
     virtual QString getFigName() const;
-    virtual std::vector<Cell> cellsToMove(const Cell &) const;
+    virtual QVector<Cell> cellsToMove(const Cell &) const;
 
 };
 
@@ -59,7 +59,7 @@ public:
     explicit Bishop(Desk *parent, FigColor);
 
     virtual QString getFigName() const;
-    virtual std::vector<Cell> cellsToMove(const Cell &) const;
+    virtual QVector<Cell> cellsToMove(const Cell &) const;
 
 };
 
@@ -71,7 +71,7 @@ public:
     explicit Rook(Desk *parent, FigColor);
 
     virtual QString getFigName() const;
-    virtual std::vector<Cell> cellsToMove(const Cell &) const;
+    virtual QVector<Cell> cellsToMove(const Cell &) const;
 
 };
 
@@ -83,7 +83,7 @@ public:
     explicit Knight(Desk *parent, FigColor);
 
     virtual QString getFigName() const;
-    virtual std::vector<Cell> cellsToMove(const Cell &) const;
+    virtual QVector<Cell> cellsToMove(const Cell &) const;
 
 };
 
@@ -95,10 +95,10 @@ public:
     explicit Pawn(Desk *parent, FigColor);
 
     virtual QString getFigName() const;
-    virtual std::vector<Cell> cellsToMove(const Cell &) const;
+    virtual QVector<Cell> cellsToMove(const Cell &) const;
 
 private:
-    bool check4move(const Cell &, std::vector<Cell> &) const;
+    bool check4move(const Cell &, QVector<Cell> &) const;
 
 };
 
