@@ -20,7 +20,7 @@ public:
     void set_b_info(CellInfo);
     void set_e_info(CellInfo);
 
-    void set_desk(Desk *);
+    void set_desk(QPointer<Desk>);
 
     void exec();
     void rollback();
@@ -34,7 +34,7 @@ public:
 private:
     CellInfo b_cell_info_;  // info about cell from which we are moving (begin)
     CellInfo e_cell_info_;  // info about cell which we are moving for (end)
-    Desk *desk_;
+    QPointer<Desk> desk_;
 };
 
 
