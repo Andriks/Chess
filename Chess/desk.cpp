@@ -12,7 +12,7 @@ Desk::Desk(QObject *parent) :
 {
     //filling desk by empty ptr on base items
     for (int row=0; row<max_cnt_; row++) {
-        std::vector<Figure*> row_vec;
+        QVector<QPointer<Figure> > row_vec;
         for (int col=0; col<max_cnt_; col++)
             row_vec.push_back(NULL);
 
@@ -50,9 +50,9 @@ Desk::Desk(QObject *parent) :
 
 bool Desk::grabFigure(const Cell &cell)
 {
-    Figure *curr_fig = getFigure(cell);
+    QPointer<Figure> curr_fig = getFigure(cell);
 
-    if (curr_fig == NULL)
+    if (curr_fig.isNull())
         return false;
 
     if (curr_fig->getColor() != color_to_move_)
@@ -78,7 +78,6 @@ bool Desk::putDownFigure(const Cell &cell)
         executed_commands_.push_back(*command_);
 
         delete command_;
-        command_ = NULL;
 
         switchActivePlayer();
         have_active_figure_ = false;
@@ -101,10 +100,10 @@ void Desk::rollback_from_list()
     if (command_ == &executed_commands_.front())
         return;
 
-    if (command_ == NULL)
+    if (command_.isNull())
         command_ = &executed_commands_.back();
     else
-        command_--;
+        command_ = command_ - 1;
 
 
     command_->rollback();
@@ -112,7 +111,7 @@ void Desk::rollback_from_list()
 
 void Desk::make_move_from_list()
 {
-    if (command_ == NULL)
+    if (command_.isNull())
         return;
 
     command_->exec();
@@ -120,14 +119,13 @@ void Desk::make_move_from_list()
     if (command_ == &executed_commands_.back())
         command_ = NULL;
     else
-        command_++;
+        command_ = command_ + 1;
 }
 
 bool Desk::interruptCommand()
 {
-    if (command_ != NULL) {
+    if (!command_.isNull()) {
         delete command_;
-        command_ = NULL;
 
         have_active_figure_ = false;
         return true;
@@ -136,43 +134,42 @@ bool Desk::interruptCommand()
     }
 }
 
-const std::vector<Command> &Desk::getState()
+const QVector<Command> &Desk::getState()
 {
     return executed_commands_;
 }
 
-void Desk::restoreState(const std::vector<Command> &commands)
+void Desk::restoreState(const QVector<Command> &commands)
 {
     executed_commands_.clear();
 
-    for (std::vector<Command>::const_iterator it=commands.begin();
+    for (QVector<Command>::const_iterator it=commands.begin();
                                       it!=commands.end();
                                       it++)
     {
-        command_ = new Command(this);
-        command_->set_b_info(it->get_b_info());
-        command_->set_e_info(it->get_e_info());
+        Command command(this);
+        command.set_b_info(it->get_b_info());
+        command.set_e_info(it->get_e_info());
 
-        if (!command_->valid())
-            throw std::exception();
+        if (!command.valid())
+            throw ChessEx();
 
-        command_->exec();
-        executed_commands_.push_back(*command_);
-        delete command_;
+        command.exec();
+        executed_commands_.push_back(command);
     }
 
     command_ = NULL;
 }
 
-Figure *Desk::getFigure(const Cell &inp_cell) const
+QPointer<Figure> Desk::getFigure(const Cell &inp_cell)
 {
     if (!inRange(inp_cell))
-        return NULL;
+        throw ChessEx();
 
     return buffer_[inp_cell.row_][inp_cell.col_];
 }
 
-Figure **Desk::getPtrFromBuffer(const Cell &inp_cell)
+QPointer<Figure> *Desk::getPtrFromBuffer(const Cell &inp_cell)
 {
     return &(buffer_[inp_cell.row_][inp_cell.col_]);
 }
