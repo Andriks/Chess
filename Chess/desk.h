@@ -5,7 +5,7 @@
 #include "figure.h"
 #include "command.h"
 
-#include <vector>
+#include <QVector>
 
 
 class Desk : public QObject
@@ -23,11 +23,11 @@ public:
 
     bool interruptCommand();
 
-    const std::vector<Command> &getState();
-    void restoreState(const std::vector<Command> &);
+    const QVector<Command> &getState();
+    void restoreState(const QVector<Command> &);
 
-    Figure *getFigure(const Cell &) const;
-    Figure **getPtrFromBuffer(const Cell &);
+    QPointer<Figure> getFigure(const Cell &);
+    QPointer<Figure> *getPtrFromBuffer(const Cell &);
     bool inRange(const Cell &) const;
     bool haveActiveFigure() const;
     static int getMaxCnt();
@@ -35,9 +35,9 @@ public:
 private:
     FigColor color_to_move_;    //color of figures to move
     bool have_active_figure_;   //we have grab some figure and start to write command_
-    std::vector< std::vector<Figure*> > buffer_;
-    Command *command_;          //current command
-    std::vector<Command> executed_commands_;
+    QVector< QVector<QPointer<Figure> > > buffer_;
+    QPointer<Command> command_;          //current command
+    QVector<Command> executed_commands_;
 
     static const int max_cnt_;
 
