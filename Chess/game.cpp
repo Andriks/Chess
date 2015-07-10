@@ -16,7 +16,7 @@ Game::Game(QObject *parent) :
 Cell Game::parseQMLCellName(QString name)
 {
     if (!name.contains(QRegExp("cell[1-8][1-8]")))
-        throw std::exception();
+        throw ChessEx();
 
 
     QString tmp = name.remove("cell");
@@ -44,12 +44,12 @@ void Game::cellAction(QString cell_name)
     Cell cell;
     try {
         cell = parseQMLCellName(cell_name);
-    } catch (std::exception) {
+    } catch (const ChessEx &ex) {
         return;
     }
 
-    QObject *t_cell = root_->findChild<QObject*>("t_"+cell_name);
-    if (t_cell == NULL) {
+    QPointer<QObject> t_cell = root_->findChild<QObject*>("t_"+cell_name);
+    if (t_cell.isNull()) {
         return;
     }
 
@@ -98,7 +98,7 @@ void Game::saveAction(QString file_url)
 {
     interruptAction();
 
-    const std::vector<Command> &executed_commands_ = desk_->getState();
+    const QVector<Command> &executed_commands_ = desk_->getState();
 
     file_url.remove("file:///");
     QFile file(file_url);
@@ -108,7 +108,7 @@ void Game::saveAction(QString file_url)
 
     QTextStream outstream(&file);
 
-    for (std::vector<Command>::const_iterator it=executed_commands_.begin();
+    for (QVector<Command>::const_iterator it=executed_commands_.begin();
                                       it!=executed_commands_.end();
                                       it++)
     {
@@ -126,7 +126,7 @@ bool Game::loadAction(QString file_url)
     if (!file.open(QFile::ReadOnly))
         return false;
 
-    std::vector<Command> comm_list;
+    QVector<Command> comm_list;
 
     while (!file.atEnd()) {
         QString line =  file.readLine();
@@ -141,10 +141,10 @@ bool Game::loadAction(QString file_url)
         comm_list.push_back(comm);
     }
 
-    Desk *new_desk = new Desk(this);
+    QPointer<Desk> new_desk = new Desk(this);
     try {
         new_desk->restoreState(comm_list);
-    } catch(std::exception) {
+    } catch(const ChessEx &ex) {
         file.close();
         return false;
     }
@@ -183,13 +183,13 @@ void Game::drawCurState()
 
 void Game::drawCell(const Cell &cell)
 {
-    QObject *t_cell = root_->findChild<QObject*>("t_cell"+QString::number(cell.row_+1)+QString::number(cell.col_+1));
+    QPointer<QObject> t_cell = root_->findChild<QObject*>("t_cell"+QString::number(cell.row_+1)+QString::number(cell.col_+1));
 
-    if (t_cell == NULL)
+    if (t_cell.isNull())
         return;
 
-    Figure *item = desk_->getFigure(cell);
-    if (item == NULL) {
+    QPointer<Figure> item = desk_->getFigure(cell);
+    if (item.isNull()) {
         t_cell->setProperty("text", "");
         return;
     }
