@@ -284,7 +284,7 @@ std::vector<Cell> Pawn::cellsToMove(const Cell &cur_cell) const
         //it is IMPORTENT to add this first, we cant check next Cell if it is not valid
         to_check4move.push_back(Cell(row-1, col));
 
-        if (row == getDesk()->max_row_cnt_-2)
+        if (row == Desk::getMaxCnt()-2)
             // it is first move if it steel there
             to_check4move.push_back(Cell(row-2, col));
 
