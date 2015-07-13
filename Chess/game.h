@@ -4,7 +4,6 @@
 #include "common_types.h"
 
 
-
 class Game : public QObject
 {
     Q_OBJECT
@@ -40,8 +39,8 @@ private:
     void interruptAction();
 
 private:
-    QObject *root_;             //for access to gui elements
-    Desk *desk_;                //ptr to desk instance (game have 1 instance of desk during all life period)
+    QPointer<QObject> root_;    //for access to gui elements
+    QPointer<Desk> desk_;       //ptr to desk instance (game have 1 instance of desk during all life period)
     bool desk_is_active_;       //desk must be active only on screen 2
 };
 

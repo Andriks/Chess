@@ -29,14 +29,14 @@ Command &Command::operator=(const Command &rv)
 bool Command::valid()
 {
     Cell cur_cell = b_cell_info_.cell_;
-    Figure *fig = desk_->getFigure(cur_cell);
+    QPointer<Figure> fig = desk_->getFigure(cur_cell);
 
-    if (fig == NULL)
+    if (fig.isNull())
         return false;
 
-    std::vector<Cell> acc_cells = fig->cellsToMove(cur_cell);
+    QVector<Cell> acc_cells = fig->cellsToMove(cur_cell);
 
-    for (std::vector<Cell>::iterator it = acc_cells.begin(); it != acc_cells.end(); it++)
+    for (QVector<Cell>::iterator it = acc_cells.begin(); it != acc_cells.end(); it++)
         if (*it == e_cell_info_.cell_)
             return true;
 
@@ -45,14 +45,14 @@ bool Command::valid()
 
 void Command::set_b_info(Cell cell)
 {
-    Figure *fig = desk_->getFigure(cell);
+    QPointer<Figure> fig = desk_->getFigure(cell);
     b_cell_info_ = CellInfo(cell, fig->getFigName(), fig->getColor());
 }
 
 void Command::set_e_info(Cell cell)
 {
-    Figure *fig = desk_->getFigure(cell);
-    if (fig != NULL)
+    QPointer<Figure> fig = desk_->getFigure(cell);
+    if (!fig.isNull())
         e_cell_info_ = CellInfo(cell, fig->getFigName(), fig->getColor());
     else
         e_cell_info_ = CellInfo(cell, " ", NONE);
@@ -68,7 +68,7 @@ void Command::set_e_info(CellInfo inp)
     e_cell_info_ = inp;
 }
 
-void Command::set_desk(Desk *new_desk)
+void Command::set_desk(QPointer<Desk> new_desk)
 {
     desk_ = new_desk;
 }
@@ -84,13 +84,11 @@ void Command::exec()
     std::swap(*desk_->getPtrFromBuffer(Cell(b_row, b_col)),
               *desk_->getPtrFromBuffer(Cell(e_row, e_col)));
 
-
     //we have swaped figures and figure, which was on target cell, on start cell now
     //if it exists (not NULL) we should to relese it from buffer (and memory)
-    Figure *rem_ptr = desk_->getFigure(Cell(b_row, b_col));
-    if (rem_ptr != NULL) {
+    QPointer<Figure> rem_ptr = desk_->getFigure(Cell(b_row, b_col));
+    if (!rem_ptr.isNull()) {
         delete rem_ptr;
-        *desk_->getPtrFromBuffer(Cell(b_row, b_col)) = NULL;
     }
 }
 

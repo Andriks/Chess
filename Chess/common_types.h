@@ -2,6 +2,7 @@
 #define COMMON_TYPES_H
 
 #include <QObject>
+#include <QPointer>
 #include <QString>
 #include <exception>
 
@@ -32,7 +33,6 @@ struct Cell {
 };
 
 
-
 struct CellInfo {
     Cell cell_;
     QString ftype_;
@@ -48,6 +48,14 @@ struct CellInfo {
         return (cell_==rv.cell_ && ftype_==rv.ftype_ && fcolor_==rv.fcolor_);
     }
 
+};
+
+
+class ChessEx: public std::exception
+{
+   const char* what() {
+       return "Chess exception occurred";
+   }
 };
 
 
