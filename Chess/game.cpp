@@ -8,39 +8,53 @@
 Game::Game(QObject *parent) :
     root_(parent),
     desk_(NULL),
-    desk_is_active_(false)
+    state_(NULL)
 {
     desk_ = new Desk(this);
+    state_ = State1::Instance();
 }
 
-Cell Game::parseQMLCellName(QString name)
+//////////////////////////////////////////////////////////////////////////////////
+
+void Game::cellAction(QString str)
 {
-    if (!name.contains(QRegExp("cell[1-8][1-8]")))
-        throw ChessEx();
-
-
-    QString tmp = name.remove("cell");
-    int row = QString(tmp[0]).toInt()-1;
-    int col = QString(tmp[1]).toInt()-1;
-
-    return Cell(row,col);
+    state_->cellAction(this, str);
 }
 
-QString Game::colorForGUI(const FigColor &color)
+void Game::startAction()
 {
-    if (color == WHITE)
-        return "blue";
-    else if (color == BLACK)
-        return "black";
-    else
-        return "";
+    state_->startAction(this);
 }
 
-void Game::cellAction(QString cell_name)
+void Game::stopAction()
 {
-    if (!desk_is_active_)
-        return;
+    state_->stopAction(this);
+}
 
+void Game::saveAction(QString str)
+{
+    state_->saveAction(this, str);
+}
+
+bool Game::loadAction(QString str)
+{
+    return state_->loadAction(this, str);
+}
+
+void Game::rollback_from_list()
+{
+    state_->rollback_from_list(this);
+}
+
+void Game::make_move_from_list()
+{
+    state_->make_move_from_list(this);
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+
+void Game::cellAction_impl(QString cell_name)
+{
     Cell cell;
     try {
         cell = parseQMLCellName(cell_name);
@@ -67,20 +81,17 @@ void Game::cellAction(QString cell_name)
     }
 }
 
-void Game::startAction()
+void Game::startAction_impl()
 {
-    desk_is_active_ = true;
-
     delete desk_;
     desk_ = new Desk(this);
 
     drawCurState();
 }
 
-void Game::stopAction()
+void Game::stopAction_impl()
 {
     interruptAction();
-    desk_is_active_ = false;
 
     delete desk_;
     desk_ = new Desk(this);
@@ -94,7 +105,7 @@ void Game::stopAction()
     }
 }
 
-void Game::saveAction(QString file_url)
+void Game::saveAction_impl(QString file_url)
 {
     interruptAction();
 
@@ -118,7 +129,7 @@ void Game::saveAction(QString file_url)
     file.close();
 }
 
-bool Game::loadAction(QString file_url)
+bool Game::loadAction_impl(QString file_url)
 {
     file_url.remove("file:///");
     QFile file(file_url);
@@ -160,16 +171,46 @@ bool Game::loadAction(QString file_url)
     return true;
 }
 
-void Game::rollback_from_list()
+void Game::rollback_from_list_impl()
 {
     desk_->rollback_from_list();
     drawCurState();
 }
 
-void Game::make_move_from_list()
+void Game::make_move_from_list_impl()
 {
     desk_->make_move_from_list();
     drawCurState();
+}
+
+void Game::ChangeState(State *state)
+{
+    state_ = state;
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+
+Cell Game::parseQMLCellName(QString name)
+{
+    if (!name.contains(QRegExp("cell[1-8][1-8]")))
+        throw ChessEx();
+
+
+    QString tmp = name.remove("cell");
+    int row = QString(tmp[0]).toInt()-1;
+    int col = QString(tmp[1]).toInt()-1;
+
+    return Cell(row,col);
+}
+
+QString Game::colorForGUI(const FigColor &color)
+{
+    if (color == WHITE)
+        return "blue";
+    else if (color == BLACK)
+        return "black";
+    else
+        return "";
 }
 
 void Game::drawCurState()

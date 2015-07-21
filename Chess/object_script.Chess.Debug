@@ -4,6 +4,7 @@ INPUT(
 ./debug\desk.o
 ./debug\figure.o
 ./debug\command.o
+./debug\state.o
 ./debug\qtquick2applicationviewer.o
 ./debug\qrc_rc.o
 ./debug\moc_qtquick2applicationviewer.o

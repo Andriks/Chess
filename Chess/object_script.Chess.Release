@@ -4,6 +4,7 @@ INPUT(
 ./release\desk.o
 ./release\figure.o
 ./release\command.o
+./release\state.o
 ./release\qtquick2applicationviewer.o
 ./release\qrc_rc.o
 ./release\moc_qtquick2applicationviewer.o
