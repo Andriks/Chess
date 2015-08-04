@@ -32,29 +32,29 @@ void State::ChangeState(Game *user, State *state)
 
 /////////////////////////////////////////////////////////////////////////
 
-State* State1::self_(0);
+State* StateOnStart::self_(0);
 
-State *State1::Instance()
+State *StateOnStart::Instance()
 {
     if(!self_) {
-        self_ = new State1();
+        self_ = new StateOnStart();
     }
 
     return self_;
 }
 
-void State1::cellAction(Game *user, QString str) {}
+void StateOnStart::cellAction(Game *user, QString str) {}
 
-void State1::startAction(Game *user)
+void StateOnStart::startAction(Game *user)
 {
     user->startAction_impl();
-    ChangeState(user, State2::Instance());
+    ChangeState(user, StatePlayingGame::Instance());
 }
 
-bool State1::loadAction(Game *user, QString str)
+bool StateOnStart::loadAction(Game *user, QString str)
 {
     if (user->loadAction_impl(str)) {
-        ChangeState(user, State3::Instance());
+        ChangeState(user, StateLoadedGame::Instance());
         return true;
     } else {
         return false;
@@ -64,29 +64,29 @@ bool State1::loadAction(Game *user, QString str)
 
 /////////////////////////////////////////////////////////////////////////
 
-State* State2::self_(0);
+State* StatePlayingGame::self_(0);
 
-State *State2::Instance()
+State *StatePlayingGame::Instance()
 {
     if(!self_) {
-        self_ = new State2();
+        self_ = new StatePlayingGame();
     }
 
     return self_;
 }
 
-void State2::cellAction(Game *user, QString str)
+void StatePlayingGame::cellAction(Game *user, QString str)
 {
     user->cellAction_impl(str);
 }
 
-void State2::stopAction(Game *user)
+void StatePlayingGame::stopAction(Game *user)
 {
     user->stopAction_impl();
-    ChangeState(user, State1::Instance());
+    ChangeState(user, StateOnStart::Instance());
 }
 
-void State2::saveAction(Game *user, QString str)
+void StatePlayingGame::saveAction(Game *user, QString str)
 {
     user->saveAction_impl(str);
 }
@@ -94,36 +94,36 @@ void State2::saveAction(Game *user, QString str)
 
 /////////////////////////////////////////////////////////////////////////
 
-State* State3::self_(0);
+State* StateLoadedGame::self_(0);
 
-State *State3::Instance()
+State *StateLoadedGame::Instance()
 {
     if(!self_) {
-        self_ = new State3();
+        self_ = new StateLoadedGame();
     }
 
     return self_;
 }
 
-void State3::cellAction(Game *user, QString str) {}
+void StateLoadedGame::cellAction(Game *user, QString str) {}
 
-void State3::startAction(Game *user)
+void StateLoadedGame::startAction(Game *user)
 {
     user->startAction_impl();
-    ChangeState(user, State2::Instance());
+    ChangeState(user, StatePlayingGame::Instance());
 }
 
-bool State3::loadAction(Game *user, QString str)
+bool StateLoadedGame::loadAction(Game *user, QString str)
 {
     return user->loadAction_impl(str);
 }
 
-void State3::rollback_from_list(Game *user)
+void StateLoadedGame::rollback_from_list(Game *user)
 {
     user->rollback_from_list_impl();
 }
 
-void State3::make_move_from_list(Game *user)
+void StateLoadedGame::make_move_from_list(Game *user)
 {
     user->make_move_from_list_impl();
 }

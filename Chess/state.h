@@ -30,16 +30,16 @@ protected:
 
 
 /////////////////////////////////////////////////////////////////////////
-class State1 : public State
+class StateOnStart : public State
 {
 public:
-    State1() {}
+    StateOnStart() {}
 
     static State* Instance();
 
-    void cellAction(Game*, QString);
-    void startAction(Game*);
-    bool loadAction(Game*, QString);
+    virtual void cellAction(Game*, QString);
+    virtual void startAction(Game*);
+    virtual bool loadAction(Game*, QString);
 
 private:
     static State *self_;
@@ -47,16 +47,16 @@ private:
 };
 
 /////////////////////////////////////////////////////////////////////////
-class State2 : public State
+class StatePlayingGame : public State
 {
 public:
-    State2() {}
+    StatePlayingGame() {}
 
     static State* Instance();
 
-    void cellAction(Game*, QString);
-    void stopAction(Game*);
-    void saveAction(Game*, QString);
+    virtual void cellAction(Game*, QString);
+    virtual void stopAction(Game*);
+    virtual void saveAction(Game*, QString);
 
 private:
     static State *self_;
@@ -64,19 +64,19 @@ private:
 };
 
 /////////////////////////////////////////////////////////////////////////
-class State3 : public State
+class StateLoadedGame : public State
 {
 public:
-    State3() {}
+    StateLoadedGame() {}
 
     static State* Instance();
 
-    void cellAction(Game*, QString);
-    void startAction(Game*);
-    bool loadAction(Game*, QString);
+    virtual void cellAction(Game*, QString);
+    virtual void startAction(Game*);
+    virtual bool loadAction(Game*, QString);
 
-    void rollback_from_list(Game*);
-    void make_move_from_list(Game*);
+    virtual void rollback_from_list(Game*);
+    virtual void make_move_from_list(Game*);
 
 
 private:

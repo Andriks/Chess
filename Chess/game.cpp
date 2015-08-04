@@ -11,7 +11,7 @@ Game::Game(QObject *parent) :
     state_(NULL)
 {
     desk_ = new Desk(this);
-    state_ = State1::Instance();
+    state_ = StateOnStart::Instance();
 }
 
 //////////////////////////////////////////////////////////////////////////////////
