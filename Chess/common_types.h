@@ -53,15 +53,17 @@ struct CellInfo {
 
 class ChessEx: public std::exception
 {
-   virtual const char* what() {
-       return "Chess exception occurred";
-   }
+    virtual const char* what() {
+        static const char *ex_discription = "Chess exception occurred";
+        return ex_discription;
+    }
 };
 
 class NotImplementedEx: public ChessEx
 {
    virtual const char* what() {
-       return "Using of not implemented command";
+        static const char *ex_discription = "Using of not implemented command";
+        return ex_discription;
    }
 };
 
