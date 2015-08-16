@@ -5,6 +5,9 @@
 #include <QTextStream>
 #include <QVariant>
 
+#include <QQuickItem>
+
+
 Game::Game(QObject *parent) :
     root_(parent),
     desk_(NULL),
@@ -18,37 +21,110 @@ Game::Game(QObject *parent) :
 
 void Game::cellAction(QString str)
 {
-    state_->cellAction(this, str);
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
+
+    try {
+        state_->cellAction(this, str);
+    } catch (const NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("using of not implemented method")));
+    } catch (const ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("chess error occured")));
+    } catch (const std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("system error occured")));
+    }
 }
 
 void Game::startAction()
 {
-    state_->startAction(this);
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
+
+    try {
+        state_->startAction(this);
+    } catch (const NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("using of not implemented method")));
+    } catch (const ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("chess error occured")));
+    } catch (const std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("system error occured")));
+    }
 }
 
 void Game::stopAction()
 {
-    state_->stopAction(this);
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
+
+    try {
+        state_->stopAction(this);
+    } catch (const NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("using of not implemented method")));
+    } catch (const ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("chess error occured")));
+    } catch (const std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("system error occured")));
+    }
 }
 
 void Game::saveAction(QString str)
 {
-    state_->saveAction(this, str);
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
+
+    try {
+        state_->saveAction(this, str);
+    } catch (const NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("using of not implemented method")));
+    } catch (const ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("chess error occured")));
+    } catch (const std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("system error occured")));
+    }
 }
 
 bool Game::loadAction(QString str)
 {
-    return state_->loadAction(this, str);
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
+
+    try {
+        return state_->loadAction(this, str);
+    } catch (const NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("using of not implemented method")));
+        return false;
+    } catch (const ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("chess error occured")));
+        return false;
+    } catch (const std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("system error occured")));
+        return false;
+    }
 }
 
 void Game::rollback_from_list()
 {
-    state_->rollback_from_list(this);
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
+
+    try {
+        state_->rollback_from_list(this);
+    } catch (const NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("using of not implemented method")));
+    } catch (const ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("chess error occured")));
+    } catch (const std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("system error occured")));
+    }
 }
 
 void Game::make_move_from_list()
 {
-    state_->make_move_from_list(this);
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
+
+    try {
+        state_->make_move_from_list(this);
+    } catch (const NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("using of not implemented method")));
+    } catch (const ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("chess error occured")));
+    } catch (const std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant("system error occured")));
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -183,7 +259,7 @@ void Game::make_move_from_list_impl()
     drawCurState();
 }
 
-void Game::ChangeState(State *state)
+void Game::changeState(State *state)
 {
     state_ = state;
 }

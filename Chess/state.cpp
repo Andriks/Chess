@@ -26,7 +26,7 @@ void State::make_move_from_list(Game *state){ throw NotImplementedEx(); }
 
 void State::ChangeState(Game *user, State *state)
 {
-    user->ChangeState(state);
+    user->changeState(state);
 }
 
 

@@ -44,7 +44,7 @@ public:
     void rollback_from_list_impl();
     void make_move_from_list_impl();
 
-    void ChangeState(State*);
+    void changeState(State*);
 private:
     static Cell parseQMLCellName(QString);
     static QString colorForGUI(const FigColor &);
