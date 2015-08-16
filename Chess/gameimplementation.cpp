@@ -7,7 +7,8 @@
 
 GameImplementation::GameImplementation(QObject *parent, QObject *root) :
     QObject(parent),
-    root_(root)
+    root_(root),
+    desk_(NULL)
 {
     desk_ = new Desk(this);
 }

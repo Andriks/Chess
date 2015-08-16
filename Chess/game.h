@@ -13,7 +13,7 @@ class Game : public QObject
 public:
     // !!IMPORTANT!! Game instance should to be deleted explicit!
     // it have no QObject owner to be deleted automatically
-    explicit Game(QObject *parent = 0);
+    explicit Game(QObject *root = 0);
 
 signals:
 
@@ -39,7 +39,7 @@ public:
 private:
     QPointer<QObject> root_;    //for access to gui elements
     State *state_;              //curr state of game (curr screen)
-    GameImplementation *game_impl;
+    GameImplementation *game_impl_;
 };
 
 #endif // GAME_H
