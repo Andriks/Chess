@@ -3,8 +3,10 @@
 
 #include "common_types.h"
 #include "game.h"
+#include "gameimplementation.h"
 
 class Game;
+class GameImplementation;
 
 class State
 {
@@ -12,19 +14,19 @@ public:
     State();
     virtual ~State();
 
-    virtual void cellAction(Game*, QString);
+    virtual void cellAction(GameImplementation*, QString);
 
-    virtual void startAction(Game*);
-    virtual void stopAction(Game*);
+    virtual void startAction(GameImplementation*);
+    virtual void stopAction(GameImplementation*);
 
-    virtual void saveAction(Game*, QString);
-    virtual bool loadAction(Game*, QString);
+    virtual void saveAction(GameImplementation*, QString);
+    virtual bool loadAction(GameImplementation*, QString);
 
-    virtual void rollback_from_list(Game*);
-    virtual void make_move_from_list(Game*);
+    virtual void rollback_from_list(GameImplementation*);
+    virtual void make_move_from_list(GameImplementation*);
 
 protected:
-    void ChangeState (Game*, State*);
+    void changeState (Game*, State*);
 
 };
 
@@ -37,9 +39,9 @@ public:
 
     static State* Instance();
 
-    virtual void cellAction(Game*, QString);
-    virtual void startAction(Game*);
-    virtual bool loadAction(Game*, QString);
+    virtual void cellAction(GameImplementation*, QString);
+    virtual void startAction(GameImplementation*);
+    virtual bool loadAction(GameImplementation*, QString);
 
 private:
     static State *self_;
@@ -54,9 +56,9 @@ public:
 
     static State* Instance();
 
-    virtual void cellAction(Game*, QString);
-    virtual void stopAction(Game*);
-    virtual void saveAction(Game*, QString);
+    virtual void cellAction(GameImplementation*, QString);
+    virtual void stopAction(GameImplementation*);
+    virtual void saveAction(GameImplementation *, QString);
 
 private:
     static State *self_;
@@ -71,12 +73,12 @@ public:
 
     static State* Instance();
 
-    virtual void cellAction(Game*, QString);
-    virtual void startAction(Game*);
-    virtual bool loadAction(Game*, QString);
+    virtual void cellAction(GameImplementation*, QString);
+    virtual void startAction(GameImplementation *);
+    virtual bool loadAction(GameImplementation*, QString);
 
-    virtual void rollback_from_list(Game*);
-    virtual void make_move_from_list(Game*);
+    virtual void rollback_from_list(GameImplementation *);
+    virtual void make_move_from_list(GameImplementation*);
 
 
 private:

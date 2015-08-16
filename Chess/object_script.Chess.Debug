@@ -5,6 +5,7 @@ INPUT(
 ./debug\figure.o
 ./debug\command.o
 ./debug\state.o
+./debug\gameimplementation.o
 ./debug\qtquick2applicationviewer.o
 ./debug\qrc_rc.o
 ./debug\moc_qtquick2applicationviewer.o
@@ -12,4 +13,5 @@ INPUT(
 ./debug\moc_desk.o
 ./debug\moc_figure.o
 ./debug\moc_command.o
+./debug\moc_gameimplementation.o
 );

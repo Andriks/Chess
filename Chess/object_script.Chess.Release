@@ -5,6 +5,7 @@ INPUT(
 ./release\figure.o
 ./release\command.o
 ./release\state.o
+./release\gameimplementation.o
 ./release\qtquick2applicationviewer.o
 ./release\qrc_rc.o
 ./release\moc_qtquick2applicationviewer.o
@@ -12,4 +13,5 @@ INPUT(
 ./release\moc_desk.o
 ./release\moc_figure.o
 ./release\moc_command.o
+./release\moc_gameimplementation.o
 );

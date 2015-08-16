@@ -3,6 +3,7 @@
 
 #include "common_types.h"
 #include "state.h"
+#include "gameimplementation.h"
 
 class State;
 
@@ -33,30 +34,12 @@ public slots:
     void make_move_from_list();
 
 public:
-    void cellAction_impl(QString);
-
-    void startAction_impl();
-    void stopAction_impl();
-
-    void saveAction_impl(QString);
-    bool loadAction_impl(QString);
-
-    void rollback_from_list_impl();
-    void make_move_from_list_impl();
-
     void changeState(State*);
-private:
-    static Cell parseQMLCellName(QString);
-    static QString colorForGUI(const FigColor &);
-
-    void drawCurState();
-    void drawCell(const Cell &);
-    void interruptAction();
 
 private:
     QPointer<QObject> root_;    //for access to gui elements
-    QPointer<Desk> desk_;       //ptr to desk instance (game have 1 instance of desk during all life period)
     State *state_;              //curr state of game (curr screen)
+    GameImplementation *game_impl;
 };
 
 #endif // GAME_H

@@ -10,23 +10,23 @@ State::~State()
 }
 
 
-void State::cellAction(Game *state, QString str){ throw NotImplementedEx(); }
+void State::cellAction(GameImplementation *state, QString str){ throw NotImplementedEx(); }
 
-void State::startAction(Game *state){ throw NotImplementedEx(); }
+void State::startAction(GameImplementation *state){ throw NotImplementedEx(); }
 
-void State::stopAction(Game *state){ throw NotImplementedEx(); }
+void State::stopAction(GameImplementation *state){ throw NotImplementedEx(); }
 
-void State::saveAction(Game *state, QString str){ throw NotImplementedEx(); }
+void State::saveAction(GameImplementation *state, QString str){ throw NotImplementedEx(); }
 
-bool State::loadAction(Game *state, QString str){ throw NotImplementedEx(); }
+bool State::loadAction(GameImplementation *state, QString str){ throw NotImplementedEx(); }
 
-void State::rollback_from_list(Game *state){ throw NotImplementedEx(); }
+void State::rollback_from_list(GameImplementation *state){ throw NotImplementedEx(); }
 
-void State::make_move_from_list(Game *state){ throw NotImplementedEx(); }
+void State::make_move_from_list(GameImplementation *state){ throw NotImplementedEx(); }
 
-void State::ChangeState(Game *user, State *state)
+void State::changeState(Game *proxy_obj, State *state)
 {
-    user->changeState(state);
+    proxy_obj->changeState(state);
 }
 
 
@@ -43,18 +43,21 @@ State *StateOnStart::Instance()
     return self_;
 }
 
-void StateOnStart::cellAction(Game *user, QString str) {}
+void StateOnStart::cellAction(GameImplementation *user, QString str) {}
 
-void StateOnStart::startAction(Game *user)
+void StateOnStart::startAction(GameImplementation *user)
 {
-    user->startAction_impl();
-    ChangeState(user, StatePlayingGame::Instance());
+    user->startAction();
+
+    Game *proxy_obj = dynamic_cast <Game*> (user->parent());
+    changeState(proxy_obj, StatePlayingGame::Instance());
 }
 
-bool StateOnStart::loadAction(Game *user, QString str)
+bool StateOnStart::loadAction(GameImplementation *user, QString str)
 {
-    if (user->loadAction_impl(str)) {
-        ChangeState(user, StateLoadedGame::Instance());
+    if (user->loadAction(str)) {
+        Game *proxy_obj = dynamic_cast <Game*> (user->parent());
+        changeState(proxy_obj, StateLoadedGame::Instance());
         return true;
     } else {
         return false;
@@ -75,20 +78,22 @@ State *StatePlayingGame::Instance()
     return self_;
 }
 
-void StatePlayingGame::cellAction(Game *user, QString str)
+void StatePlayingGame::cellAction(GameImplementation *user, QString str)
 {
-    user->cellAction_impl(str);
+    user->cellAction(str);
 }
 
-void StatePlayingGame::stopAction(Game *user)
+void StatePlayingGame::stopAction(GameImplementation *user)
 {
-    user->stopAction_impl();
-    ChangeState(user, StateOnStart::Instance());
+    user->stopAction();
+
+    Game *proxy_obj = dynamic_cast <Game*> (user->parent());
+    changeState(proxy_obj, StateOnStart::Instance());
 }
 
-void StatePlayingGame::saveAction(Game *user, QString str)
+void StatePlayingGame::saveAction(GameImplementation *user, QString str)
 {
-    user->saveAction_impl(str);
+    user->saveAction(str);
 }
 
 
@@ -105,26 +110,28 @@ State *StateLoadedGame::Instance()
     return self_;
 }
 
-void StateLoadedGame::cellAction(Game *user, QString str) {}
+void StateLoadedGame::cellAction(GameImplementation *user, QString str) {}
 
-void StateLoadedGame::startAction(Game *user)
+void StateLoadedGame::startAction(GameImplementation *user)
 {
-    user->startAction_impl();
-    ChangeState(user, StatePlayingGame::Instance());
+    user->startAction();
+
+    Game *proxy_obj = dynamic_cast <Game*> (user->parent());
+    changeState(proxy_obj, StatePlayingGame::Instance());
 }
 
-bool StateLoadedGame::loadAction(Game *user, QString str)
+bool StateLoadedGame::loadAction(GameImplementation *user, QString str)
 {
-    return user->loadAction_impl(str);
+    return user->loadAction(str);
 }
 
-void StateLoadedGame::rollback_from_list(Game *user)
+void StateLoadedGame::rollback_from_list(GameImplementation *user)
 {
-    user->rollback_from_list_impl();
+    user->rollback_from_list();
 }
 
-void StateLoadedGame::make_move_from_list(Game *user)
+void StateLoadedGame::make_move_from_list(GameImplementation *user)
 {
-    user->make_move_from_list_impl();
+    user->make_move_from_list();
 }
 
