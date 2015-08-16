@@ -14,7 +14,9 @@ SOURCES += \
     game.cpp \
     desk.cpp \
     figure.cpp \
-    command.cpp
+    command.cpp \
+    state.cpp \
+    gameimplementation.cpp
 
 # Installation path
 # target.path =
@@ -34,4 +36,6 @@ HEADERS += \
     desk.h \
     figure.h \
     command.h \
-    common_types.h
+    common_types.h \
+    state.h \
+    gameimplementation.h

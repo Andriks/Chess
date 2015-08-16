@@ -1,9 +1,9 @@
 #include "figure.h"
 #include "desk.h"
 
-Figure::Figure(Desk *desk_, FigColor fcolor) :
-    QObject(desk_),
-    desk_(desk_),
+Figure::Figure(Desk *desk, FigColor fcolor) :
+    QObject(desk),
+    desk_(desk),
     color_(fcolor)
 {
 }

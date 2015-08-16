@@ -6,8 +6,15 @@ Rectangle {
     height: 600
 
     MessageDialog {
-        id: err_message
-        title: "error"
+        id: chess_msg
+        objectName: "chess_msg"
+        title: "chess message"
+        text: "chess message"
+
+        function show(text) {
+            chess_msg.text = text;
+            chess_msg.visible = true;
+        }
     }
 
     Rectangle {
@@ -160,8 +167,7 @@ Rectangle {
                     btnNext.visible = true;
                     btnPrev.visible = true;
                 } else {
-                    err_message.text = "bad input file";
-                    err_message.visible = true;
+                    chess_msg.show("bad input file")
                 }
             }
         }

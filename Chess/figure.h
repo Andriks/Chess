@@ -9,7 +9,7 @@ class Figure : public QObject
 {
     Q_OBJECT
 public:
-    explicit Figure(Desk *desk_ = 0, FigColor fcolor=NONE);
+    explicit Figure(Desk *desk = 0, FigColor fcolor=NONE);
 
     FigColor getColor() const;
     QPointer<Desk> getDesk() const;

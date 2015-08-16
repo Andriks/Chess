@@ -1,205 +1,132 @@
 #include "game.h"
-#include "desk.h"
 
-#include <QFile>
-#include <QTextStream>
 #include <QVariant>
+#include <QQuickItem>
 
-Game::Game(QObject *parent) :
-    root_(parent),
-    desk_(NULL),
-    desk_is_active_(false)
+
+Game::Game(QObject *root) :
+    root_(root),
+    state_(NULL),
+    game_impl_(NULL)
 {
-    desk_ = new Desk(this);
+    state_ = StateOnStart::Instance();
+    game_impl_ = new GameImplementation(this, root_);
 }
 
-Cell Game::parseQMLCellName(QString name)
+//////////////////////////////////////////////////////////////////////////////////
+
+void Game::cellAction(QString str)
 {
-    if (!name.contains(QRegExp("cell[1-8][1-8]")))
-        throw ChessEx();
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
 
-
-    QString tmp = name.remove("cell");
-    int row = QString(tmp[0]).toInt()-1;
-    int col = QString(tmp[1]).toInt()-1;
-
-    return Cell(row,col);
-}
-
-QString Game::colorForGUI(const FigColor &color)
-{
-    if (color == WHITE)
-        return "blue";
-    else if (color == BLACK)
-        return "black";
-    else
-        return "";
-}
-
-void Game::cellAction(QString cell_name)
-{
-    if (!desk_is_active_)
-        return;
-
-    Cell cell;
     try {
-        cell = parseQMLCellName(cell_name);
-    } catch (const ChessEx &ex) {
-        return;
-    }
-
-    QPointer<QObject> t_cell = root_->findChild<QObject*>("t_"+cell_name);
-    if (t_cell.isNull()) {
-        return;
-    }
-
-    if (!desk_->haveActiveFigure()) {
-        if (!desk_->grabFigure(cell))
-            return;
-
-        t_cell->setProperty("color", "red");
-
-    } else {
-        if (desk_->putDownFigure(cell))
-            drawCurState();
-        else
-            interruptAction();
+        state_->cellAction(game_impl_, str);
+    } catch ( NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    } catch ( ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    } catch ( std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
     }
 }
 
 void Game::startAction()
 {
-    desk_is_active_ = true;
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
 
-    delete desk_;
-    desk_ = new Desk(this);
-
-    drawCurState();
+    try {
+        state_->startAction(game_impl_);
+    } catch ( NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    } catch ( ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    } catch ( std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    }
 }
 
 void Game::stopAction()
 {
-    interruptAction();
-    desk_is_active_ = false;
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
 
-    delete desk_;
-    desk_ = new Desk(this);
-
-    //clearing all figures on gui to have pure desk
-    for (size_t row=0; row<Desk::getMaxCnt(); row++) {
-        for (size_t col=0; col<Desk::getMaxCnt(); col++) {
-            QObject *t_cell = root_->findChild<QObject*>("t_cell"+QString::number(row+1)+QString::number(col+1));
-            t_cell->setProperty("text", "");
-        }
-    }
-}
-
-void Game::saveAction(QString file_url)
-{
-    interruptAction();
-
-    const QVector<Command> &executed_commands_ = desk_->getState();
-
-    file_url.remove("file:///");
-    QFile file(file_url);
-
-    if (!file.open(QFile::WriteOnly|QFile::Truncate))
-        return;
-
-    QTextStream outstream(&file);
-
-    for (QVector<Command>::const_iterator it=executed_commands_.begin();
-                                      it!=executed_commands_.end();
-                                      it++)
-    {
-        outstream << it->getAsString() << "\n";
-    }
-
-    file.close();
-}
-
-bool Game::loadAction(QString file_url)
-{
-    file_url.remove("file:///");
-    QFile file(file_url);
-
-    if (!file.open(QFile::ReadOnly))
-        return false;
-
-    QVector<Command> comm_list;
-
-    while (!file.atEnd()) {
-        QString line =  file.readLine();
-        Command comm;
-        if (!comm.setFromString(line)) {
-            // bad input file, releasing of resources and breaking operation
-            file.close();
-
-            return false;
-        }
-
-        comm_list.push_back(comm);
-    }
-
-    QPointer<Desk> new_desk = new Desk(this);
     try {
-        new_desk->restoreState(comm_list);
-    } catch(const ChessEx &ex) {
-        file.close();
+        state_->stopAction(game_impl_);
+    } catch ( NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    } catch ( ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    } catch ( std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    }
+}
+
+void Game::saveAction(QString str)
+{
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
+
+    try {
+        state_->saveAction(game_impl_, str);
+    } catch ( NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    } catch ( ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    } catch ( std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    }
+}
+
+bool Game::loadAction(QString str)
+{
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
+
+    try {
+        return state_->loadAction(game_impl_, str);
+    } catch ( NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+        return false;
+    } catch ( ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+        return false;
+    } catch ( std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
         return false;
     }
-
-    file.close();
-
-    //if everething was nice
-    delete desk_;
-    desk_ = new_desk;
-
-    drawCurState();
-
-    return true;
 }
 
 void Game::rollback_from_list()
 {
-    desk_->rollback_from_list();
-    drawCurState();
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
+
+    try {
+        state_->rollback_from_list(game_impl_);
+    } catch ( NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    } catch ( ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    } catch ( std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    }
 }
 
 void Game::make_move_from_list()
 {
-    desk_->make_move_from_list();
-    drawCurState();
-}
+    QPointer<QObject> msg = root_->findChild<QObject*>("chess_msg");
 
-void Game::drawCurState()
-{
-    for (size_t row=0; row<Desk::getMaxCnt(); row++) {
-        for (size_t col=0; col<Desk::getMaxCnt(); col++) {
-            drawCell(Cell(row, col));
-        }
+    try {
+        state_->make_move_from_list(game_impl_);
+    } catch ( NotImplementedEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    } catch ( ChessEx &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
+    } catch ( std::exception &ex) {
+        QMetaObject::invokeMethod(msg, "show", Q_ARG(QVariant, QVariant(ex.what())));
     }
 }
 
-void Game::drawCell(const Cell &cell)
+//////////////////////////////////////////////////////////////////////////////////
+
+void Game::changeState(State *state)
 {
-    QPointer<QObject> t_cell = root_->findChild<QObject*>("t_cell"+QString::number(cell.row_+1)+QString::number(cell.col_+1));
-
-    if (t_cell.isNull())
-        return;
-
-    QPointer<Figure> item = desk_->getFigure(cell);
-    if (item.isNull()) {
-        t_cell->setProperty("text", "");
-        return;
-    }
-
-    t_cell->setProperty("text", item->getFigName());
-    t_cell->setProperty("color", colorForGUI(item->getColor()));
+    state_ = state;
 }
 
-void Game::interruptAction()
-{
-    desk_->interruptCommand();
-    drawCurState();
-}
